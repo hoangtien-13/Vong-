@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Thành Phố Lặng · Ván Bài Lòng Tin</title>
+<meta name="theme-color" content="#07080b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Thành Phố Lặng">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b;--panel:#0d1016;--line:#1e2531;--txt:#c9d1dc;--dim:#6b7686;
+  --red:#ff2e4d;--cyan:#3de1ff;--amber:#ffb547;--green:#4dffa6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--txt);font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.mono{font-family:'Chakra Petch',ui-monospace,Consolas,monospace}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;
+  background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.8) 100%)}
+
+.screen{display:none;min-height:100vh;min-height:100dvh;padding:16px;max-width:720px;margin:0 auto;flex-direction:column}
+.screen.on{display:flex}
+
+/* ---------- buttons ---------- */
+.btn{font-family:'Chakra Petch',monospace;font-size:16px;letter-spacing:.12em;color:var(--cyan);
+  background:transparent;border:1px solid var(--cyan);padding:12px 18px;cursor:pointer;
+  box-shadow:0 0 12px rgba(61,225,255,.25),inset 0 0 12px rgba(61,225,255,.08);transition:.15s}
+.btn:hover:not(:disabled){background:rgba(61,225,255,.1)}
+.btn:disabled{opacity:.3;cursor:default;box-shadow:none}
+.btn.red{color:var(--red);border-color:var(--red);box-shadow:0 0 12px rgba(255,46,77,.3),inset 0 0 12px rgba(255,46,77,.08)}
+.btn.red:hover:not(:disabled){background:rgba(255,46,77,.12)}
+.introBtns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- intro ---------- */
+#intro{justify-content:center;gap:20px}
+.tag{color:var(--red);font-size:14px;letter-spacing:.3em}
+.title{font-size:clamp(34px,9.5vw,64px);font-weight:800;letter-spacing:.04em;color:#fff;line-height:1.1;
+  text-shadow:0 0 18px rgba(255,46,77,.6),2px 0 var(--red),-2px 0 var(--cyan);animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.4}94%{opacity:1}96%{opacity:.6}}
+.announce{min-height:3.2em;color:var(--amber);font-size:17px}
+.rules{border:1px solid var(--line);background:var(--panel);padding:16px 18px;line-height:1.75;font-size:15px}
+.rules li{list-style:none;padding-left:18px;position:relative}
+.rules li::before{content:"▸";position:absolute;left:0;color:var(--red)}
+.rules b{color:#fff}
+.stakes{display:flex;gap:10px;flex-wrap:wrap;font-size:14px}
+.stakes span{border:1px solid var(--line);padding:6px 10px;color:var(--dim)}
+.stakes span b{color:var(--txt)}
+.warn{color:var(--dim);font-style:italic;font-size:14px}
+.pay{display:grid;grid-template-columns:1fr auto;gap:4px 14px;font-size:14px}
+.pay span:nth-child(even){text-align:right;font-family:'Chakra Petch',monospace;color:#fff}
+.c{color:var(--green)} .b{color:var(--red)}
+
+/* ---------- game ---------- */
+#game{gap:12px}
+.hud{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;gap:8px}
+.hud .name{font-size:13px;letter-spacing:.2em;color:var(--red)}
+.hud .days{font-size:13px;color:var(--dim);letter-spacing:.1em}
+.timer{font-size:34px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.35);transition:opacity .3s}
+.timer.paused{opacity:.35}
+.counters{display:flex;gap:16px;font-size:13px;color:var(--dim);letter-spacing:.08em;align-items:center;flex-wrap:wrap}
+.counters b{color:var(--cyan);font-weight:400}
+.ext{margin-left:auto;font-size:13px;letter-spacing:.06em;color:var(--amber);background:transparent;
+  border:1px solid var(--amber);padding:6px 10px;cursor:pointer;box-shadow:0 0 10px rgba(255,181,71,.2)}
+.ext:hover:not(:disabled){background:rgba(255,181,71,.12)}
+.ext:disabled{opacity:.3;cursor:default;box-shadow:none}
+.danger .ext:not(:disabled){animation:pulseA 1s infinite}
+@keyframes pulseA{50%{box-shadow:0 0 18px rgba(255,181,71,.8)}}
+
+.goal{border:1px solid var(--line);background:var(--panel);padding:8px 12px;font-size:13px;color:var(--dim);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.goal b{color:var(--amber);font-weight:400}
+
+.table{display:flex;flex-direction:column;gap:8px}
+.pl{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;border:1px solid var(--line);background:var(--panel);padding:10px 12px;position:relative}
+.pl.me{border-color:rgba(61,225,255,.45)}
+.mask{width:40px;height:40px;border-radius:50% 50% 45% 45%;position:relative;background:var(--m,#ddd);box-shadow:0 0 12px rgba(0,0,0,.6)}
+.mask::before,.mask::after{content:"";position:absolute;top:15px;width:10px;height:5px;background:#05070a;border-radius:50%}
+.mask::before{left:8px;transform:rotate(12deg)}.mask::after{right:8px;transform:rotate(-12deg)}
+.me .mask{background:none;border:2px solid var(--cyan);box-shadow:0 0 10px rgba(61,225,255,.4)}
+.me .mask::before,.me .mask::after{display:none}
+.pname{font-weight:700;color:#fff;font-size:15px}
+.hist{display:flex;gap:4px;margin-top:5px}
+.hist i{width:20px;height:20px;border:1px solid #2a3240;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;font-family:'Chakra Petch',monospace;color:var(--dim)}
+.hist i.C{border-color:var(--green);color:var(--green);background:rgba(77,255,166,.08)}
+.hist i.B{border-color:var(--red);color:var(--red);background:rgba(255,46,77,.1)}
+.right{text-align:right;min-width:74px}
+.score{font-family:'Chakra Petch',monospace;font-size:26px;color:#fff;line-height:1}
+.delta{font-family:'Chakra Petch',monospace;font-size:13px;height:16px;opacity:0;transition:opacity .3s}
+.delta.show{opacity:1}
+.delta.pos{color:var(--green)} .delta.neg{color:var(--red)} .delta.zero{color:var(--dim)}
+.card{position:absolute;right:96px;top:50%;transform:translateY(-50%);font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:.1em;
+  padding:5px 8px;border:1px solid #2a3240;color:var(--dim);background:#0a0d12}
+.card.C{color:var(--green);border-color:var(--green);box-shadow:0 0 12px rgba(77,255,166,.35)}
+.card.B{color:var(--red);border-color:var(--red);box-shadow:0 0 12px rgba(255,46,77,.45)}
+.card.flip{animation:flip .35s}
+@keyframes flip{0%{transform:translateY(-50%) rotateY(90deg)}100%{transform:translateY(-50%) rotateY(0)}}
+@media (max-width:460px){
+  .pl{row-gap:6px}
+  .card{position:static;transform:none;grid-column:2 / 4;justify-self:start}
+  .card:empty{display:none}
+  .card.flip{animation:flipM .35s}
+}
+@keyframes flipM{0%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+
+.msg{min-height:2.6em;text-align:center;font-size:15px;color:var(--amber);display:flex;align-items:center;justify-content:center;line-height:1.4}
+.msg.ok{color:var(--green)} .msg.err{color:var(--red)}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{font-family:'Chakra Petch',monospace;font-size:18px;letter-spacing:.12em;padding:18px 10px;background:transparent;cursor:pointer;transition:.15s}
+.choice small{display:block;font-size:12px;letter-spacing:.04em;margin-top:6px;opacity:.75;font-family:'Be Vietnam Pro',sans-serif}
+.choice.c{color:var(--green);border:1px solid var(--green);box-shadow:0 0 14px rgba(77,255,166,.2)}
+.choice.c:hover:not(:disabled){background:rgba(77,255,166,.1)}
+.choice.b{color:var(--red);border:1px solid var(--red);box-shadow:0 0 14px rgba(255,46,77,.25)}
+.choice.b:hover:not(:disabled){background:rgba(255,46,77,.1)}
+.choice:disabled{opacity:.25;cursor:default;box-shadow:none}
+details.legend{border:1px solid var(--line);background:var(--panel);padding:8px 12px;font-size:14px}
+details.legend summary{cursor:pointer;color:var(--dim);font-family:'Chakra Petch',monospace;letter-spacing:.1em;font-size:13px}
+details.legend .pay{margin-top:8px}
+
+.banner{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:40;pointer-events:none;opacity:0}
+.banner span{font-size:clamp(30px,9vw,58px);font-weight:800;color:var(--red);letter-spacing:.08em;
+  text-shadow:0 0 30px rgba(255,46,77,.8),3px 0 var(--cyan);background:rgba(7,8,11,.8);padding:12px 26px;text-align:center}
+.banner small{display:block;font-size:15px;font-weight:400;letter-spacing:.05em;color:var(--amber);text-shadow:none;margin-top:6px}
+.banner.show{animation:ban 1.9s forwards}
+@keyframes ban{0%{opacity:0;transform:scale(1.2)}15%{opacity:1;transform:scale(1)}25%{opacity:.4}30%{opacity:1}85%{opacity:1}100%{opacity:0}}
+
+.log{border-top:1px solid var(--line);padding-top:10px;font-size:14px;color:var(--dim);line-height:1.7}
+.log div b{color:var(--txt);font-weight:400}
+
+/* danger / glitch */
+.danger .timer{color:var(--red);text-shadow:0 0 14px var(--red);animation:jit .12s infinite}
+.danger{animation:glitch 2.2s infinite}
+@keyframes jit{50%{transform:translate(1px,-1px)}}
+@keyframes glitch{0%,88%,100%{filter:none;transform:none}
+  89%{filter:hue-rotate(40deg) saturate(2);transform:translateX(-3px)}
+  91%{filter:none;transform:translateX(3px)}
+  93%{filter:contrast(1.6);transform:none}}
+.crtoff{animation:off .7s forwards}
+@keyframes off{0%{transform:scale(1,1);filter:brightness(1)}
+  45%{transform:scale(1,.006);filter:brightness(4)}100%{transform:scale(0,.006);filter:brightness(6);opacity:0}}
+
+/* ---------- end ---------- */
+#end{justify-content:center;gap:18px;text-align:center;align-items:center}
+.big{font-size:clamp(38px,11vw,68px);font-weight:800;letter-spacing:.05em}
+.lose .big{color:var(--red);text-shadow:0 0 22px rgba(255,46,77,.7),3px 0 var(--cyan)}
+.win .big{color:var(--green);text-shadow:0 0 22px rgba(77,255,166,.5)}
+.reason{font-size:16px;line-height:1.6;max-width:520px}
+.daysBox{font-size:20px;letter-spacing:.12em;color:var(--amber)}
+.reveal{width:100%;max-width:560px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.reveal div{border:1px solid var(--line);background:var(--panel);padding:10px 14px;font-size:14px;line-height:1.55}
+.reveal b{color:#fff}
+.reveal .rk{float:right;font-family:'Chakra Petch',monospace;color:var(--amber)}
+details.tips{max-width:560px;width:100%;text-align:left;border:1px solid var(--line);background:var(--panel);padding:12px 16px;font-size:14px;line-height:1.7}
+details.tips summary{cursor:pointer;color:var(--cyan);font-family:'Chakra Petch',monospace;letter-spacing:.1em}
+details.tips p{margin-top:8px}
+/* phông chữ: Chakra Petch cho tiêu đề, nhãn, số; Be Vietnam Pro cho đoạn văn */
+.title,.big,.bname,.sheet h2,#ending .big{font-family:'Chakra Petch',sans-serif;font-weight:700}
+.timer,.score,.slot,.clock .val,.try .code{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="screen on">
+  <div class="tag mono">TRÒ CHƠI · ■ LÒNG TIN · ★★★★★</div>
+  <div class="title">VÁN BÀI<br>LÒNG TIN</div>
+  <div class="announce mono" id="announce"></div>
+  <ul class="rules">
+    <li>Bạn ngồi cùng bàn với <b>3 người đeo mặt nạ</b>. Ván bài có <b>5 vòng</b>.</li>
+    <li>Mỗi vòng, tất cả cùng lúc chọn <b class="c">HỢP TÁC</b> hoặc <b class="b">PHẢN BỘI</b>. Lựa chọn được lật ra cùng một lúc.</li>
+    <li>Điểm được tính giữa <b>từng cặp</b> người chơi (xem bảng bên dưới).</li>
+    <li>Nếu có <b class="b">từ 3 người phản bội</b> trong cùng một vòng, ván bài sụp đổ: <b>mọi người −4 điểm</b>.</li>
+    <li>Mỗi người có một <b>tính cách riêng</b> và hành động theo quy luật của mình. Hãy quan sát để đọc ra họ.</li>
+    <li>Để sống sót: <b>đạt ít nhất 15 điểm</b> và <b>không đứng cuối bảng</b> (đồng hạng cuối cũng tính là cuối).</li>
+    <li>Mỗi vòng có <b>45 giây</b> để quyết định. Có thể <b>đổi 1 ngày lấy thêm 30 giây</b>. Trò chơi ★★★★★: hết giờ là <b class="b">GAME OVER</b>.</li>
+  </ul>
+  <div class="rules pay" style="display:grid">
+    <span>Bạn <b class="c">hợp tác</b>, đối phương <b class="c">hợp tác</b></span><span>+2 / +2</span>
+    <span>Bạn <b class="b">phản bội</b>, đối phương <b class="c">hợp tác</b></span><span>+3 / −1</span>
+    <span>Bạn <b class="c">hợp tác</b>, đối phương <b class="b">phản bội</b></span><span>−1 / +3</span>
+    <span>Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
+  </div>
+  <div class="stakes mono">
+    <span>Ngày còn lại <b id="stDays">3</b></span>
+    <span>Phí vào cửa <b>−1 ngày</b></span>
+    <span>Phần thưởng <b>+9 ngày</b></span>
+  </div>
+  <div class="warn">Lưu ý: ở bàn này, sự tin tưởng có giá, và sự phản bội cũng vậy.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">NGỒI VÀO BÀN ▸</button></div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div>
+      <div class="name mono">■ VÁN BÀI LÒNG TIN</div>
+      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+    </div>
+    <div class="timer mono paused" id="timer">00:45</div>
+  </div>
+  <div class="counters mono">
+    <span>VÒNG: <b id="roundHud">1/5</b></span>
+    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+  </div>
+  <div class="goal mono"><span>MỤC TIÊU: <b>≥ 15 điểm</b> và <b>không đứng cuối</b></span><span id="rankHud">HẠNG: –</span></div>
+
+  <div class="table" id="table"></div>
+
+  <div class="msg" id="msg"></div>
+  <div class="choices">
+    <button class="choice c" id="coopBtn" disabled>HỢP TÁC<small>Tin tưởng cả bàn</small></button>
+    <button class="choice b" id="betrayBtn" disabled>PHẢN BỘI<small>Lấy phần hơn về mình</small></button>
+  </div>
+  <details class="legend">
+    <summary>BẢNG ĐIỂM</summary>
+    <div class="pay">
+      <span>Cả hai <b class="c">hợp tác</b></span><span>+2 / +2</span>
+      <span><b class="b">Phản bội</b> người <b class="c">hợp tác</b></span><span>+3 / −1</span>
+      <span>Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
+      <span>Từ 3 người phản bội trở lên</span><span>tất cả −4</span>
+    </div>
+  </details>
+  <div class="log mono" id="log"></div>
+</section>
+
+<div class="banner" id="banner"><span>VÁN BÀI SỤP ĐỔ<small>Quá nhiều kẻ phản bội. Mọi người −4 điểm.</small></span></div>
+
+<!-- ============ END ============ -->
+<section id="end" class="screen">
+  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="big" id="endTitle"></div>
+  <div class="reason" id="endReason"></div>
+  <div class="daysBox mono" id="endDays"></div>
+  <div class="reveal" id="reveal"></div>
+  <details class="tips">
+    <summary>MẸO</summary>
+    <p><b>Luôn phản bội</b> nghe có vẻ an toàn, nhưng bàn sẽ sụp đổ liên tục và bạn khó đạt 15 điểm.</p>
+    <p><b>Luôn hợp tác</b> giúp người khác giàu lên nhờ bạn, và bạn sẽ đứng cuối.</p>
+    <p><b>Quan sát lịch sử:</b> ai luôn làm lại điều bạn đã làm? Ai tốt bụng lúc đầu rồi trở mặt? Ai chẳng theo quy luật nào?</p>
+    <p><b>Vòng cuối</b> không còn vòng sau để bị trả đũa. Hãy nghĩ xem người khác cũng biết điều đó.</p>
+  </details>
+  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+</section>
+
+<script>
+/* ---------- lượt chơi chung với Thành Phố Lặng ---------- */
+const GAME_ID = 'tin';
+const RUN = (() => {
+  const KEY = 'thanh-pho-lang-run', START = 3;
+  const q = new URLSearchParams(location.search);
+  let st = null;
+  if (q.has('d')) st = { days: +q.get('d'), done: (q.get('c') || '').split(',').filter(Boolean) };
+  else try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+  if (!st || !Number.isFinite(st.days) || !Array.isArray(st.done)) st = { days: START, done: [] };
+  const save = s => { st = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
+  return { get: () => st, save, url: file => `${file}?d=${st.days}&c=${st.done.join(',')}` };
+})();
+</script>
+<script>
+(() => {
+  /* ---------- cấu hình (đã cân bằng bằng mô phỏng 20.000 ván) ---------- */
+  const DAYS_START = RUN.get().days, FEE = 1, REWARD = 9;
+  const STARS = 5, SOFT_MAX_STARS = 2, TIMEOUT_PENALTY = 1;
+  const EXT_SEC = 30, EXT_COST = 1;
+  const ROUNDS = 5, ROUND_TIME = 45, TARGET = 15;
+  const PAY = { CC: [2, 2], BC: [3, -1], CB: [-1, 3], BB: [0, 0] };
+  const COLLAPSE_AT = 3, COLLAPSE_LOSS = 4;
+
+  // tính cách của người chơi máy. h = lịch sử các vòng (h[r][0] là bạn), me = vị trí của họ
+  const PERSONAS = {
+    loyal:    { name: 'KẺ TRUNG THÀNH', desc: 'Luôn hợp tác, cho tới khi bị phản bội tổng cộng 3 lần. Sau đó không bao giờ tha thứ.',
+                act: (h, me) => h.reduce((n, row) => n + row.filter((a, j) => j !== me && a === 'B').length, 0) >= 3 ? 'B' : 'C' },
+    mirror:   { name: 'TẤM GƯƠNG', desc: 'Vòng đầu hợp tác. Sau đó làm lại đúng điều BẠN đã làm ở vòng trước.',
+                act: (h, me, r) => r === 0 ? 'C' : h[r - 1][0] },
+    fox:      { name: 'CON CÁO', desc: 'Hợp tác 2 vòng đầu để lấy lòng tin. Sau đó phản bội khi thấy bàn dễ dãi, và luôn phản bội ở vòng cuối.',
+                act: (h, me, r) => r < 2 ? 'C' : r === ROUNDS - 1 ? 'B' : (h[r - 1].filter((a, j) => j !== me && a === 'C').length >= 2 ? 'B' : 'C') },
+    chaos:    { name: 'KẺ ĐIÊN', desc: 'Không có quy luật nào. Mỗi vòng tung đồng xu trong đầu.',
+                act: () => Math.random() < .5 ? 'C' : 'B' },
+    cautious: { name: 'KẺ THẬN TRỌNG', desc: 'Hợp tác, trừ khi vòng trước có từ 2 người khác trở lên phản bội.',
+                act: (h, me, r) => r === 0 ? 'C' : (h[r - 1].filter((a, j) => j !== me && a === 'B').length >= 2 ? 'B' : 'C') },
+  };
+  const MASKS = [
+    { name: 'MẶT NẠ TRẮNG', color: '#e8ecf2' }, { name: 'MẶT NẠ ĐỎ', color: '#d8263f' },
+    { name: 'MẶT NẠ XÁM', color: '#7d8796' }, { name: 'MẶT NẠ VÀNG', color: '#e0a83a' }, { name: 'MẶT NẠ TÍM', color: '#8a5cd6' },
+  ];
+
+  const $ = id => document.getElementById(id);
+  const screens = ['intro', 'game', 'end'];
+  const show = id => screens.forEach(s => $(s).classList.toggle('on', s === id));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const shuffle = a => a.map(x => [Math.random(), x]).sort((p, q) => p[0] - q[0]).map(p => p[1]);
+
+  /* ---------- audio ---------- */
+  let ac = null;
+  function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(20, freq + slide), t + dur);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur + .02);
+    } catch (e) {}
+  }
+
+  /* ---------- intro typewriter ---------- */
+  const ANNOUNCE = '> Trò chơi cuối cùng trước tòa tháp. Ba chiếc mặt nạ đang chờ bạn ngồi xuống.';
+  let typeTimer;
+  function typeAnnounce() {
+    const el = $('announce'); el.textContent = ''; let i = 0;
+    clearInterval(typeTimer);
+    typeTimer = setInterval(() => { el.textContent = ANNOUNCE.slice(0, ++i); if (i >= ANNOUNCE.length) clearInterval(typeTimer); }, 35);
+  }
+
+  /* ---------- state ---------- */
+  let S, tick, runId = 0;
+
+  function reset() {
+    runId++;
+    const personas = shuffle(Object.keys(PERSONAS)).slice(0, 3);
+    const masks = shuffle(MASKS).slice(0, 3);
+    S = { round: 0, phase: 'idle', time: ROUND_TIME, over: false, days: DAYS_START - FEE, exts: 0,
+          players: [{ name: 'BẠN', me: true }, ...personas.map((p, k) => ({ name: masks[k].name, color: masks[k].color, persona: p }))],
+          score: [0, 0, 0, 0], hist: [] };
+    $('game').classList.remove('danger', 'crtoff');
+    $('log').innerHTML = '';
+    drawTable();
+  }
+
+  function rankOfMe() { return 1 + S.score.slice(1).filter(x => x >= S.score[0]).length; }
+  function fmt(t) { t = Math.max(0, t); return '0' + Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+  function setMsg(t, cls = '') { const m = $('msg'); m.innerHTML = t; m.className = 'msg ' + cls; }
+
+  function drawTable() {
+    const t = $('table'); t.innerHTML = '';
+    S.players.forEach((p, i) => {
+      const row = document.createElement('div');
+      row.className = 'pl' + (p.me ? ' me' : '');
+      row.innerHTML = `<div class="mask" style="--m:${p.color || 'none'}"></div>
+        <div><div class="pname">${p.name}</div><div class="hist">${Array.from({ length: ROUNDS }, (_, r) => `<i>${r + 1}</i>`).join('')}</div></div>
+        <div class="right"><div class="score">0</div><div class="delta"></div></div>
+        <div class="card">${p.me ? '' : '…'}</div>`;
+      t.appendChild(row);
+    });
+  }
+
+  function render() {
+    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('roundHud').textContent = `${Math.max(1, S.round)}/${ROUNDS}`;
+    $('extBtn').disabled = S.over || S.phase !== 'choose' || S.days - EXT_COST < 1;
+    $('timer').textContent = fmt(S.time);
+    $('timer').classList.toggle('paused', S.phase !== 'choose');
+    $('coopBtn').disabled = $('betrayBtn').disabled = S.phase !== 'choose';
+    const rows = document.querySelectorAll('.pl');
+    rows.forEach((row, i) => {
+      row.querySelector('.score').textContent = S.score[i];
+      row.querySelectorAll('.hist i').forEach((cell, r) => {
+        const a = S.hist[r] && S.hist[r][i];
+        cell.className = a || ''; cell.textContent = a ? (a === 'C' ? 'H' : 'P') : r + 1;
+      });
+    });
+    const rk = S.round ? rankOfMe() : 0;
+    $('rankHud').innerHTML = rk ? `HẠNG: <b style="color:${rk === 4 ? 'var(--red)' : 'var(--amber)'}">${rk}/4</b>` : 'HẠNG: –';
+  }
+
+  async function nextRound() {
+    const my = runId;
+    S.round++; S.time = ROUND_TIME; S.phase = 'choose';
+    $('game').classList.remove('danger');
+    document.querySelectorAll('.pl').forEach((row, i) => {
+      const c = row.querySelector('.card'); c.className = 'card'; c.textContent = i === 0 ? '' : '…';
+      row.querySelector('.delta').className = 'delta';
+    });
+    setMsg(S.round === ROUNDS ? `<b style="color:var(--red)">Vòng cuối.</b>&nbsp;Không còn vòng sau để trả đũa.` : `Vòng ${S.round}/${ROUNDS}. Bạn chọn gì?`);
+    render();
+  }
+
+  async function choose(mine) {
+    if (S.phase !== 'choose') return;
+    const my = runId;
+    S.phase = 'reveal'; render();
+    beep(mine === 'C' ? 520 : 200, .12, 'triangle', .06);
+    const r = S.round - 1;
+    const acts = [mine, ...S.players.slice(1).map((p, k) => PERSONAS[p.persona].act(S.hist, k + 1, r))];
+    setMsg('Các lá bài đang được lật…');
+    const rows = document.querySelectorAll('.pl');
+    rows[0].querySelector('.card').textContent = mine === 'C' ? 'HỢP TÁC' : 'PHẢN BỘI';
+    rows[0].querySelector('.card').className = 'card ' + mine;
+    await wait(600); if (my !== runId) return;
+    for (let i = 1; i < 4; i++) {
+      const c = rows[i].querySelector('.card');
+      c.textContent = acts[i] === 'C' ? 'HỢP TÁC' : 'PHẢN BỘI';
+      c.className = 'card flip ' + acts[i];
+      beep(acts[i] === 'C' ? 440 : 160, .14, acts[i] === 'C' ? 'triangle' : 'sawtooth', .06);
+      await wait(550); if (my !== runId) return;
+    }
+
+    // tính điểm theo từng cặp
+    const delta = [0, 0, 0, 0];
+    for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) {
+      const [a, b] = PAY[acts[i] + acts[j]]; delta[i] += a; delta[j] += b;
+    }
+    const betrayers = acts.filter(a => a === 'B').length;
+    const collapse = betrayers >= COLLAPSE_AT;
+    if (collapse) {
+      for (let i = 0; i < 4; i++) delta[i] -= COLLAPSE_LOSS;
+      const b = $('banner'); b.classList.remove('show'); void b.offsetWidth; b.classList.add('show');
+      beep(90, .8, 'sawtooth', .09, -40);
+      await wait(1900); if (my !== runId) return;
+    }
+    S.hist.push(acts);
+    delta.forEach((d, i) => {
+      S.score[i] += d;
+      const el = rows[i].querySelector('.delta');
+      el.textContent = (d > 0 ? '+' : '') + d;
+      el.className = 'delta show ' + (d > 0 ? 'pos' : d < 0 ? 'neg' : 'zero');
+    });
+    render();
+    const line = document.createElement('div');
+    line.innerHTML = `VÒNG ${S.round}: ${betrayers} người phản bội${collapse ? ' · <b style="color:var(--red)">SỤP ĐỔ</b>' : ''} → bạn <b>${delta[0] > 0 ? '+' : ''}${delta[0]}</b> (tổng ${S.score[0]})`;
+    $('log').appendChild(line);
+    setMsg(delta[0] >= 0 ? `Bạn nhận ${delta[0] > 0 ? '+' : ''}${delta[0]} điểm.` : `Bạn mất ${-delta[0]} điểm.`, delta[0] > 0 ? 'ok' : delta[0] < 0 ? 'err' : '');
+    await wait(1800); if (my !== runId) return;
+    if (S.round === ROUNDS) return judge();
+    nextRound();
+  }
+
+  function judge() {
+    const rk = rankOfMe(), me = S.score[0];
+    if (me >= TARGET && rk < 4) return finish('win');
+    S.days = 0;
+    const why = me < TARGET && rk === 4 ? `Bạn chỉ có ${me} điểm, chưa đạt ${TARGET}, và còn đứng cuối bàn.`
+      : me < TARGET ? `Bạn có ${me} điểm, chưa đạt mức ${TARGET} điểm.`
+      : `Bạn có ${me} điểm nhưng ${S.score.slice(1).some(x => x === me) ? 'đồng hạng cuối' : 'đứng cuối'} bàn.`;
+    finish('lose', why);
+  }
+
+  /* ---------- gia hạn ---------- */
+  function extend() {
+    if (!S || S.over || S.phase !== 'choose' || S.days - EXT_COST < 1) return;
+    S.days -= EXT_COST; S.time += EXT_SEC; S.exts++;
+    if (S.time > 10) $('game').classList.remove('danger');
+    const line = document.createElement('div');
+    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    $('log').appendChild(line);
+    [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
+    render();
+  }
+
+  function startTimer() {
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (S.over || S.phase !== 'choose') return;
+      S.time--; render();
+      if (S.time <= 10) { $('game').classList.add('danger'); beep(S.time <= 5 ? 1200 : 880, .05, 'square', .04); }
+      if (S.time <= 0) timeout();
+    }, 1000);
+  }
+
+  function timeout() {
+    S.over = true; S.phase = 'done'; clearInterval(tick); render();
+    const where = `Hết giờ ở vòng ${S.round}/${ROUNDS}. Ở bàn này, im lặng cũng là một lựa chọn, và nó không được tha thứ.`;
+    if (STARS <= SOFT_MAX_STARS) {
+      S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
+      if (S.days > 0) return finish('penalty', where);
+    }
+    S.days = 0;
+    finish('lose', where);
+  }
+
+  /* ---------- end ---------- */
+  function finish(kind, why = '') {
+    RUN.save({ days: kind === 'win' ? S.days + REWARD : kind === 'lose' ? 0 : S.days,
+               done: kind === 'win' ? [...new Set([...RUN.get().done, GAME_ID])] : RUN.get().done });
+    S.over = true; clearInterval(tick); runId++;
+    const end = $('end');
+    ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
+
+    // lật mặt nạ
+    // đồng điểm thì bạn xếp sau (đúng với luật "đồng hạng cuối cũng tính là cuối")
+    const order = S.players.map((p, i) => i).sort((a, b) => (S.score[b] - S.score[a]) || (a === 0 ? 1 : b === 0 ? -1 : 0));
+    $('reveal').innerHTML = order.map((i, k) => {
+      const p = S.players[i];
+      return p.me
+        ? `<div style="border-color:rgba(61,225,255,.45)"><span class="rk">#${k + 1} · ${S.score[i]} điểm</span><b>BẠN</b></div>`
+        : `<div><span class="rk">#${k + 1} · ${S.score[i]} điểm</span><b>${p.name}</b> là <b style="color:${p.color}">${PERSONAS[p.persona].name}</b><br>${PERSONAS[p.persona].desc}</div>`;
+    }).join('');
+
+    if (kind === 'win') {
+      $('endTitle').textContent = 'SỐNG SÓT';
+      $('endReason').innerHTML = `Bạn kết thúc với <b>${S.score[0]} điểm</b>, xếp hạng ${rankOfMe()}/4.`
+        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      S.days += REWARD;
+      [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
+      show('end');
+    } else {
+      $('endTitle').textContent = 'GAME OVER';
+      $('endReason').innerHTML = why;
+      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      beep(160, .9, 'sawtooth', .1, -140);
+      $('game').classList.add('crtoff');
+      setTimeout(() => show('end'), 800);
+    }
+  }
+
+  /* ---------- wiring ---------- */
+  $('startBtn').onclick = () => {
+    RUN.save({ days: DAYS_START - FEE, done: RUN.get().done });
+    beep(220, .3, 'sawtooth', .06, 300);
+    reset(); show('game'); startTimer(); nextRound();
+  };
+  $('coopBtn').onclick = () => choose('C');
+  $('betrayBtn').onclick = () => choose('B');
+  $('extBtn').onclick = extend;
+
+  const HOME = 'thanh-pho-lang.html';
+  $('stDays').textContent = DAYS_START;
+  $('homeBtn').onclick = () => location.href = RUN.url(HOME);
+  $('againBtn').onclick = () => location.href = RUN.url(HOME);
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+
+  if (new URLSearchParams(location.search).has('selftest')) window.__state = () => S;
+
+  typeAnnounce();
+})();
+</script>
+<script>
+/* PWA: cho phép cài như app và chơi khi không có mạng (chỉ hoạt động khi chạy qua https hoặc localhost) */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http'))
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+</body>
+</html>

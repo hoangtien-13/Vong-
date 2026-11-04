@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Thành Phố Lặng · Hành Lang Đèn</title>
+<meta name="theme-color" content="#07080b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Thành Phố Lặng">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b;--panel:#0d1016;--line:#1e2531;--txt:#c9d1dc;--dim:#6b7686;
+  --red:#ff2e4d;--cyan:#3de1ff;--amber:#ffb547;--green:#4dffa6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--txt);font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.mono{font-family:'Chakra Petch',ui-monospace,Consolas,monospace}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;
+  background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.8) 100%)}
+
+.screen{display:none;min-height:100vh;min-height:100dvh;padding:16px;max-width:680px;margin:0 auto;flex-direction:column}
+.screen.on{display:flex}
+
+/* ---------- buttons ---------- */
+.btn{font-family:'Chakra Petch',monospace;font-size:16px;letter-spacing:.12em;color:var(--cyan);
+  background:transparent;border:1px solid var(--cyan);padding:12px 18px;cursor:pointer;
+  box-shadow:0 0 12px rgba(61,225,255,.25),inset 0 0 12px rgba(61,225,255,.08);transition:.15s}
+.btn:hover:not(:disabled){background:rgba(61,225,255,.1)}
+.btn:disabled{opacity:.3;cursor:default;box-shadow:none}
+.btn.red{color:var(--red);border-color:var(--red);box-shadow:0 0 12px rgba(255,46,77,.3),inset 0 0 12px rgba(255,46,77,.08)}
+.btn.red:hover:not(:disabled){background:rgba(255,46,77,.12)}
+
+/* ---------- intro ---------- */
+#intro{justify-content:center;gap:22px}
+.tag{color:var(--red);font-size:14px;letter-spacing:.3em}
+.title{font-size:clamp(36px,10vw,68px);font-weight:800;letter-spacing:.05em;color:#fff;
+  text-shadow:0 0 18px rgba(255,46,77,.6),2px 0 var(--red),-2px 0 var(--cyan);animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.4}94%{opacity:1}96%{opacity:.6}}
+.announce{min-height:3.2em;color:var(--amber);font-size:17px}
+.rules{border:1px solid var(--line);background:var(--panel);padding:16px 18px;line-height:1.75;font-size:15px}
+.rules li{list-style:none;padding-left:18px;position:relative}
+.rules li::before{content:"▸";position:absolute;left:0;color:var(--red)}
+.rules b{color:#fff}
+.stakes{display:flex;gap:10px;flex-wrap:wrap;font-size:14px}
+.stakes span{border:1px solid var(--line);padding:6px 10px;color:var(--dim)}
+.stakes span b{color:var(--txt)}
+.warn{color:var(--dim);font-style:italic;font-size:14px}
+
+/* ---------- game ---------- */
+#game{gap:12px}
+.hud{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;gap:8px}
+.hud .name{font-size:13px;letter-spacing:.2em;color:var(--red)}
+.hud .days{font-size:13px;color:var(--dim);letter-spacing:.1em}
+.timer{font-size:34px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.35);transition:opacity .3s}
+.timer.paused{opacity:.35}
+.counters{display:flex;gap:16px;font-size:13px;color:var(--dim);letter-spacing:.08em;align-items:center;flex-wrap:wrap}
+.counters b{color:var(--cyan);font-weight:400}
+.ext{margin-left:auto;font-size:13px;letter-spacing:.06em;color:var(--amber);background:transparent;
+  border:1px solid var(--amber);padding:6px 10px;cursor:pointer;box-shadow:0 0 10px rgba(255,181,71,.2)}
+.ext:hover:not(:disabled){background:rgba(255,181,71,.12)}
+.ext:disabled{opacity:.3;cursor:default;box-shadow:none}
+.danger .ext:not(:disabled){animation:pulseA 1s infinite}
+@keyframes pulseA{50%{box-shadow:0 0 18px rgba(255,181,71,.8)}}
+
+.msg{min-height:2.8em;text-align:center;font-size:15px;color:var(--amber);padding:0 4px;line-height:1.4;display:flex;align-items:center;justify-content:center}
+.msg.err{color:var(--red)}
+.msg.ok{color:var(--green)}
+.msg.watch{color:var(--cyan)}
+
+.prog{display:flex;gap:6px;justify-content:center;min-height:12px}
+.prog i{width:12px;height:12px;border-radius:50%;border:1px solid #2f3846;display:block}
+.prog i.done{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.reverse .prog i.done{background:var(--red);border-color:var(--red);box-shadow:0 0 8px var(--red)}
+
+.hall{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%;max-width:360px;margin:0 auto;padding:6px 0}
+.door{position:relative;aspect-ratio:3/4;border-radius:6px 6px 2px 2px;cursor:pointer;
+  background:linear-gradient(180deg,#141a24 0%,#0b0e13 100%);border:1px solid #232b38;
+  box-shadow:inset 0 -18px 30px rgba(0,0,0,.6);transition:box-shadow .12s,border-color .12s,background .12s}
+.door::before{content:"";position:absolute;inset:14% 12% 6% 12%;border:1px solid #1b222d;border-radius:3px}
+.door .lamp{position:absolute;top:5%;left:50%;width:30%;height:6px;transform:translateX(-50%);border-radius:4px;background:#24151a;transition:.12s}
+.door .knob{position:absolute;right:20%;top:56%;width:7px;height:7px;border-radius:50%;background:#3a4352}
+.door .num{position:absolute;left:20%;bottom:10%;font-size:13px;color:#3d4757}
+.locked .door{cursor:default}
+.door.lit{border-color:var(--cyan);background:linear-gradient(180deg,#0f2d36 0%,#0b1418 100%);
+  box-shadow:0 0 26px rgba(61,225,255,.55),inset 0 0 34px rgba(61,225,255,.25)}
+.door.lit .lamp{background:#e9fbff;box-shadow:0 0 18px 4px var(--cyan)}
+.door.lit .num{color:var(--cyan)}
+.door.hit{border-color:#fff;box-shadow:0 0 22px rgba(255,255,255,.45),inset 0 0 28px rgba(255,255,255,.15)}
+.door.hit .lamp{background:#fff;box-shadow:0 0 14px 3px #fff}
+.door.bad{border-color:var(--red);background:linear-gradient(180deg,#3a0d16 0%,#14070a 100%);
+  box-shadow:0 0 30px rgba(255,46,77,.7),inset 0 0 34px rgba(255,46,77,.35)}
+.door.bad .lamp{background:var(--red);box-shadow:0 0 18px 4px var(--red)}
+.door.should{animation:should .35s 4}
+@keyframes should{50%{border-color:var(--green);box-shadow:0 0 26px rgba(77,255,166,.6)}}
+
+.banner{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:40;pointer-events:none;opacity:0}
+.banner span{font-size:clamp(34px,10vw,64px);font-weight:800;color:var(--red);letter-spacing:.1em;
+  text-shadow:0 0 30px rgba(255,46,77,.8),3px 0 var(--cyan);background:rgba(7,8,11,.75);padding:12px 26px;text-align:center}
+.banner small{display:block;font-size:15px;font-weight:400;letter-spacing:.05em;color:var(--amber);text-shadow:none;margin-top:6px}
+.banner.show{animation:ban 1.8s forwards}
+@keyframes ban{0%{opacity:0;transform:scale(1.2)}15%{opacity:1;transform:scale(1)}25%{opacity:.4}30%{opacity:1}85%{opacity:1}100%{opacity:0}}
+
+.log{border-top:1px solid var(--line);padding-top:10px;font-size:14px;color:var(--dim);line-height:1.7}
+.log div b{color:var(--txt);font-weight:400}
+
+/* danger / glitch */
+.danger .timer{color:var(--red);text-shadow:0 0 14px var(--red);animation:jit .12s infinite}
+.danger{animation:glitch 2.2s infinite}
+@keyframes jit{50%{transform:translate(1px,-1px)}}
+@keyframes glitch{0%,88%,100%{filter:none;transform:none}
+  89%{filter:hue-rotate(40deg) saturate(2);transform:translateX(-3px)}
+  91%{filter:none;transform:translateX(3px)}
+  93%{filter:contrast(1.6);transform:none}}
+.crtoff{animation:off .7s forwards}
+@keyframes off{0%{transform:scale(1,1);filter:brightness(1)}
+  45%{transform:scale(1,.006);filter:brightness(4)}100%{transform:scale(0,.006);filter:brightness(6);opacity:0}}
+
+/* ---------- end ---------- */
+#end{justify-content:center;gap:20px;text-align:center;align-items:center}
+.big{font-size:clamp(38px,11vw,68px);font-weight:800;letter-spacing:.05em}
+.lose .big{color:var(--red);text-shadow:0 0 22px rgba(255,46,77,.7),3px 0 var(--cyan)}
+.win .big{color:var(--green);text-shadow:0 0 22px rgba(77,255,166,.5)}
+.penalty .big{color:var(--amber);text-shadow:0 0 22px rgba(255,181,71,.5)}
+.reason{font-size:16px;line-height:1.6;max-width:480px}
+.daysBox{font-size:20px;letter-spacing:.12em;color:var(--amber)}
+details{max-width:520px;text-align:left;border:1px solid var(--line);background:var(--panel);padding:12px 16px;font-size:14px;line-height:1.7}
+summary{cursor:pointer;color:var(--cyan);font-family:'Chakra Petch',monospace;letter-spacing:.1em}
+details p{margin-top:8px}
+.introBtns{display:flex;gap:10px;flex-wrap:wrap}
+.btn:disabled{opacity:.3;cursor:default;box-shadow:none}
+/* phông chữ: Chakra Petch cho tiêu đề, nhãn, số; Be Vietnam Pro cho đoạn văn */
+.title,.big,.bname,.sheet h2,#ending .big{font-family:'Chakra Petch',sans-serif;font-weight:700}
+.timer,.score,.slot,.clock .val,.try .code{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="screen on">
+  <div class="tag mono">TRÒ CHƠI · ● TRÍ NHỚ · ★★</div>
+  <div class="title">HÀNH LANG ĐÈN</div>
+  <div class="announce mono" id="announce"></div>
+  <ul class="rules">
+    <li>Hành lang có <b>9 cánh cửa</b>. Đèn trên các cửa sẽ lần lượt sáng lên theo một thứ tự.</li>
+    <li>Chạm lại các cửa <b>đúng thứ tự</b> đó.</li>
+    <li>Có <b>6 vòng</b>. Mỗi vòng chuỗi đèn dài thêm 1 cửa (từ 3 đến 8), và đèn chớp ngày càng nhanh.</li>
+    <li>Từ <b style="color:var(--red)">vòng 5</b>: phải chạm theo thứ tự <b style="color:var(--red)">NGƯỢC LẠI</b>.</li>
+    <li>Đồng hồ <b>60 giây</b> chỉ chạy khi đến lượt bạn. Có thể <b>đổi 1 ngày sống lấy thêm 30 giây</b>.</li>
+    <li>Hết giờ: bị <b style="color:var(--amber)">phạt −1 ngày</b> (trò chơi dưới ★★★ không loại người chơi vì hết giờ).</li>
+    <li>Chạm sai cửa, hoặc ngày sống về 0: <b style="color:var(--red)">GAME OVER</b>.</li>
+  </ul>
+  <div class="stakes mono">
+    <span>Ngày còn lại <b id="stDays">3</b></span>
+    <span>Phí vào cửa <b>−1 ngày</b></span>
+    <span>Phần thưởng <b>+3 ngày</b></span>
+  </div>
+  <div class="warn">Lưu ý: hành lang chỉ cho xem một lần. Không có lần chiếu lại.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div>
+      <div class="name mono">● HÀNH LANG ĐÈN</div>
+      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+    </div>
+    <div class="timer mono paused" id="timer">01:00</div>
+  </div>
+  <div class="counters mono">
+    <span>VÒNG: <b id="roundHud">1/6</b></span>
+    <span>CHUỖI: <b id="lenHud">3</b></span>
+    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+  </div>
+
+  <div class="msg" id="msg">Chuẩn bị…</div>
+  <div class="prog" id="prog"></div>
+  <div class="hall locked" id="hall"></div>
+
+  <div class="log mono" id="log"></div>
+</section>
+
+<div class="banner" id="banner"><span>ĐẢO NGƯỢC<small>Từ giờ, chạm theo thứ tự ngược lại</small></span></div>
+
+<!-- ============ END ============ -->
+<section id="end" class="screen">
+  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="big" id="endTitle"></div>
+  <div class="reason" id="endReason"></div>
+  <div class="daysBox mono" id="endDays"></div>
+  <details>
+    <summary>MẸO GHI NHỚ</summary>
+    <p><b>Gom nhóm:</b> đừng nhớ từng cửa riêng lẻ. Chia chuỗi thành các cụm 3–4 cửa, ví dụ "7-2-9 · 4-1-6".</p>
+    <p><b>Nhớ theo hình:</b> 9 cửa giống bàn phím số điện thoại. Hãy hình dung đường đèn vẽ ra trên lưới (đi chéo, đi xuống, quay về...).</p>
+    <p><b>Đọc thầm:</b> nhẩm số cửa thành tiếng trong đầu khi đèn sáng. Trí nhớ âm thanh thường giữ lâu hơn hình ảnh.</p>
+    <p><b>Vòng đảo ngược:</b> mỗi vòng chỉ thêm 1 cửa vào cuối chuỗi cũ, nên bạn chỉ cần nhớ cửa mới rồi chạm nó <b>đầu tiên</b>, sau đó lần ngược phần còn lại.</p>
+  </details>
+  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+</section>
+
+<script>
+/* ---------- lượt chơi chung với Thành Phố Lặng ---------- */
+const GAME_ID = 'den';
+const RUN = (() => {
+  const KEY = 'thanh-pho-lang-run', START = 3;
+  const q = new URLSearchParams(location.search);
+  let st = null;
+  if (q.has('d')) st = { days: +q.get('d'), done: (q.get('c') || '').split(',').filter(Boolean) };
+  else try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+  if (!st || !Number.isFinite(st.days) || !Array.isArray(st.done)) st = { days: START, done: [] };
+  const save = s => { st = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
+  return { get: () => st, save, url: file => `${file}?d=${st.days}&c=${st.done.join(',')}` };
+})();
+</script>
+<script>
+(() => {
+  /* ---------- cấu hình ---------- */
+  const DOORS = 9, ROUNDS = 6, START_LEN = 3, REVERSE_FROM = 5;
+  const TIME = 60, DAYS_START = RUN.get().days, FEE = 1, REWARD = 3;
+  const STARS = 2;            // độ khó của trò chơi này
+  const SOFT_MAX_STARS = 2;   // trò chơi từ mức này trở xuống: hết giờ bị phạt thay vì bị loại
+  const TIMEOUT_PENALTY = 1;  // số ngày bị phạt khi hết giờ
+  const EXT_SEC = 30, EXT_COST = 1; // gia hạn: +30 giây đổi 1 ngày
+  // tốc độ đèn theo vòng: [thời gian sáng, thời gian tắt] (ms)
+  const SPEED = [[700, 280], [650, 250], [560, 220], [480, 190], [480, 190], [420, 170]];
+
+  const $ = id => document.getElementById(id);
+  const screens = ['intro', 'game', 'end'];
+  const show = id => screens.forEach(s => $(s).classList.toggle('on', s === id));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  /* ---------- audio ---------- */
+  let ac = null;
+  function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(20, freq + slide), t + dur);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur + .02);
+    } catch (e) {}
+  }
+  // mỗi cửa một nốt (thang ngũ cung thứ, nghe u tối)
+  const NOTES = [220, 261.6, 293.7, 329.6, 392, 440, 523.3, 587.3, 659.3];
+  const doorTone = (i, dur) => beep(NOTES[i], dur / 1000, 'triangle', .09);
+
+  /* ---------- intro typewriter ---------- */
+  const ANNOUNCE = '> Trò chơi tiếp theo. Hãy nhìn thật kỹ, hành lang chỉ cho xem một lần.';
+  let typeTimer;
+  function typeAnnounce() {
+    const el = $('announce'); el.textContent = ''; let i = 0;
+    clearInterval(typeTimer);
+    typeTimer = setInterval(() => {
+      el.textContent = ANNOUNCE.slice(0, ++i);
+      if (i >= ANNOUNCE.length) clearInterval(typeTimer);
+    }, 35);
+  }
+
+  /* ---------- doors ---------- */
+  const doors = [];
+  for (let i = 0; i < DOORS; i++) {
+    const d = document.createElement('div');
+    d.className = 'door';
+    d.innerHTML = `<div class="lamp"></div><div class="knob"></div><div class="num mono">${i + 1}</div>`;
+    d.addEventListener('pointerdown', e => { e.preventDefault(); pressDoor(i); });
+    $('hall').appendChild(d); doors.push(d);
+  }
+
+  /* ---------- state ---------- */
+  let S, tick, runId = 0;
+
+  function reset() {
+    runId++;
+    S = { seq: [], round: 0, phase: 'idle', idx: 0, time: TIME, over: false,
+          days: DAYS_START - FEE, exts: 0 };
+    $('game').classList.remove('danger', 'crtoff', 'reverse');
+    $('log').innerHTML = '';
+    doors.forEach(d => d.className = 'door');
+    $('timer').textContent = fmt(TIME);
+    render();
+  }
+
+  const isReverse = () => S.round >= REVERSE_FROM;
+  const expected = () => isReverse() ? S.seq[S.seq.length - 1 - S.idx] : S.seq[S.idx];
+
+  function render() {
+    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('roundHud').textContent = `${Math.max(1, S.round)}/${ROUNDS}`;
+    $('lenHud').textContent = S.seq.length || START_LEN;
+    $('extBtn').disabled = S.over || S.days - EXT_COST < 1;
+    $('hall').classList.toggle('locked', S.phase !== 'input');
+    $('timer').classList.toggle('paused', S.phase !== 'input');
+    $('game').classList.toggle('reverse', isReverse());
+    const p = $('prog'); p.innerHTML = '';
+    for (let i = 0; i < S.seq.length; i++) {
+      const dot = document.createElement('i');
+      if (S.phase === 'input' && i < S.idx) dot.className = 'done';
+      p.appendChild(dot);
+    }
+  }
+
+  function setMsg(t, cls = '') { const m = $('msg'); m.textContent = t; m.className = 'msg ' + cls; }
+
+  function addToSeq() {
+    let n;
+    do { n = Math.floor(Math.random() * DOORS); } while (n === S.seq[S.seq.length - 1]);
+    S.seq.push(n);
+  }
+
+  async function nextRound() {
+    const my = runId;
+    S.round++;
+    if (S.round === 1) for (let i = 0; i < START_LEN; i++) addToSeq();
+    else addToSeq();
+    S.phase = 'watch'; S.idx = 0;
+    render();
+
+    if (S.round === REVERSE_FROM) {
+      const b = $('banner'); b.classList.remove('show'); void b.offsetWidth; b.classList.add('show');
+      beep(110, .6, 'sawtooth', .08, 60);
+      await wait(1900); if (my !== runId) return;
+    }
+
+    setMsg(`Vòng ${S.round}: hãy quan sát…`, 'watch');
+    await wait(700); if (my !== runId) return;
+
+    const [on, off] = SPEED[S.round - 1];
+    for (const n of S.seq) {
+      doors[n].classList.add('lit'); doorTone(n, on);
+      await wait(on); if (my !== runId) return;
+      doors[n].classList.remove('lit');
+      await wait(off); if (my !== runId) return;
+    }
+
+    S.phase = 'input';
+    setMsg(isReverse() ? 'Đến lượt bạn. Chạm theo thứ tự NGƯỢC LẠI.' : 'Đến lượt bạn. Chạm lại đúng thứ tự.',
+           isReverse() ? 'err' : '');
+    render();
+  }
+
+  function pressDoor(i) {
+    if (!S || S.over || S.phase !== 'input') return;
+    const d = doors[i];
+    if (i === expected()) {
+      d.classList.add('hit'); doorTone(i, 180);
+      setTimeout(() => d.classList.remove('hit'), 180);
+      S.idx++;
+      render();
+      if (S.idx === S.seq.length) roundCleared();
+    } else {
+      wrongDoor(i);
+    }
+  }
+
+  async function roundCleared() {
+    const my = runId;
+    S.phase = 'done';
+    const line = document.createElement('div');
+    line.innerHTML = `VÒNG ${S.round}: ${S.seq.length} cửa${isReverse() ? ' (ngược)' : ''} → <b>Vượt qua</b>`;
+    $('log').appendChild(line);
+    render();
+    if (S.round === ROUNDS) { await wait(400); if (my === runId) finish('win'); return; }
+    setMsg('Chính xác.', 'ok');
+    beep(660, .1, 'triangle', .06); setTimeout(() => beep(880, .14, 'triangle', .06), 90);
+    await wait(1000); if (my !== runId) return;
+    nextRound();
+  }
+
+  function wrongDoor(i) {
+    S.phase = 'done'; S.over = true; clearInterval(tick);
+    const right = expected();
+    doors[i].classList.add('bad');
+    doors[right].classList.add('should');
+    beep(90, .5, 'square', .08, -30);
+    setMsg(`Sai cửa. Cửa đúng là số ${right + 1}.`, 'err');
+    render();
+    const order = (isReverse() ? [...S.seq].reverse() : S.seq).map(x => x + 1).join(' → ');
+    S.days = 0;
+    setTimeout(() => finish('lose',
+      `Bạn chạm cửa số <b>${i + 1}</b>, nhưng cửa đúng là số <b>${right + 1}</b>.<br>`
+      + `<span style="color:var(--dim)">Vòng ${S.round}, thứ tự cần chạm: ${order}</span>`), 1500);
+  }
+
+  /* ---------- gia hạn ---------- */
+  function extend() {
+    if (!S || S.over || S.days - EXT_COST < 1) return;
+    S.days -= EXT_COST; S.time += EXT_SEC; S.exts++;
+    $('timer').textContent = fmt(S.time);
+    if (S.time > 15) $('game').classList.remove('danger');
+    const line = document.createElement('div');
+    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    $('log').appendChild(line);
+    [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
+    render();
+  }
+
+  /* ---------- timer: chỉ chạy khi đến lượt người chơi ---------- */
+  function fmt(t) { t = Math.max(0, t); return '0' + Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+  function startTimer() {
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (S.over || S.phase !== 'input') return;
+      S.time--;
+      $('timer').textContent = fmt(S.time);
+      if (S.time <= 15) { $('game').classList.add('danger'); beep(S.time <= 5 ? 1200 : 880, .05, 'square', .04); }
+      if (S.time <= 0) timeout();
+    }, 1000);
+  }
+
+  function timeout() {
+    S.over = true; S.phase = 'done'; clearInterval(tick); render();
+    const where = `Hết giờ ở vòng ${S.round}/${ROUNDS}.`;
+    if (STARS <= SOFT_MAX_STARS) {
+      S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
+      if (S.days > 0)
+        return finish('penalty', `${where}<br>Trò chơi ★★ không loại bạn, nhưng bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
+      return finish('lose', `${where}<br>Bạn bị phạt −${TIMEOUT_PENALTY} ngày và không còn ngày sống nào.`);
+    }
+    S.days = 0;
+    finish('lose', where);
+  }
+
+  /* ---------- end ---------- */
+  function finish(kind, why = '') {
+    RUN.save({ days: kind === 'win' ? S.days + REWARD : kind === 'lose' ? 0 : S.days,
+               done: kind === 'win' ? [...new Set([...RUN.get().done, GAME_ID])] : RUN.get().done });
+    S.over = true; clearInterval(tick); runId++;
+    const end = $('end');
+    ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
+    if (kind === 'win') {
+      $('endTitle').textContent = 'SỐNG SÓT';
+      $('endReason').innerHTML = `Bạn đã nhớ đúng cả ${ROUNDS} vòng, chuỗi dài nhất ${S.seq.length} cửa.<br>Thời gian còn dư: ${S.time} giây.`
+        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      S.days += REWARD;
+      [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
+      show('end');
+    } else if (kind === 'penalty') {
+      $('endTitle').textContent = 'THẤT BẠI';
+      $('endReason').innerHTML = why;
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      beep(220, .5, 'sawtooth', .07, -100);
+      show('end');
+    } else {
+      $('endTitle').textContent = 'GAME OVER';
+      $('endReason').innerHTML = why;
+      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      beep(160, .9, 'sawtooth', .1, -140);
+      $('game').classList.add('crtoff');
+      setTimeout(() => show('end'), 800);
+    }
+  }
+
+  /* ---------- wiring ---------- */
+  $('startBtn').onclick = () => {
+    beep(220, .3, 'sawtooth', .06, 300);
+    reset(); show('game'); startTimer();
+    setMsg('Chuẩn bị…');
+    const my = runId;
+    setTimeout(() => { if (my === runId) nextRound(); }, 900);
+  };
+  $('extBtn').onclick = extend;
+  $('againBtn').onclick = () => { show('intro'); typeAnnounce(); };
+
+  /* ---------- nối với Thành Phố Lặng ---------- */
+  const HOME = 'thanh-pho-lang.html';
+  $('stDays').textContent = DAYS_START;
+  $('homeBtn').onclick = () => location.href = RUN.url(HOME);
+  $('againBtn').onclick = () => location.href = RUN.url(HOME);
+  // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
+  $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+
+  typeAnnounce();
+})();
+</script>
+<script>
+/* PWA: cho phép cài như app và chơi khi không có mạng (chỉ hoạt động khi chạy qua https hoặc localhost) */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http'))
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+</body>
+</html>
