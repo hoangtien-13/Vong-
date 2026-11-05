@@ -1,0 +1,8 @@
+{
+  "appId": "io.github.hoangtien13.vonggioi",
+  "appName": "Vong Giới",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#07080b"
+  }
+}

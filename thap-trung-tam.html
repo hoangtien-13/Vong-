@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Thành Phố Lặng · Tháp Trung Tâm</title>
+<title>Vong Giới · Tháp Trung Tâm</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Thành Phố Lặng">
+<meta name="apple-mobile-web-app-title" content="Vong Giới">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -223,7 +223,7 @@ body.light::before{opacity:.25}
 </section>
 
 <script>
-/* ---------- lượt chơi chung với Thành Phố Lặng ---------- */
+/* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'thap';
 const RUN = (() => {
   const KEY = 'thanh-pho-lang-run', START = 3;
@@ -241,7 +241,7 @@ const RUN = (() => {
   const DAYS_START = RUN.get().days;
   const LEN = 4, DIGITS = 6, MAX_TRIES = 8, TIME = 180, FAIL_COST = 3;
   const EXT_SEC = 30, EXT_COST = 1;
-  const GAMES = ['can', 'den', 'nuoc', 'cua', 'tin'];
+  const GAMES = ['can', 'den', 'nuoc', 'lift', 'cua', 'tin'];
   const HOME = 'thanh-pho-lang.html';
 
   const $ = id => document.getElementById(id);
@@ -288,8 +288,8 @@ const RUN = (() => {
   /* ---------- intro ---------- */
   $('stDays').textContent = DAYS_START;
   typeInto($('announce'), allCleared()
-    ? '> Năm tòa nhà đã tắt đèn. Chỉ còn tòa tháp này sáng.'
-    : '> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 5 trò chơi.', 32);
+    ? '> Sáu tòa nhà đã tắt đèn. Chỉ còn tòa tháp này sáng.'
+    : '> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 6 trò chơi.', 32);
   if (!allCleared()) { $('startBtn').disabled = true; $('startBtn').textContent = 'TÒA THÁP ĐANG KHÓA'; }
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
 
@@ -411,7 +411,7 @@ const RUN = (() => {
   /* ---------- câu chuyện ---------- */
   const STORY = [
     'Ổ khóa bật mở. Sau cánh cửa là một cầu thang xoắn ốc dẫn thẳng lên đỉnh tháp. Không có ai canh gác. Chỉ có tiếng bước chân của chính bạn.',
-    'Trên đỉnh là một căn phòng tròn. Hàng trăm màn hình phủ kín bức tường, mỗi màn hình phát lại một trò chơi: căn phòng có chiếc cân, hành lang đèn, căn phòng ngập nước, bốn cánh cửa, chiếc bàn của những mặt nạ.',
+    'Trên đỉnh là một căn phòng tròn. Hàng trăm màn hình phủ kín bức tường, mỗi màn hình phát lại một trò chơi: căn phòng có chiếc cân, hành lang đèn, căn phòng ngập nước, chiếc thang máy không bao giờ dừng, bốn cánh cửa, chiếc bàn của những mặt nạ.',
     'Bạn bước lại gần. Trong mọi màn hình, người chơi đều là <b>bạn</b>. Có màn hình bạn thắng, có màn hình bạn thua. Có những trò chơi bạn không hề nhớ mình đã chơi.',
     'Giữa phòng có một chiếc ghế trống. Trên lưng ghế khắc dòng chữ: <b>NGƯỜI DẪN TRÒ</b>. Trên bàn là một tờ giấy gấp đôi, và nét chữ trên đó chính là của bạn:',
     '<span class="note">“Nếu bạn đọc được dòng này, nghĩa là bạn đã thắng thêm một lần nữa. Thành phố không bắt ai cả. Nó được dựng lại mỗi khi có người chiến thắng. Người thắng sẽ ngồi vào chiếc ghế này, nghĩ ra những trò chơi tiếp theo, rồi quên tất cả.”</span>',
@@ -441,7 +441,7 @@ const RUN = (() => {
     },
     light: {
       tag: 'KẾT THÚC 2/2', title: 'ÁNH SÁNG',
-      text: d => `Bạn đẩy cánh cửa. Ánh sáng nuốt chửng mọi thứ: những màn hình, chiếc ghế, cả thành phố bên dưới.<br><br>Bạn giật mình tỉnh dậy trước một màn hình máy tính. Trên đó là một trang web tối màu với hàng chữ neon đỏ: <b>THÀNH PHỐ LẶNG</b>. Ở góc màn hình, đồng hồ dừng ở con số <b>${d} ngày</b>.<br><br>Bạn không nhớ mình đã làm ra nó từ lúc nào.`,
+      text: d => `Bạn đẩy cánh cửa. Ánh sáng nuốt chửng mọi thứ: những màn hình, chiếc ghế, cả thành phố bên dưới.<br><br>Bạn giật mình tỉnh dậy trước một màn hình máy tính. Trên đó là một trang web tối màu với hàng chữ neon đỏ: <b>VONG GIỚI</b>. Ở góc màn hình, đồng hồ dừng ở con số <b>${d} ngày</b>.<br><br>Bạn không nhớ mình đã làm ra nó từ lúc nào.`,
     },
   };
   async function ending(kind) {
@@ -453,7 +453,7 @@ const RUN = (() => {
     else beep(80, 1.6, 'sawtooth', .07, 20);
     $('endTag').textContent = e.tag; $('endTitle').textContent = e.title;
     $('endText').innerHTML = '';
-    $('stats').innerHTML = `TÒA NHÀ ĐÃ VƯỢT QUA: 5/5<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}`;
+    $('stats').innerHTML = `TÒA NHÀ ĐÃ VƯỢT QUA: 6/6<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}`;
     show('ending');
     await wait(600);
     await typeInto($('endText'), e.text(run.days), 24);
@@ -461,14 +461,17 @@ const RUN = (() => {
   $('chooseLoop').onclick = () => ending('loop');
   $('chooseLight').onclick = () => ending('light');
   $('cityBtn').onclick = () => location.href = RUN.url(HOME);
-  $('restartBtn').onclick = () => { RUN.save({ days: RUN.START, done: [] }); location.href = RUN.url(HOME); };
+  $('restartBtn').onclick = () => {
+    try { localStorage.removeItem('vong-gioi-ads'); } catch (e) {}   // lượt chơi mới: được xem lại quảng cáo có thưởng
+    RUN.save({ days: RUN.START, done: [] }); location.href = RUN.url(HOME);
+  };
 
   if (new URLSearchParams(location.search).has('selftest')) window.__state = () => S;
 })();
 </script>
 <script>
 /* PWA: cho phép cài như app và chơi khi không có mạng (chỉ hoạt động khi chạy qua https hoặc localhost) */
-if ('serviceWorker' in navigator && location.protocol.startsWith('http'))
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !(window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform()))
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 </script>
 </body>

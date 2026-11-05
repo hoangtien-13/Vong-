@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Thành Phố Lặng · Hành Lang Đèn</title>
+<title>Vong Giới · Hành Lang Đèn</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Thành Phố Lặng">
+<meta name="apple-mobile-web-app-title" content="Vong Giới">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -209,7 +209,7 @@ details p{margin-top:8px}
 </section>
 
 <script>
-/* ---------- lượt chơi chung với Thành Phố Lặng ---------- */
+/* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'den';
 const RUN = (() => {
   const KEY = 'thanh-pho-lang-run', START = 3;
@@ -473,7 +473,7 @@ const RUN = (() => {
   $('extBtn').onclick = extend;
   $('againBtn').onclick = () => { show('intro'); typeAnnounce(); };
 
-  /* ---------- nối với Thành Phố Lặng ---------- */
+  /* ---------- nối với Vong Giới ---------- */
   const HOME = 'thanh-pho-lang.html';
   $('stDays').textContent = DAYS_START;
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
@@ -487,7 +487,7 @@ const RUN = (() => {
 </script>
 <script>
 /* PWA: cho phép cài như app và chơi khi không có mạng (chỉ hoạt động khi chạy qua https hoặc localhost) */
-if ('serviceWorker' in navigator && location.protocol.startsWith('http'))
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !(window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform()))
   addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 </script>
 </body>

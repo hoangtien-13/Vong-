@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Vong Giới · Thang Máy 21</title>
+<meta name="theme-color" content="#07080b">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vong Giới">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Be+Vietnam+Pro:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07080b;--panel:#0d1016;--line:#1e2531;--txt:#c9d1dc;--dim:#6b7686;
+  --red:#ff2e4d;--cyan:#3de1ff;--amber:#ffb547;--green:#4dffa6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--txt);font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  overflow-x:hidden;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.mono{font-family:'Chakra Petch',ui-monospace,Consolas,monospace}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 3px)}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;
+  background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.8) 100%)}
+
+.screen{display:none;min-height:100vh;min-height:100dvh;padding:16px;max-width:680px;margin:0 auto;flex-direction:column;position:relative;z-index:2}
+.screen.on{display:flex}
+
+/* ---------- buttons ---------- */
+.btn{font-family:'Chakra Petch',monospace;font-size:16px;letter-spacing:.12em;color:var(--cyan);
+  background:transparent;border:1px solid var(--cyan);padding:12px 18px;cursor:pointer;
+  box-shadow:0 0 12px rgba(61,225,255,.25),inset 0 0 12px rgba(61,225,255,.08);transition:.15s}
+.btn:hover:not(:disabled){background:rgba(61,225,255,.1)}
+.btn.red{color:var(--red);border-color:var(--red);box-shadow:0 0 12px rgba(255,46,77,.3),inset 0 0 12px rgba(255,46,77,.08)}
+.btn.red:hover:not(:disabled){background:rgba(255,46,77,.12)}
+.btn.amber{color:var(--amber);border-color:var(--amber);box-shadow:0 0 12px rgba(255,181,71,.25),inset 0 0 12px rgba(255,181,71,.08)}
+.btn.amber:hover:not(:disabled){background:rgba(255,181,71,.1)}
+.btn:disabled{opacity:.3;cursor:default;box-shadow:none}
+
+/* ---------- intro ---------- */
+#intro{justify-content:center;gap:22px}
+.tag{color:var(--red);font-size:14px;letter-spacing:.3em}
+.title{font-size:clamp(32px,9vw,62px);font-weight:800;letter-spacing:.04em;color:#fff;line-height:1.1;
+  text-shadow:0 0 18px rgba(255,46,77,.6),2px 0 var(--red),-2px 0 var(--cyan);animation:flick 4s infinite}
+@keyframes flick{0%,92%,100%{opacity:1}93%{opacity:.4}94%{opacity:1}96%{opacity:.6}}
+.announce{min-height:3.2em;color:var(--amber);font-size:17px}
+.rules{border:1px solid var(--line);background:var(--panel);padding:16px 18px;line-height:1.75;font-size:15px}
+.rules li{list-style:none;padding-left:18px;position:relative}
+.rules li::before{content:"▸";position:absolute;left:0;color:var(--red)}
+.rules b{color:#fff}
+.stakes{display:flex;gap:10px;flex-wrap:wrap;font-size:14px}
+.stakes span{border:1px solid var(--line);padding:6px 10px;color:var(--dim)}
+.stakes span b{color:var(--txt)}
+.warn{color:var(--dim);font-style:italic;font-size:14px}
+.introBtns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- game ---------- */
+#game{gap:12px}
+.hud{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;gap:8px}
+.hud .name{font-size:13px;letter-spacing:.2em;color:var(--red)}
+.hud .days{font-size:13px;color:var(--dim);letter-spacing:.1em}
+.timer{font-size:34px;color:#fff;text-shadow:0 0 10px rgba(255,255,255,.35)}
+.counters{display:flex;gap:16px;font-size:13px;color:var(--dim);letter-spacing:.08em;align-items:center;flex-wrap:wrap}
+.counters b{color:var(--cyan);font-weight:400}
+.ext{margin-left:auto;font-size:13px;letter-spacing:.06em;color:var(--amber);background:transparent;
+  border:1px solid var(--amber);padding:6px 10px;cursor:pointer;box-shadow:0 0 10px rgba(255,181,71,.2)}
+.ext:hover:not(:disabled){background:rgba(255,181,71,.12)}
+.ext:disabled{opacity:.3;cursor:default;box-shadow:none}
+.danger .ext:not(:disabled){animation:pulseA 1s infinite}
+@keyframes pulseA{50%{box-shadow:0 0 18px rgba(255,181,71,.8)}}
+
+.msg{min-height:2.8em;text-align:center;font-size:15px;color:var(--amber);padding:0 4px;line-height:1.4;display:flex;align-items:center;justify-content:center}
+.msg.err{color:var(--red)}
+.msg.ok{color:var(--green)}
+
+.play{display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:start}
+
+/* giếng thang */
+.shaft{position:relative;border:1px solid var(--line);background:#05070a;padding:2px 0}
+.floor{display:grid;grid-template-columns:30px 1fr 30px;height:15px;align-items:center;font-size:10px;color:#3a4352;
+  border-bottom:1px solid #0e131a}
+.floor .n{text-align:right;padding-right:5px;font-variant-numeric:tabular-nums}
+.floor .well{height:100%;border-left:1px solid #1a212c;border-right:1px solid #1a212c;background:#080b10}
+.floor.neg .n{color:#7a2433}
+.floor.neg .well{background:repeating-linear-gradient(45deg,#1a080c 0 4px,#0b0507 4px 8px)}
+.floor.top .n{color:var(--green)}
+.floor.top .well{background:rgba(77,255,166,.1)}
+.floor.seen .n{color:var(--dim)}
+.floor.me .n{color:var(--amber)}
+.car{position:absolute;left:31px;width:calc(100% - 62px);height:15px;background:var(--cyan);
+  box-shadow:0 0 12px rgba(61,225,255,.8);display:flex;align-items:center;justify-content:center;font-size:9px;color:#05202a;font-weight:700}
+.car.open{background:#bff6ff}
+.car.inside{background:var(--amber);box-shadow:0 0 14px rgba(255,181,71,.9)}
+.you{position:absolute;right:2px;width:26px;height:15px;display:flex;align-items:center;justify-content:center;
+  color:var(--amber);font-size:13px;text-shadow:0 0 8px var(--amber);transition:top .5s linear}
+.you.hide{display:none}
+
+/* bảng điều khiển */
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.panel{border:1px solid var(--line);background:var(--panel);padding:12px;display:flex;flex-direction:column;gap:10px}
+.panel h3{font-family:'Chakra Petch',monospace;font-size:12px;letter-spacing:.2em;color:var(--dim);font-weight:500}
+.ind{display:flex;align-items:center;justify-content:center;gap:10px;background:#05070a;border:1px solid #1a212c;padding:8px}
+.ind .arrow{font-size:20px;color:var(--dim);width:20px;text-align:center}
+.ind .arrow.on{color:var(--red);text-shadow:0 0 10px var(--red)}
+.ind .val{font-family:'Chakra Petch',monospace;font-size:44px;font-weight:700;color:var(--red);
+  text-shadow:0 0 14px rgba(255,46,77,.8);min-width:2.2ch;text-align:center;font-variant-numeric:tabular-nums}
+.ind .val.top{color:var(--green);text-shadow:0 0 14px rgba(77,255,166,.8)}
+.doors{display:flex;height:52px;border:1px solid #2a3240;background:#020304;overflow:hidden;position:relative}
+.doors .leaf{flex:1;background:linear-gradient(90deg,#3b4555,#232a36);transition:transform .45s ease}
+.doors .leaf:nth-child(2){background:linear-gradient(270deg,#3b4555,#232a36)}
+.doors.open .leaf:first-child{transform:translateX(-92%)}
+.doors.open .leaf:nth-child(2){transform:translateX(92%)}
+.doors .where{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;
+  letter-spacing:.12em;color:var(--dim);pointer-events:none}
+.where-me{font-size:14px;line-height:1.5}
+.where-me b{color:var(--amber);font-weight:600}
+.side .btn{width:100%;padding:11px 10px;font-size:15px}
+.stair{display:flex;align-items:center;gap:8px}
+.stair button.step{width:40px;height:40px;font-size:20px;flex:none;padding:0}
+.stair .tgt{flex:1;text-align:center;font-family:'Chakra Petch',monospace;font-size:24px;color:#fff;font-variant-numeric:tabular-nums}
+.cost{font-size:13px;color:var(--dim);text-align:center;min-height:1.4em}
+.cost b{color:var(--amber);font-weight:600}
+
+.stops{display:flex;flex-wrap:wrap;gap:5px;align-items:center;min-height:30px}
+.stops .lbl{font-size:11px;letter-spacing:.15em;color:var(--dim);margin-right:4px}
+.chip small{display:block;font-size:9px;color:var(--dim);line-height:1.1;letter-spacing:.05em}
+.chip{font-family:'Chakra Petch',monospace;font-size:13px;min-width:30px;text-align:center;padding:3px 5px;border:1px solid #2a3240;color:var(--txt);font-variant-numeric:tabular-nums}
+.chip.neg{border-color:#5c1a26;color:var(--red)}
+.chip.top{border-color:#1d6b49;color:var(--green)}
+.chip.mine{border-color:var(--amber);color:var(--amber)}
+.chip.last{box-shadow:0 0 8px rgba(61,225,255,.5);border-color:var(--cyan)}
+
+.log{border-top:1px solid var(--line);padding-top:10px;font-size:14px;color:var(--dim);line-height:1.7}
+.log div b{color:var(--txt);font-weight:400}
+
+/* danger / glitch */
+.danger .timer{color:var(--red);text-shadow:0 0 14px var(--red);animation:jit .12s infinite}
+.danger{animation:glitch 2.2s infinite}
+@keyframes jit{50%{transform:translate(1px,-1px)}}
+@keyframes glitch{0%,88%,100%{filter:none;transform:none}
+  89%{filter:hue-rotate(40deg) saturate(2);transform:translateX(-3px)}
+  91%{filter:none;transform:translateX(3px)}
+  93%{filter:contrast(1.6);transform:none}}
+.crtoff{animation:off .7s forwards}
+@keyframes off{0%{transform:scale(1,1);filter:brightness(1)}
+  45%{transform:scale(1,.006);filter:brightness(4)}100%{transform:scale(0,.006);filter:brightness(6);opacity:0}}
+.fall{animation:fall .9s ease-in forwards}
+@keyframes fall{to{transform:translateY(60px);filter:brightness(.2)}}
+
+/* ---------- end ---------- */
+#end{justify-content:center;gap:20px;text-align:center;align-items:center}
+.big{font-size:clamp(38px,11vw,68px);font-weight:800;letter-spacing:.05em}
+.lose .big{color:var(--red);text-shadow:0 0 22px rgba(255,46,77,.7),3px 0 var(--cyan)}
+.win .big{color:var(--green);text-shadow:0 0 22px rgba(77,255,166,.5)}
+.penalty .big{color:var(--amber);text-shadow:0 0 22px rgba(255,181,71,.5)}
+.reason{font-size:16px;line-height:1.6;max-width:480px}
+.daysBox{font-size:20px;letter-spacing:.12em;color:var(--amber)}
+details{max-width:520px;width:100%;text-align:left;border:1px solid var(--line);background:var(--panel);padding:12px 16px;font-size:14px;line-height:1.7}
+summary{cursor:pointer;color:var(--cyan);font-family:'Chakra Petch',monospace;letter-spacing:.1em}
+details p{margin-top:8px}
+details .chip{display:inline-block;margin:2px}
+/* phông chữ: Chakra Petch cho tiêu đề, nhãn, số; Be Vietnam Pro cho đoạn văn */
+.title,.big{font-family:'Chakra Petch',sans-serif;font-weight:700}
+.timer{font-variant-numeric:tabular-nums}
+
+@media (max-width:420px){
+  .play{grid-template-columns:104px 1fr;gap:10px}
+  .ind .val{font-size:38px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ INTRO ============ -->
+<section id="intro" class="screen on">
+  <div class="tag mono">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★★★</div>
+  <div class="title">THANG MÁY 21</div>
+  <div class="announce mono" id="announce"></div>
+  <ul class="rules">
+    <li>Bạn đang ở <b>tầng 1</b>. Lối thoát duy nhất là <b style="color:var(--green)">tầng 21</b>, và chỉ thang máy mới lên được tới đó.</li>
+    <li>Thang máy tự chạy theo <b>một quy luật cố định</b>, mỗi lần chơi một quy luật khác.</li>
+    <li>Khi thang dừng ở tầng của bạn, cửa mở rất nhanh: bạn có thể <b>bước vào</b> hoặc chờ lượt sau. Đang ở trong thang, mỗi lần cửa mở bạn có thể <b>bước ra</b>.</li>
+    <li>Thang chạy xuống <b style="color:var(--red)">tầng 0 hoặc tầng âm</b> khi bạn đang ở trong: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li>Thang lên tới <b style="color:var(--green)">tầng 21</b> lần đầu tiên mà bạn <b>không ở trong</b>: cửa sân thượng khóa lại vĩnh viễn, <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li><b>Thang bộ</b>: đi lên hoặc xuống, cứ <b>3 tầng tốn 1 ngày sống</b> (làm tròn lên). Không thể đi bộ tới tầng 21.</li>
+    <li>Bảng lịch sử ghi lại các tầng thang đã dừng kèm <b>số thứ tự lượt chạy</b>. Thời gian <b>100 giây</b>.</li>
+  </ul>
+  <div class="stakes mono">
+    <span>Ngày còn lại <b id="stDays">3</b></span>
+    <span>Phí vào cửa <b>−1 ngày</b></span>
+    <span>Phần thưởng <b>+7 ngày</b></span>
+    <span>Cần ít nhất <b>3 ngày</b></span>
+  </div>
+  <div class="warn">Lưu ý: chiếc thang đang mở cửa chờ bạn ở tầng 1. Đừng vội tin nó, nhưng cũng đừng chờ quá lâu.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+</section>
+
+<!-- ============ GAME ============ -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div>
+      <div class="name mono">◆ THANG MÁY 21</div>
+      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+    </div>
+    <div class="timer mono" id="timer">01:40</div>
+  </div>
+  <div class="counters mono">
+    <span>LƯỢT CHẠY TIẾP THEO: <b id="nextMove">1</b></span>
+  </div>
+
+  <div class="msg" id="msg">Quan sát thang máy.</div>
+
+  <div class="play">
+    <div class="shaft mono" id="shaft">
+      <div class="car" id="car"></div>
+      <div class="you" id="me">◉</div>
+    </div>
+    <div class="side">
+      <div class="panel">
+        <h3>THANG MÁY</h3>
+        <div class="ind"><span class="arrow" id="arUp">▲</span><span class="val" id="indVal">1</span><span class="arrow" id="arDn">▼</span></div>
+        <div class="doors" id="doors"><div class="leaf"></div><div class="leaf"></div><div class="where mono" id="doorTxt"></div></div>
+        <div class="where-me" id="whereMe"></div>
+        <button class="btn" id="boardBtn">BƯỚC VÀO</button>
+      </div>
+      <div class="panel" id="stairPanel">
+        <h3>THANG BỘ</h3>
+        <div class="stair">
+          <button class="btn step" id="stDown">−</button>
+          <div class="tgt" id="stTgt">1</div>
+          <button class="btn step" id="stUp">+</button>
+        </div>
+        <div class="cost" id="stCost"></div>
+        <button class="btn amber" id="walkBtn">ĐI THANG BỘ</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stops" id="stops"><span class="lbl mono">LỊCH SỬ</span></div>
+  <div class="log mono" id="log"></div>
+</section>
+
+<!-- ============ END ============ -->
+<section id="end" class="screen">
+  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="big" id="endTitle"></div>
+  <div class="reason" id="endReason"></div>
+  <div class="daysBox mono" id="endDays"></div>
+  <details open>
+    <summary>QUY LUẬT CỦA THANG MÁY</summary>
+    <div id="ruleBox"></div>
+  </details>
+  <details>
+    <summary>MẸO</summary>
+    <p><b>Đọc bảng lịch sử:</b> mỗi ô ghi tầng thang dừng và lượt chạy đưa nó tới đó (L1, L2…). So sánh các lượt lẻ với các lượt chẵn: thang lên bao nhiêu tầng, đổi chiều ở tầng nào.</p>
+    <p><b>Tính trước đường đi:</b> khi đã đoán ra quy luật, hãy tính tiếp các tầng thang sẽ tới. Lần ghé an toàn là lần thang ghé qua <b>sau lần xuống tầng âm cuối cùng</b> và <b>trước khi lên 21</b>.</p>
+    <p><b>Cùng một tầng, khác lượt:</b> thang có thể ghé tầng của bạn nhiều lần. Chỉ bước vào ở đúng lần an toàn.</p>
+    <p><b>Thang máy là phương tiện miễn phí:</b> đi một đoạn rồi bước ra trước khi nó lao xuống, sau đó đi bộ vài tầng tới điểm an toàn.</p>
+  </details>
+  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+</section>
+
+<script>
+/* ---------- lượt chơi chung với Vong Giới ---------- */
+const GAME_ID = 'lift';
+const RUN = (() => {
+  const KEY = 'thanh-pho-lang-run', START = 3;
+  const q = new URLSearchParams(location.search);
+  let st = null;
+  if (q.has('d')) st = { days: +q.get('d'), done: (q.get('c') || '').split(',').filter(Boolean) };
+  else try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+  if (!st || !Number.isFinite(st.days) || !Array.isArray(st.done)) st = { days: START, done: [] };
+  const save = s => { st = s; try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
+  return { get: () => st, save, url: file => `${file}?d=${st.days}&c=${st.done.join(',')}` };
+})();
+</script>
+<script>
+(() => {
+  /* ---------- cấu hình ---------- */
+  const DAYS_START = RUN.get().days, FEE = 1, REWARD = 7, MIN_DAYS = 3;
+  const STARS = 4;            // độ khó của trò chơi này
+  const SOFT_MAX_STARS = 2;   // trò chơi từ mức này trở xuống: hết giờ bị phạt thay vì bị loại
+  const TIMEOUT_PENALTY = 1;
+
+  const TIME = 100;
+  const TOP = 21, LOW = -6, STEP = 3;          // 3 tầng thang bộ = 1 ngày
+  const DWELL = 1100, CLOSE = 350, WALK_MS = 450, REACT = 700;   // mở cửa, đóng cửa, đi bộ mỗi tầng, thời gian phản ứng (ms)
+  const MIN_SLACK = 12000;   // lời giải rẻ nhất phải dư ít nhất 12 giây, để người chơi kịp quan sát và suy luận
+
+  const $ = id => document.getElementById(id);
+  const screens = ['intro', 'game', 'end'];
+  const show = id => screens.forEach(s => $(s).classList.toggle('on', s === id));
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const rand = n => Math.floor(Math.random() * n);
+  const ri = (a, b) => a + rand(b - a + 1);
+  const mod = (x, m) => ((x % m) + m) % m;
+  const fl = n => n < 0 ? '−' + (-n) : String(n);
+
+  /* ---------- audio ---------- */
+  let ac = null;
+  function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    try {
+      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(20, freq + slide), t + dur);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g).connect(ac.destination); o.start(t); o.stop(t + dur + .02);
+    } catch (e) {}
+  }
+  const ding = () => { beep(1046, .25, 'sine', .06); setTimeout(() => beep(784, .35, 'sine', .05), 160); };
+
+  /* ---------- intro typewriter ---------- */
+  const ANNOUNCE = '> Sảnh tầng 1. Đèn báo tầng nhấp nháy. Có thứ gì đó đang điều khiển chiếc thang này.';
+  let typeTimer;
+  function typeAnnounce() {
+    const el = $('announce'); el.textContent = ''; let i = 0;
+    clearInterval(typeTimer);
+    typeTimer = setInterval(() => {
+      el.textContent = ANNOUNCE.slice(0, ++i);
+      if (i >= ANNOUNCE.length) clearInterval(typeTimer);
+    }, 30);
+  }
+
+  /* ---------- quy luật thang máy ---------- */
+  // m = số thứ tự lượt chạy (1, 2, 3…). Mọi quy luật đều có "ngưỡng": dưới ngưỡng thì lên,
+  // từ ngưỡng trở lên thì xuống, nên thang không trôi mãi. Thang không vượt quá tầng 21.
+  const up = (x, n) => Math.min(TOP, x + n);
+  const FAMILIES = [
+    () => { const k = ri(9, 18), a = ri(3, 11), c = ri(3, 11), b = ri(6, 18); if (a === c) return null;
+      return { f: (x, m) => x >= k ? x - b : m % 2 ? up(x, a) : up(x, c),
+        txt: [`Từ tầng ${k} trở lên: xuống ${b} tầng`, `Dưới tầng ${k}, lượt chạy lẻ: lên ${a} tầng`, `Dưới tầng ${k}, lượt chạy chẵn: lên ${c} tầng`] }; },
+    () => { const k = ri(9, 18), a = ri(3, 11), b = ri(6, 18), d = ri(6, 18); if (b === d) return null;
+      return { f: (x, m) => x < k ? up(x, a) : m % 2 ? x - b : x - d,
+        txt: [`Dưới tầng ${k}: lên ${a} tầng`, `Từ tầng ${k} trở lên, lượt chạy lẻ: xuống ${b} tầng`, `Từ tầng ${k} trở lên, lượt chạy chẵn: xuống ${d} tầng`] }; },
+    () => { const k = ri(9, 18), a = ri(3, 11), c = ri(2, 9), b = ri(6, 18);
+      return { f: (x, m) => m % 2 ? up(x, a) : x >= k ? x - b : up(x, c),
+        txt: [`Lượt chạy lẻ: lên ${a} tầng`, `Lượt chạy chẵn, từ tầng ${k} trở lên: xuống ${b} tầng`, `Lượt chạy chẵn, dưới tầng ${k}: lên ${c} tầng`] }; },
+  ];
+  const cost = dist => Math.ceil(Math.abs(dist) / STEP);
+  const travel = (a, b) => 350 + 110 * Math.abs(b - a);
+
+  // Mô phỏng thang từ tầng 1 tới lần đầu lên tầng 21, rồi tìm cách thắng rẻ nhất
+  // (tính cả thời gian đi bộ và thời gian mở cửa thực tế).
+  function analyse(R) {
+    const seq = [1], t = [0];
+    while (seq.length < 25) {
+      const x = seq[seq.length - 1], v = R.f(x, seq.length);
+      if (v < LOW) return null;
+      t.push(t[t.length - 1] + DWELL + CLOSE + travel(x, v));
+      seq.push(v);
+      if (v === TOP) break;
+    }
+    const T = seq.length - 1;
+    if (seq[T] !== TOP || T < 11 || T > 18) return null;
+    const firstNeg = seq.findIndex(v => v <= 0);
+    if (firstNeg === -1 || firstNeg > T) return null;          // vào thang ngay ở tầng 1 luôn thua
+    let lastNeg = 0; seq.forEach((v, i) => { if (v <= 0 && i < T) lastNeg = i; });
+    if (T - lastNeg < 2) return null;
+    const starts = [{ q: 1, j: 0, tq: REACT }];
+    for (let j = 1; j < firstNeg; j++) if (seq[j] >= 1) starts.push({ q: seq[j], j, tq: t[j] + REACT });
+    let best = null;
+    for (let i = lastNeg + 1; i < T; i++) {
+      const p = seq[i];
+      for (const st of starts) {
+        if (st.j >= i) continue;
+        const slack = t[i] + DWELL - REACT - (st.tq + Math.abs(p - st.q) * WALK_MS);
+        if (slack < 0) continue;
+        const c = cost(p - st.q);
+        if (!best || c < best.c || (c === best.c && slack > best.slack)) best = { p, i, q: st.q, j: st.j, c, slack };
+      }
+    }
+    if (!best) return null;
+    return { seq, T, firstNeg, lastNeg, best };
+  }
+  function makeRule() {
+    for (let n = 0; n < 50000; n++) {
+      const R = FAMILIES[rand(FAMILIES.length)](); if (!R) continue;
+      const a = analyse(R);
+      if (a && a.best.c === 1 && a.best.slack >= MIN_SLACK) return Object.assign(R, a);
+    }
+  }
+
+  /* ---------- giếng thang ---------- */
+  const ROW = 15, FLOORS = [];
+  for (let f = TOP; f >= LOW; f--) FLOORS.push(f);
+  const rowTop = f => 2 + (TOP - f) * ROW;   // 2px viền trên
+  FLOORS.forEach(f => {
+    const r = document.createElement('div');
+    r.className = 'floor' + (f <= 0 ? ' neg' : '') + (f === TOP ? ' top' : '');
+    r.id = 'fl' + f;
+    r.innerHTML = `<span class="n">${fl(f)}</span><span class="well"></span><span></span>`;
+    $('shaft').appendChild(r);
+  });
+
+  /* ---------- state ---------- */
+  let S, tick, runId = 0;
+
+  function reset() {
+    runId++;
+    S = { R: makeRule(), car: 1, carPos: 1, dir: 0, doors: false, inside: false, me: 1, tgt: 1, moves: 0,
+          walking: false, stops: [], time: TIME, over: false, days: DAYS_START - FEE, exts: 0,
+          spent: 0, walked: 0, rides: 0 };
+    $('game').classList.remove('danger', 'crtoff', 'fall');
+    $('log').innerHTML = '';
+    document.querySelectorAll('.floor').forEach(e => e.classList.remove('seen', 'me'));
+    $('stops').innerHTML = '<span class="lbl mono">LỊCH SỬ</span>';
+    setMsg('Thang đang mở cửa ở tầng 1. Bước vào ngay, hay quan sát trước?');
+    $('timer').textContent = fmt(S.time);
+    render();
+  }
+
+  function setMsg(t, cls = '') { const m = $('msg'); m.innerHTML = t; m.className = 'msg ' + cls; }
+  function fmt(t) { t = Math.max(0, t); return '0' + Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+  function logLine(h) { const d = document.createElement('div'); d.innerHTML = h; $('log').prepend(d); }
+  const maxReach = () => (S.days - 1) * STEP;   // luôn giữ lại ít nhất 1 ngày
+
+  function render() {
+    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('nextMove').textContent = S.moves + 1;
+
+    // thang
+    const car = $('car');
+    car.style.top = rowTop(S.carPos) + 'px';
+    car.classList.toggle('open', S.doors);
+    car.classList.toggle('inside', S.inside);
+    car.textContent = S.inside ? '◉' : '';
+    $('indVal').textContent = fl(Math.round(S.carPos));
+    $('indVal').classList.toggle('top', Math.round(S.carPos) === TOP);
+    $('arUp').classList.toggle('on', S.dir > 0);
+    $('arDn').classList.toggle('on', S.dir < 0);
+    $('doors').classList.toggle('open', S.doors && (S.inside || S.car === S.me));
+    $('doorTxt').textContent = S.doors ? '' : S.dir ? 'ĐANG CHẠY' : '';
+
+    // người chơi
+    $('me').classList.toggle('hide', S.inside);
+    $('me').style.top = rowTop(S.me) + 'px';
+    document.querySelectorAll('.floor.me').forEach(e => e.classList.remove('me'));
+    if (!S.inside) $('fl' + S.me).classList.add('me');
+
+    const canBoard = !S.over && !S.walking && S.doors && !S.inside && S.car === S.me;
+    const canExit = !S.over && S.doors && S.inside && S.car >= 1 && S.car < TOP;
+    const b = $('boardBtn');
+    b.textContent = S.inside ? 'BƯỚC RA Ở TẦNG ' + fl(S.car) : 'BƯỚC VÀO';
+    b.disabled = S.inside ? !canExit : !canBoard;
+    b.classList.toggle('red', S.inside);
+    $('whereMe').innerHTML = S.inside
+      ? `Bạn đang <b>ở trong thang</b>.`
+      : S.walking ? `Bạn đang đi thang bộ… tầng <b>${fl(S.me)}</b>`
+      : `Bạn đang đứng ở sảnh tầng <b>${fl(S.me)}</b>.`;
+
+    // thang bộ
+    const inStair = !S.over && !S.inside && !S.walking;
+    const d = Math.abs(S.tgt - S.me), c = cost(d);
+    $('stTgt').textContent = fl(S.tgt);
+    $('stDown').disabled = !inStair || S.tgt <= 1 || Math.abs(S.tgt - 1 - S.me) > maxReach() && S.tgt - 1 < S.me;
+    $('stUp').disabled = !inStair || S.tgt >= TOP - 1 || Math.abs(S.tgt + 1 - S.me) > maxReach() && S.tgt + 1 > S.me;
+    $('walkBtn').disabled = !inStair || d === 0 || d > maxReach();
+    $('stCost').innerHTML = S.inside ? 'Bước ra khỏi thang để dùng thang bộ.'
+      : d === 0 ? (maxReach() ? `Đi được tối đa <b>${maxReach()}</b> tầng.` : 'Không đủ ngày để đi thang bộ.')
+      : `${d} tầng · <b>−${c} ngày</b> · còn ${S.days - c}`;
+  }
+
+  /* ---------- thang chạy ---------- */
+  function addStop(f) {
+    const n = S.stops.length;          // lượt chạy vừa đưa thang tới tầng này (0 = vị trí ban đầu)
+    S.stops.push(f);
+    $('fl' + f).classList.add('seen');
+    const box = $('stops');
+    box.querySelectorAll('.chip.last').forEach(e => e.classList.remove('last'));
+    const c = document.createElement('span');
+    c.className = 'chip last' + (f <= 0 ? ' neg' : '') + (f === TOP ? ' top' : '') + (S.inside ? ' mine' : '');
+    c.innerHTML = `${fl(f)}<small>${n ? 'L' + n : 'ĐẦU'}</small>`;
+    c.title = n ? `Sau lượt chạy ${n}` : 'Vị trí ban đầu';
+    box.appendChild(c);
+    const chips = box.querySelectorAll('.chip');
+    if (chips.length > 14) chips[0].remove();
+  }
+
+  async function elevator(my) {
+    S.car = 1; S.carPos = 1; S.doors = true; addStop(1); render();
+    while (true) {
+      await wait(DWELL); if (my !== runId || S.over) return;
+      S.doors = false; render();
+      await wait(CLOSE); if (my !== runId || S.over) return;
+      const from = S.car, to = S.R.f(from, S.moves + 1);
+      S.dir = Math.sign(to - from);
+      const dur = travel(from, to), t0 = performance.now();
+      beep(70, dur / 1000, 'sawtooth', .02, S.dir * 30);
+      // hiệu ứng chạy bằng requestAnimationFrame, còn logic chạy theo đồng hồ
+      // (để thang vẫn chạy đúng khi trình duyệt tạm dừng hiệu ứng ở chế độ nền)
+      let moving = true;
+      (function step() {
+        if (!moving || my !== runId) return;
+        const k = Math.min(1, (performance.now() - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        S.carPos = from + (to - from) * e; render();
+        if (k < 1) requestAnimationFrame(step);
+      })();
+      await wait(dur); moving = false;
+      if (my !== runId || S.over) return;
+      S.car = to; S.carPos = to; S.dir = 0; S.doors = true; S.moves++;
+      addStop(to); ding(); render();
+      if (to === TOP) return S.inside ? win() : missed();
+      if (S.inside && to <= 0) return crash(to);
+      if (S.inside) setMsg(`Thang dừng ở tầng ${fl(to)}. Ở lại hay bước ra?`);
+      else if (to === S.me && !S.walking) setMsg(`Thang dừng ở tầng của bạn (tầng ${fl(to)}). Cửa đang mở.`);
+      else if (!S.walking) setMsg(`Thang dừng ở tầng ${fl(to)}.`);
+    }
+  }
+
+  /* ---------- hành động ---------- */
+  function board() {
+    if (S.over) return;
+    if (S.inside) {
+      if (!(S.doors && S.car >= 1 && S.car < TOP)) return;
+      S.inside = false; S.me = S.car; S.tgt = S.me;
+      logLine(`BƯỚC RA ở tầng <b>${fl(S.me)}</b>`);
+      setMsg(`Bạn đã bước ra ở tầng ${fl(S.me)}.`);
+      beep(300, .08, 'triangle', .06);
+    } else {
+      if (!(S.doors && !S.walking && S.car === S.me)) return;
+      S.inside = true; S.rides++;
+      logLine(`BƯỚC VÀO thang ở tầng <b>${fl(S.me)}</b>`);
+      setMsg('Bạn đã vào thang. Cửa có thể đóng bất cứ lúc nào.');
+      beep(440, .08, 'triangle', .06);
+    }
+    render();
+  }
+
+  function nudge(d) {
+    if (S.over || S.inside || S.walking) return;
+    const t = S.tgt + d;
+    if (t < 1 || t > TOP - 1) return;
+    if (Math.abs(t - S.me) > maxReach() && Math.abs(t - S.me) > Math.abs(S.tgt - S.me)) return beep(110, .1, 'square', .04);
+    S.tgt = t; beep(500 + t * 15, .03, 'square', .03); render();
+  }
+
+  async function walk() {
+    if (S.over || S.inside || S.walking) return;
+    const d = S.tgt - S.me, n = Math.abs(d), c = cost(d);
+    if (!n || n > maxReach()) return;
+    const my = runId;
+    S.days -= c; S.spent += c; S.walked += n; S.walking = true;
+    logLine(`THANG BỘ: tầng ${fl(S.me)} → <b>${fl(S.tgt)}</b> · −${c} ngày`);
+    setMsg(`Đang đi thang bộ tới tầng ${fl(S.tgt)}…`);
+    render();
+    for (let i = 0; i < n; i++) {
+      await wait(WALK_MS); if (my !== runId || S.over) return;
+      S.me += Math.sign(d); beep(180 + rand(40), .03, 'square', .025); render();
+    }
+    S.walking = false;
+    setMsg(`Bạn đã tới sảnh tầng ${fl(S.me)}. Chờ thang dừng ở đây.`);
+    render();
+  }
+
+  /* ---------- timer ---------- */
+  function startTimer() {
+    clearInterval(tick);
+    tick = setInterval(() => {
+      if (S.over) return;
+      S.time--;
+      $('timer').textContent = fmt(S.time);
+      const danger = S.time <= 20;
+      $('game').classList.toggle('danger', danger);
+      if (danger) beep(S.time <= 5 ? 1200 : 880, .05, 'square', .04);
+      if (S.time <= 0) timeout();
+    }, 1000);
+  }
+
+  function timeout() {
+    S.over = true; clearInterval(tick); render();
+    const where = S.inside ? 'Đèn tắt khi bạn vẫn còn kẹt trong thang.' : `Đèn tắt khi bạn vẫn đứng ở sảnh tầng ${fl(S.me)}.`;
+    if (STARS <= SOFT_MAX_STARS) {
+      S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
+      if (S.days > 0) return finish('penalty', `${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
+    }
+    S.days = 0;
+    finish('lose', `Hết giờ. ${where}<br><span style="color:var(--dim)">Trò chơi ★★★ không có phạt nhẹ khi hết giờ.</span>`);
+  }
+
+  function win() {
+    S.over = true;
+    setMsg('Tầng 21. Cửa mở ra sân thượng.', 'ok');
+    [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
+    setTimeout(() => finish('win'), 1300);
+  }
+
+  function missed() {
+    S.over = true; S.days = 0;
+    setMsg('Thang đã lên tầng 21… mà không có bạn.', 'err');
+    beep(140, 1.2, 'sawtooth', .09, -60);
+    const where = S.walking ? 'vẫn đang trên thang bộ' : `vẫn đứng ở sảnh tầng ${fl(S.me)}`;
+    setTimeout(() => finish('lose', `Thang đã lên tới <b style="color:var(--green)">tầng 21</b> khi bạn ${where}. Cửa sân thượng khóa lại vĩnh viễn.`), 1100);
+  }
+
+  function crash(f) {
+    S.over = true; S.days = 0;
+    setMsg(`Thang lao xuống tầng ${fl(f)}…`, 'err');
+    beep(160, 1, 'sawtooth', .1, -140);
+    $('game').classList.add('fall');
+    setTimeout(() => finish('lose', `Thang lao xuống <b style="color:var(--red)">tầng ${fl(f)}</b> khi bạn vẫn ở bên trong. Cửa không bao giờ mở lại.`), 1100);
+  }
+
+  /* ---------- end ---------- */
+  function ruleHTML() {
+    const R = S.R, b = R.best;
+    const chips = R.seq.map((f, i) => `<span class="chip${f <= 0 ? ' neg' : ''}${f === TOP ? ' top' : ''}${i > R.lastNeg && i < R.T ? ' mine' : ''}" title="sau lượt ${i}">${fl(f)}</span>`).join('→');
+    const start = R.seq.slice(0, R.firstNeg + 1).map(fl).join(' → ');
+    const safe = R.seq.map((f, i) => ({ f, i })).filter(o => o.i > R.lastNeg && o.i < R.T).map(o => `tầng ${fl(o.f)} (sau lượt ${o.i})`).join(', ');
+    const plan = b.q === 1
+      ? `đi bộ từ tầng 1 lên tầng ${fl(b.p)}`
+      : `vào thang ở tầng 1, bước ra ở tầng ${fl(b.q)} (sau lượt ${b.j}), đi bộ ${b.p > b.q ? 'lên' : 'xuống'} tầng ${fl(b.p)}`;
+    return `<p>${R.txt.map(t => `▸ ${t}`).join('<br>')}<br>▸ Thang không bao giờ vượt quá tầng 21.</p>`
+      + `<p><b>Đường đi của thang</b> từ tầng 1 tới tầng 21 (${R.T} lượt chạy):<br>${chips}</p>`
+      + `<p><b>Nếu bước vào ngay ở tầng 1:</b> ${start}. Rơi xuống tầng âm.</p>`
+      + `<p><b>Lần ghé an toàn để bước vào</b> (viền vàng): ${safe}.</p>`
+      + `<p><b>Cách rẻ nhất (−${b.c} ngày):</b> ${plan}, rồi chờ thang tới đó sau lượt ${b.i} và đi thẳng lên tầng 21.</p>`;
+  }
+
+  function finish(kind, why = '') {
+    RUN.save({ days: kind === 'win' ? S.days + REWARD : kind === 'lose' ? 0 : S.days,
+               done: kind === 'win' ? [...new Set([...RUN.get().done, GAME_ID])] : RUN.get().done });
+    S.over = true; clearInterval(tick); runId++;
+    const end = $('end');
+    ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
+    $('ruleBox').innerHTML = ruleHTML();
+    if (kind === 'win') {
+      $('endTitle').textContent = 'SỐNG SÓT';
+      $('endReason').innerHTML = `Bạn đã lên tới tầng 21 sau ${S.moves} lượt chạy.`
+        + `<br><span style="color:var(--dim)">Đi bộ ${S.walked} tầng (−${S.spent} ngày).</span>`;
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      S.days += REWARD;
+      show('end');
+    } else if (kind === 'penalty') {
+      $('endTitle').textContent = 'THẤT BẠI';
+      $('endReason').innerHTML = why;
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      beep(220, .5, 'sawtooth', .07, -100);
+      show('end');
+    } else {
+      $('endTitle').textContent = 'GAME OVER';
+      $('endReason').innerHTML = why;
+      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('game').classList.remove('fall'); $('game').classList.add('crtoff');
+      setTimeout(() => show('end'), 800);
+    }
+  }
+
+  /* ---------- wiring ---------- */
+  $('boardBtn').onclick = board;
+  $('walkBtn').onclick = walk;
+  $('stUp').onclick = () => nudge(1);
+  $('stDown').onclick = () => nudge(-1);
+  $('startBtn').onclick = () => {
+    beep(220, .3, 'sawtooth', .06, 300);
+    reset(); show('game'); startTimer(); elevator(runId);
+  };
+
+  /* ---------- nối với Vong Giới ---------- */
+  const HOME = 'thanh-pho-lang.html';
+  $('stDays').textContent = DAYS_START;
+  $('homeBtn').onclick = () => location.href = RUN.url(HOME);
+  $('againBtn').onclick = () => location.href = RUN.url(HOME);
+  // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
+  $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
+  if (DAYS_START < MIN_DAYS) { $('startBtn').disabled = true; $('startBtn').textContent = `CẦN ÍT NHẤT ${MIN_DAYS} NGÀY`; }
+
+  if (new URLSearchParams(location.search).has('selftest')) window.__lift = { get S() { return S; }, makeRule, analyse, FAMILIES };
+  typeAnnounce();
+})();
+</script>
+<script>
+/* PWA: cho phép cài như app và chơi khi không có mạng (chỉ hoạt động khi chạy qua https hoặc localhost) */
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !(window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform()))
+  addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# Thành Phố Lặng: cài lên điện thoại Android
+# Vong Giới: cài lên điện thoại Android
 
 Thư mục `ban-phat-hanh` chứa toàn bộ game ở dạng **PWA**, tức là web app cài được như app thật, có biểu tượng riêng, mở toàn màn hình và chơi được khi không có mạng.
 
@@ -15,7 +15,7 @@ Thư mục `ban-phat-hanh` chứa toàn bộ game ở dạng **PWA**, tức là 
 
 1. Mở link ở bước 1 bằng **Chrome** trên điện thoại.
 2. Chrome sẽ hiện thông báo **"Cài đặt ứng dụng"**. Nếu không thấy, bấm menu **⋮** rồi chọn **"Thêm vào màn hình chính"**, sau đó chọn **"Cài đặt"**.
-3. Biểu tượng **Thành Phố Lặng** sẽ xuất hiện ngoài màn hình chính. Mở lên là chơi toàn màn hình.
+3. Biểu tượng **Vong Giới** sẽ xuất hiện ngoài màn hình chính. Mở lên là chơi toàn màn hình.
 4. Sau lần mở đầu tiên có mạng, game được lưu sẵn trong máy, từ đó **chơi được cả khi tắt mạng**.
 
 iPhone cũng cài được: mở link bằng **Safari**, bấm nút **Chia sẻ**, rồi chọn **"Thêm vào MH chính"**.

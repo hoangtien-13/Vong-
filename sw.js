@@ -1,12 +1,12 @@
-/* Service worker của Thành Phố Lặng: lưu sẵn toàn bộ game để chơi khi không có mạng.
+/* Service worker của Vong Giới: lưu sẵn toàn bộ game để chơi khi không có mạng.
    Mỗi lần sửa game, hãy tăng số phiên bản bên dưới để điện thoại tải bản mới. */
-const VERSION = 'tpl-v2';
+const VERSION = 'tpl-v12';
 const FONT_CACHE = 'tpl-fonts';
 const FILES = [
   './', './index.html', './thanh-pho-lang.html',
   './phong-can.html', './hanh-lang-den.html', './phong-ngap-nuoc.html',
-  './bon-canh-cua.html', './van-bai-long-tin.html', './thap-trung-tam.html',
-  './manifest.json',
+  './thang-may.html', './bon-canh-cua.html', './van-bai-long-tin.html', './thap-trung-tam.html',
+  './ads.js', './manifest.json',
   './icons/icon-192.png', './icons/icon-512.png',
   './icons/maskable-192.png', './icons/maskable-512.png',
   './icons/apple-touch-icon.png', './icons/favicon-32.png',
