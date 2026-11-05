@@ -5,6 +5,7 @@
    Khi có tài khoản AdMob thật: thay mã đơn vị quảng cáo bên dưới và đặt TESTING = false.
    (Mã ỨNG DỤNG AdMob nằm trong file .github/workflows/android.yml, biến ADMOB_APP_ID.) */
 window.ADS = (() => {
+  const tr = (vi, en) => (window.T ? window.T(vi, en) : vi);   // ngôn ngữ (settings.js)
   const CFG = {
     REWARDED_ID: 'ca-app-pub-3940256099942544/5224354917',      // mã thử nghiệm của Google
     TESTING: true,
@@ -56,11 +57,11 @@ window.ADS = (() => {
   function simAd(kind) {
     return new Promise(res => {
       const reward = kind === 'rewarded';
-      const v = veil(`<div class="box"><div class="big">QUẢNG CÁO</div><div class="dim">(GIẢ LẬP · CÓ THƯỞNG)</div>
+      const v = veil(`<div class="box"><div class="big">${tr('QUẢNG CÁO', 'AD')}</div><div class="dim">${tr('(GIẢ LẬP · CÓ THƯỞNG)', '(SIMULATED · REWARDED)')}</div>
         <div class="big" id="adCount">3</div></div>
-        <div class="row">${reward ? '<button class="red" id="adQuit">ĐÓNG SỚM (KHÔNG NHẬN THƯỞNG)</button>' : ''}<button id="adDone" disabled>ĐÓNG</button></div>`);
+        <div class="row">${reward ? `<button class="red" id="adQuit">${tr('ĐÓNG SỚM (KHÔNG NHẬN THƯỞNG)', 'CLOSE EARLY (NO REWARD)')}</button>` : ''}<button id="adDone" disabled>${tr('ĐÓNG', 'CLOSE')}</button></div>`);
       let n = 3;
-      const t = setInterval(() => { n--; v.querySelector('#adCount').textContent = n; if (n <= 0) { clearInterval(t); v.querySelector('#adDone').disabled = false; v.querySelector('#adCount').textContent = reward ? '✓ ĐÃ XEM HẾT' : '✓'; } }, 1000);
+      const t = setInterval(() => { n--; v.querySelector('#adCount').textContent = n; if (n <= 0) { clearInterval(t); v.querySelector('#adDone').disabled = false; v.querySelector('#adCount').textContent = reward ? tr('✓ ĐÃ XEM HẾT', '✓ WATCHED') : '✓'; } }, 1000);
       const close = ok => { clearInterval(t); v.remove(); res(ok); };
       v.querySelector('#adDone').onclick = () => close(true);
       if (reward) v.querySelector('#adQuit').onclick = () => close(false);
@@ -71,12 +72,12 @@ window.ADS = (() => {
   async function rewarded() {
     if (sim) return simAd('rewarded');
     if (!plugin) return false;
-    const v = veil('<div class="big">ĐANG TẢI QUẢNG CÁO…</div>');
+    const v = veil(`<div class="big">${tr('ĐANG TẢI QUẢNG CÁO…', 'LOADING AD…')}</div>`);
     try {
       await init();
       await plugin.prepareRewardVideoAd({ adId: CFG.REWARDED_ID, isTesting: CFG.TESTING });
     } catch (e) {
-      v.innerHTML = '<div class="big">KHÔNG TẢI ĐƯỢC QUẢNG CÁO</div><div class="dim">Kiểm tra mạng rồi thử lại sau.</div><button>ĐÓNG</button>';
+      v.innerHTML = `<div class="big">${tr('KHÔNG TẢI ĐƯỢC QUẢNG CÁO', 'COULD NOT LOAD AD')}</div><div class="dim">${tr('Kiểm tra mạng rồi thử lại sau.', 'Check your connection and try again later.')}</div><button>${tr('ĐÓNG', 'CLOSE')}</button>`;
       return new Promise(res => v.querySelector('button').onclick = () => { v.remove(); res(false); });
     }
     v.remove();

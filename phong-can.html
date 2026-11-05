@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Phòng Cân</title>
+<title data-en="Vong Giới · The Scale Room">Vong Giới · Phòng Cân</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -164,40 +164,40 @@ details p{margin-top:8px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★</div>
-  <div class="title">PHÒNG CÂN</div>
+  <div class="tag mono" data-en="GAME · ◆ INTELLECT · ★★">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★</div>
+  <div class="title" data-en="THE SCALE ROOM">PHÒNG CÂN</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Trong phòng có <b>9 quả cầu</b> giống hệt nhau. <b>Một quả nặng hơn</b> những quả còn lại.</li>
-    <li>Bạn được dùng chiếc cân <b>2 lần</b>.</li>
-    <li>Bạn chỉ được <b>đoán 1 lần</b>.</li>
-    <li>Thời gian: <b>90 giây</b>. Có thể <b>đổi 1 ngày sống lấy thêm 30 giây</b>.</li>
-    <li>Hết giờ: bị <b style="color:var(--amber)">phạt −1 ngày</b> (trò chơi dưới ★★★ không loại người chơi vì hết giờ).</li>
-    <li>Đoán sai, hoặc ngày sống về 0: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li data-en="The room holds <b>9 identical orbs</b>. <b>One is heavier</b> than the rest.">Trong phòng có <b>9 quả cầu</b> giống hệt nhau. <b>Một quả nặng hơn</b> những quả còn lại.</li>
+    <li data-en="You may use the scale <b>2 times</b>.">Bạn được dùng chiếc cân <b>2 lần</b>.</li>
+    <li data-en="You get <b>1 guess</b>. Only one.">Bạn chỉ được <b>đoán 1 lần</b>.</li>
+    <li data-en="Time: <b>90 seconds</b>. You may <b>trade 1 day of life for 30 more seconds</b>.">Thời gian: <b>90 giây</b>. Có thể <b>đổi 1 ngày sống lấy thêm 30 giây</b>.</li>
+    <li data-en='Time runs out: <b style="color:var(--amber)">−1 day penalty</b> (games below ★★★ do not eliminate players for timing out).'>Hết giờ: bị <b style="color:var(--amber)">phạt −1 ngày</b> (trò chơi dưới ★★★ không loại người chơi vì hết giờ).</li>
+    <li data-en='Wrong guess, or days of life hit 0: <b style="color:var(--red)">GAME OVER</b>.'>Đoán sai, hoặc ngày sống về 0: <b style="color:var(--red)">GAME OVER</b>.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+3 ngày</b></span>
+    <span data-en='Days left <b id="stDays">3</b>'>Ngày còn lại <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>−1 day</b>">Phí vào cửa <b>−1 ngày</b></span>
+    <span data-en="Reward <b>+3 days</b>">Phần thưởng <b>+3 ngày</b></span>
   </div>
-  <div class="warn">Lưu ý: đoán khi chưa cân đủ 2 lần, căn phòng sẽ không để may mắn đứng về phía bạn.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="warn" data-en="Warning: guess before weighing twice, and the room will not let luck be on your side.">Lưu ý: đoán khi chưa cân đủ 2 lần, căn phòng sẽ không để may mắn đứng về phía bạn.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn" data-en="ENTER ▸">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">◆ PHÒNG CÂN</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="◆ THE SCALE ROOM">◆ PHÒNG CÂN</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono" id="timer">01:30</div>
   </div>
   <div class="counters mono">
-    <span>LƯỢT CÂN: <b id="weighCount">2</b></span>
-    <span>LƯỢT ĐOÁN: <b>1</b></span>
-    <button class="ext clear mono" id="clearBtn">↺ DỌN CÂN</button>
-    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+    <span data-en='WEIGHINGS: <b id="weighCount">2</b>'>LƯỢT CÂN: <b id="weighCount">2</b></span>
+    <span data-en="GUESSES: <b>1</b>">LƯỢT ĐOÁN: <b>1</b></span>
+    <button class="ext clear mono" id="clearBtn" data-en="↺ CLEAR">↺ DỌN CÂN</button>
+    <button class="ext mono" id="extBtn" data-en="+30s · −1 DAY">+30s · −1 NGÀY</button>
   </div>
 
   <div class="stage" id="stage">
@@ -206,25 +206,25 @@ details p{margin-top:8px}
     <div class="pivot"></div>
     <div class="pan" id="panL">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="50" y1="0" x2="2" y2="100" stroke="#5d6879" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="50" y1="0" x2="98" y2="100" stroke="#5d6879" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
-      <div class="load" id="loadL"></div><div class="bowl"></div><div class="lbl">◂ TRÁI · <b id="cntL">0</b></div>
+      <div class="load" id="loadL"></div><div class="bowl"></div><div class="lbl" data-en='◂ LEFT · <b id="cntL">0</b>'>◂ TRÁI · <b id="cntL">0</b></div>
     </div>
     <div class="pan" id="panR">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="50" y1="0" x2="2" y2="100" stroke="#5d6879" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="50" y1="0" x2="98" y2="100" stroke="#5d6879" stroke-width="1" vector-effect="non-scaling-stroke"/></svg>
-      <div class="load" id="loadR"></div><div class="bowl"></div><div class="lbl">PHẢI ▸ · <b id="cntR">0</b></div>
+      <div class="load" id="loadR"></div><div class="bowl"></div><div class="lbl" data-en='RIGHT ▸ · <b id="cntR">0</b>'>PHẢI ▸ · <b id="cntR">0</b></div>
     </div>
   </div>
 
-  <div class="msg" id="msg">Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.</div>
+  <div class="msg" id="msg" data-en="Place orbs on both pans, then press WEIGH.">Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.</div>
   <div class="tray" id="tray"></div>
-  <div class="hint" id="hint">Chạm đĩa để chọn, rồi chạm quả cầu để đặt lên. Có thể kéo thả.</div>
+  <div class="hint" id="hint" data-en="Tap a pan to select it, then tap an orb to place it. Drag and drop works too.">Chạm đĩa để chọn, rồi chạm quả cầu để đặt lên. Có thể kéo thả.</div>
 
   <div class="actions" id="actions">
-    <button class="btn" id="weighBtn">⚖ CÂN</button>
-    <button class="btn red" id="guessBtn">ĐOÁN ▸</button>
+    <button class="btn" id="weighBtn" data-en="⚖ WEIGH">⚖ CÂN</button>
+    <button class="btn red" id="guessBtn" data-en="GUESS ▸">ĐOÁN ▸</button>
   </div>
   <div class="actions" id="guessActions" style="display:none">
-    <button class="btn" id="cancelBtn">◂ QUAY LẠI</button>
-    <button class="btn red" id="confirmBtn" disabled>XÁC NHẬN</button>
+    <button class="btn" id="cancelBtn" data-en="◂ BACK">◂ QUAY LẠI</button>
+    <button class="btn red" id="confirmBtn" disabled data-en="CONFIRM">XÁC NHẬN</button>
   </div>
 
   <div class="log mono" id="log"></div>
@@ -232,20 +232,21 @@ details p{margin-top:8px}
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono" id="endTag">KẾT QUẢ</div>
+  <div class="tag mono" id="endTag" data-en="RESULT">KẾT QUẢ</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <details>
-    <summary>LỜI GIẢI</summary>
-    <p>Chia 9 quả thành 3 nhóm, mỗi nhóm 3 quả: A, B, C.</p>
-    <p><b>Lần cân 1:</b> đặt nhóm A lên đĩa trái, nhóm B lên đĩa phải. Nếu cân lệch, quả nặng nằm trong nhóm ở đĩa thấp hơn. Nếu cân bằng, quả nặng nằm trong nhóm C.</p>
-    <p><b>Lần cân 2:</b> từ nhóm đáng ngờ, đặt 1 quả lên mỗi đĩa. Nếu lệch, quả ở đĩa thấp hơn là quả nặng. Nếu cân bằng, đó là quả thứ ba chưa cân.</p>
-    <p>Mấu chốt: mỗi lần cân cho <b>3 kết quả</b> (trái, phải, cân bằng), nên 2 lần cân phân biệt được 3 × 3 = <b>9</b> khả năng, vừa đủ cho 9 quả.</p>
+    <summary data-en="SOLUTION">LỜI GIẢI</summary>
+    <p data-en="Split the 9 orbs into 3 groups of 3: A, B, C.">Chia 9 quả thành 3 nhóm, mỗi nhóm 3 quả: A, B, C.</p>
+    <p data-en="<b>Weighing 1:</b> put group A on the left pan, group B on the right. If the scale tips, the heavy orb is in the group on the lower pan. If it balances, the heavy orb is in group C."><b>Lần cân 1:</b> đặt nhóm A lên đĩa trái, nhóm B lên đĩa phải. Nếu cân lệch, quả nặng nằm trong nhóm ở đĩa thấp hơn. Nếu cân bằng, quả nặng nằm trong nhóm C.</p>
+    <p data-en="<b>Weighing 2:</b> from the suspect group, put 1 orb on each pan. If it tips, the orb on the lower pan is the heavy one. If it balances, it is the third, unweighed orb."><b>Lần cân 2:</b> từ nhóm đáng ngờ, đặt 1 quả lên mỗi đĩa. Nếu lệch, quả ở đĩa thấp hơn là quả nặng. Nếu cân bằng, đó là quả thứ ba chưa cân.</p>
+    <p data-en="The key: each weighing gives <b>3 outcomes</b> (left, right, balanced), so 2 weighings tell apart 3 × 3 = <b>9</b> possibilities, exactly enough for 9 orbs.">Mấu chốt: mỗi lần cân cho <b>3 kết quả</b> (trái, phải, cân bằng), nên 2 lần cân phân biệt được 3 × 3 = <b>9</b> khả năng, vừa đủ cho 9 quả.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'can';
@@ -274,6 +275,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -285,7 +287,7 @@ const RUN = (() => {
   }
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Chào mừng người chơi. Trò chơi sẽ bắt đầu khi bạn bước vào.';
+  const ANNOUNCE = T('> Chào mừng người chơi. Trò chơi sẽ bắt đầu khi bạn bước vào.', '> Welcome, player. The game begins when you step inside.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -316,7 +318,7 @@ const RUN = (() => {
           days: DAYS_START - FEE, exts: 0 };
     $('game').classList.remove('danger', 'crtoff', 'guessing');
     $('log').innerHTML = '';
-    setMsg('Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.');
+    setMsg(T('Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.', 'Place orbs on both pans, then press WEIGH.'));
     tilt(0, true);
     render();
   }
@@ -330,7 +332,7 @@ const RUN = (() => {
     }
     $('weighCount').textContent = S.weighs;
     $('weighBtn').disabled = S.weighs === 0;
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     // không cho gia hạn nếu ngày sống sẽ về 0
     $('extBtn').disabled = S.over || S.days - EXT_COST < 1;
     const g = S.mode === 'guess';
@@ -338,8 +340,9 @@ const RUN = (() => {
     $('actions').style.display = g ? 'none' : 'flex';
     $('guessActions').style.display = g ? 'flex' : 'none';
     $('confirmBtn').disabled = S.guess === null;
-    $('hint').textContent = g ? 'Chạm vào quả cầu bạn cho là nặng nhất.'
-                              : `Đang đặt vào ĐĨA ${S.target === 'L' ? 'TRÁI' : 'PHẢI'}. Chạm đĩa kia để đổi · chạm quả trên đĩa để trả về khay · có thể kéo thả.`;
+    $('hint').textContent = g ? T('Chạm vào quả cầu bạn cho là nặng nhất.', 'Tap the orb you believe is the heaviest.')
+                              : T(`Đang đặt vào ĐĨA ${S.target === 'L' ? 'TRÁI' : 'PHẢI'}. Chạm đĩa kia để đổi · chạm quả trên đĩa để trả về khay · có thể kéo thả.`,
+                                  `Placing on the ${S.target === 'L' ? 'LEFT' : 'RIGHT'} PAN. Tap the other pan to switch · tap an orb on a pan to return it · drag and drop works too.`);
     $('panL').classList.toggle('active', !g && S.target === 'L');
     $('panR').classList.toggle('active', !g && S.target === 'R');
     $('cntL').textContent = S.pos.filter(p => p === 'L').length;
@@ -434,8 +437,8 @@ const RUN = (() => {
     if (S.over || S.busy || S.weighs === 0) return;
     const L = [], R = [];
     S.pos.forEach((p, i) => p === 'L' ? L.push(i) : p === 'R' ? R.push(i) : 0);
-    if (!L.length || !R.length) return fail('Cả hai đĩa đều phải có quả cầu.');
-    if (L.length !== R.length) return fail('Hai đĩa phải có số quả bằng nhau.');
+    if (!L.length || !R.length) return fail(T('Cả hai đĩa đều phải có quả cầu.', 'Both pans must hold orbs.'));
+    if (L.length !== R.length) return fail(T('Hai đĩa phải có số quả bằng nhau.', 'Both pans must hold the same number of orbs.'));
 
     // The room "chooses" the heavy orb as late as possible: the outcome that
     // keeps the most possibilities alive. Guessing by luck therefore never works.
@@ -448,19 +451,19 @@ const RUN = (() => {
     const [res, keep] = pick[Math.floor(Math.random() * pick.length)];
 
     S.busy = true;
-    setMsg('Đang cân…');
+    setMsg(T('Đang cân…', 'Weighing…'));
     tilt(0);
     beep(110, .35, 'sawtooth', .05, -40);
     setTimeout(() => {
       S.cand = keep; S.weighs--;
       tilt(res === 'L' ? -1 : res === 'R' ? 1 : 0);
       beep(res === 'E' ? 330 : 180, .25, 'sine', .1);
-      const txt = res === 'L' ? 'Đĩa trái nặng hơn' : res === 'R' ? 'Đĩa phải nặng hơn' : 'Cân bằng';
+      const txt = res === 'L' ? T('Đĩa trái nặng hơn', 'Left pan is heavier') : res === 'R' ? T('Đĩa phải nặng hơn', 'Right pan is heavier') : T('Cân bằng', 'Balanced');
       const n = 2 - S.weighs;
       const line = document.createElement('div');
-      line.innerHTML = `LẦN ${n}: [${L.map(x => x + 1).join('·')}] vs [${R.map(x => x + 1).join('·')}] → <b>${txt}</b>`;
+      line.innerHTML = `${T('LẦN', 'WEIGHING')} ${n}: [${L.map(x => x + 1).join('·')}] vs [${R.map(x => x + 1).join('·')}] → <b>${txt}</b>`;
       $('log').appendChild(line);
-      setMsg(S.weighs ? `${txt}. Còn 1 lượt cân.` : `${txt}. Hết lượt cân. Đến lúc đoán.`);
+      setMsg(S.weighs ? T(`${txt}. Còn 1 lượt cân.`, `${txt}. 1 weighing left.`) : T(`${txt}. Hết lượt cân. Đến lúc đoán.`, `${txt}. No weighings left. Time to guess.`));
       S.busy = false;
       render();
     }, 900);
@@ -472,7 +475,7 @@ const RUN = (() => {
     $('timer').textContent = fmt(S.time);
     if (S.time > 15) $('game').classList.remove('danger');
     const line = document.createElement('div');
-    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    line.innerHTML = T(`GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`, `EXTENSION: <b>+${EXT_SEC} sec</b> · −${EXT_COST} day${EXT_COST === 1 ? '' : 's'}`);
     $('log').appendChild(line);
     [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
     render();
@@ -484,9 +487,9 @@ const RUN = (() => {
   }
 
   function enterGuess() { if (S.over || S.busy) return; S.mode = 'guess'; S.guess = null;
-    setMsg('Chọn một quả cầu. Bạn chỉ có một lần.', 'err'); render(); }
+    setMsg(T('Chọn một quả cầu. Bạn chỉ có một lần.', 'Pick one orb. You only get one shot.'), 'err'); render(); }
   function cancelGuess() { S.mode = 'place'; S.guess = null;
-    setMsg(S.weighs ? 'Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.' : 'Hết lượt cân. Đến lúc đoán.'); render(); }
+    setMsg(S.weighs ? T('Đặt quả cầu lên hai đĩa cân, rồi bấm CÂN.', 'Place orbs on both pans, then press WEIGH.') : T('Hết lượt cân. Đến lúc đoán.', 'No weighings left. Time to guess.')); render(); }
 
   function confirmGuess() {
     if (S.guess === null || S.over) return;
@@ -497,18 +500,19 @@ const RUN = (() => {
     if (S.weighs === 0) {
       const n = S.cand.length;
       const heavy = S.cand[Math.floor(Math.random() * n)];
-      if (heavy === g) return finish('win', g, `Bạn đoán mò giữa ${n} khả năng và may mắn đã đứng về phía bạn (1/${n}).`);
+      if (heavy === g) return finish('win', g, T(`Bạn đoán mò giữa ${n} khả năng và may mắn đã đứng về phía bạn (1/${n}).`, `You guessed blind among ${n} possibilities and luck was on your side (1/${n}).`));
       S.days = 0;
-      return finish('lose', heavy, `Sai. Quả nặng là số <b>${heavy + 1}</b>.`
-        + (S.cand.includes(g) ? `<br><span style="color:var(--dim)">Bạn đoán mò giữa ${n} khả năng và không gặp may (1/${n}).</span>` : ''));
+      return finish('lose', heavy, T(`Sai. Quả nặng là số <b>${heavy + 1}</b>.`, `Wrong. The heavy orb was number <b>${heavy + 1}</b>.`)
+        + (S.cand.includes(g) ? T(`<br><span style="color:var(--dim)">Bạn đoán mò giữa ${n} khả năng và không gặp may (1/${n}).</span>`, `<br><span style="color:var(--dim)">You guessed blind among ${n} possibilities and luck ran out (1/${n}).</span>`) : ''));
     }
 
     // Chưa cân đủ 2 lần: căn phòng không để may mắn giúp bạn.
     const others = S.cand.filter(c => c !== g);
     const heavy = others[Math.floor(Math.random() * others.length)];
-    let why = `Sai. Quả nặng là số <b>${heavy + 1}</b>.`;
+    let why = T(`Sai. Quả nặng là số <b>${heavy + 1}</b>.`, `Wrong. The heavy orb was number <b>${heavy + 1}</b>.`);
     if (S.cand.includes(g))
-      why += `<br><span style="color:var(--dim)">Bạn đoán khi chưa cân đủ 2 lần, lúc vẫn còn ${S.cand.length} khả năng. Căn phòng không để may mắn giúp bạn.</span>`;
+      why += T(`<br><span style="color:var(--dim)">Bạn đoán khi chưa cân đủ 2 lần, lúc vẫn còn ${S.cand.length} khả năng. Căn phòng không để may mắn giúp bạn.</span>`,
+               `<br><span style="color:var(--dim)">You guessed before weighing twice, with ${S.cand.length} possibilities still open. The room does not let luck help you.</span>`);
     S.days = 0;
     finish('lose', heavy, why);
   }
@@ -528,11 +532,13 @@ const RUN = (() => {
         if (STARS <= SOFT_MAX_STARS) {
           S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
           if (S.days > 0)
-            return finish('penalty', heavy, `Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.<br>Trò chơi ★★ không loại bạn, nhưng bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
-          return finish('lose', heavy, `Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.<br>Bạn bị phạt −${TIMEOUT_PENALTY} ngày và không còn ngày sống nào.`);
+            return finish('penalty', heavy, T(`Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.<br>Trò chơi ★★ không loại bạn, nhưng bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`,
+                                              `Time's up. The heavy orb was number <b>${heavy + 1}</b>.<br>A ★★ game does not eliminate you, but you are fined <b>−${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'}</b>.`));
+          return finish('lose', heavy, T(`Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.<br>Bạn bị phạt −${TIMEOUT_PENALTY} ngày và không còn ngày sống nào.`,
+                                         `Time's up. The heavy orb was number <b>${heavy + 1}</b>.<br>You are fined −${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'} and have no days of life left.`));
         }
         S.days = 0;
-        finish('lose', heavy, `Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.`);
+        finish('lose', heavy, T(`Hết giờ. Quả nặng là số <b>${heavy + 1}</b>.`, `Time's up. The heavy orb was number <b>${heavy + 1}</b>.`));
       }
     }, 1000);
   }
@@ -544,27 +550,27 @@ const RUN = (() => {
     S.over = true; clearInterval(tick);
     const end = $('end');
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
-    $('endTag').textContent = 'TRÒ CHƠI KẾT THÚC';
+    $('endTag').textContent = T('TRÒ CHƠI KẾT THÚC', 'GAME FINISHED');
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Chính xác. Quả số <b>${heavy + 1}</b> là quả nặng.<br>`
+      $('endTitle').textContent = T('SỐNG SÓT', 'SURVIVED');
+      $('endReason').innerHTML = T(`Chính xác. Quả số <b>${heavy + 1}</b> là quả nặng.<br>`, `Correct. Orb number <b>${heavy + 1}</b> is the heavy one.<br>`)
         + (why ? `<span style="color:var(--amber)">${why}</span><br>` : '')
-        + `Thời gian còn dư: ${S.time} giây.`
-        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+        + T(`Thời gian còn dư: ${S.time} giây.`, `Time to spare: ${S.time} sec.`)
+        + (S.exts ? T(`<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>`, `<br><span style="color:var(--dim)">Extended ${S.exts} time${S.exts === 1 ? '' : 's'}.</span>`) : '');
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`, `DAYS LEFT: ${S.days} + ${REWARD} = ${S.days + REWARD}`);
       S.days += REWARD;
       [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'THẤT BẠI';
+      $('endTitle').textContent = T('THẤT BẠI', 'FAILED');
       $('endReason').innerHTML = why;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       beep(220, .5, 'sawtooth', .07, -100);
       show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       beep(160, .9, 'sawtooth', .1, -140);
       $('game').classList.add('crtoff');
       setTimeout(() => show('end'), 800);
@@ -589,7 +595,7 @@ const RUN = (() => {
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
   // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
   $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
-  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = T('KHÔNG ĐỦ NGÀY', 'NOT ENOUGH DAYS'); }
 
   typeAnnounce();
 })();

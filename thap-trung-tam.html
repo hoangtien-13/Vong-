@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Tháp Trung Tâm</title>
+<title data-en="Vong Giới · Central Tower">Vong Giới · Tháp Trung Tâm</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,6 +133,8 @@ body.light::before{opacity:.25}
 .light .stats{border-color:#d8d2c4;background:#ece7dc;color:#4a4d55}
 .light .btn{color:#1b1d22;border-color:#1b1d22;box-shadow:none}
 .stats{border:1px solid var(--line);background:var(--panel);padding:12px 16px;font-size:14px;line-height:1.8;font-family:'Chakra Petch',monospace;color:var(--dim)}
+.stats b{color:var(--amber);font-weight:400}
+.light .stats b{color:#8a6a2a}
 
 /* ---------- fail ---------- */
 #fail{justify-content:center;gap:20px;text-align:center;align-items:center}
@@ -149,46 +151,48 @@ body.light::before{opacity:.25}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">✦ THÁP TRUNG TÂM</div>
-  <div class="title">ĐỈNH THÁP</div>
+  <div class="tag mono" data-en="✦ CENTRAL TOWER">✦ THÁP TRUNG TÂM</div>
+  <div class="title" data-en="TOWER TOP">ĐỈNH THÁP</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li id="stage1"><b>Chặng 1 · THANG MÁY 21.</b> Lối duy nhất lên đỉnh tháp là chiếc thang máy chạy theo một quy luật bí ẩn. Cần ít nhất <b>2 ngày</b>. Thua ở thang máy là <b style="color:var(--red)">GAME OVER</b> ngay. Đã lên tới tầng 21 thì những lần sau đi thẳng tới cánh cửa.</li>
-    <li><b>Chặng 2 · CÁNH CỬA KHÓA.</b> Cánh cửa ở tầng 21 được khóa bằng một <b>mã 4 chữ số</b>. Các chữ số từ <b>1 đến 6</b> và <b>không trùng nhau</b>.</li>
-    <li>Bạn có <b>8 lần thử</b>. Sau mỗi lần, ổ khóa sẽ trả lời:
+    <li id="stage1" data-en="<b>Stage 1 · ELEVATOR 21.</b> The only way to the top is an elevator that runs by a mysterious rule. It takes at least <b>2 days</b>. Losing in the elevator is an instant <b style=&quot;color:var(--red)&quot;>GAME OVER</b>. Once you reach floor 21, later visits take you straight to the door."><b>Chặng 1 · THANG MÁY 21.</b> Lối duy nhất lên đỉnh tháp là chiếc thang máy chạy theo một quy luật bí ẩn. Cần ít nhất <b>2 ngày</b>. Thua ở thang máy là <b style="color:var(--red)">GAME OVER</b> ngay. Đã lên tới tầng 21 thì những lần sau đi thẳng tới cánh cửa.</li>
+    <li data-en="<b>Stage 2 · THE LOCKED DOOR.</b> The door on floor 21 is sealed with a <b>4-digit code</b>. The digits run from <b>1 to 6</b> and <b>never repeat</b>."><b>Chặng 2 · CÁNH CỬA KHÓA.</b> Cánh cửa ở tầng 21 được khóa bằng một <b>mã 4 chữ số</b>. Các chữ số từ <b>1 đến 6</b> và <b>không trùng nhau</b>.</li>
+    <li data-en="You have <b>8 tries</b>. After each one, the lock answers:
+      <br><b class=&quot;ok&quot;>●</b> a correct digit in the correct position
+      <br><b class=&quot;half&quot;>○</b> a digit that is in the code but in the wrong position">Bạn có <b>8 lần thử</b>. Sau mỗi lần, ổ khóa sẽ trả lời:
       <br><b class="ok">●</b> một chữ số đúng và đúng vị trí
       <br><b class="half">○</b> một chữ số có trong mã nhưng sai vị trí</li>
-    <li>Ổ khóa không cho biết chữ số nào đúng, chỉ cho biết có bao nhiêu.</li>
-    <li>Thời gian: <b>180 giây</b>. Có thể đổi 1 ngày lấy thêm 30 giây.</li>
-    <li>Thất bại ở cánh cửa: tháp đẩy bạn ra ngoài, <b style="color:var(--red)">−3 ngày</b>. Nếu không còn ngày nào: GAME OVER.</li>
+    <li data-en="The lock never tells you which digits are right, only how many.">Ổ khóa không cho biết chữ số nào đúng, chỉ cho biết có bao nhiêu.</li>
+    <li data-en="Time: <b>180 seconds</b>. You can trade 1 day for 30 more seconds.">Thời gian: <b>180 giây</b>. Có thể đổi 1 ngày lấy thêm 30 giây.</li>
+    <li data-en="Fail at the door: the tower throws you out, <b style=&quot;color:var(--red)&quot;>−3 days</b>. If you have no days left: GAME OVER.">Thất bại ở cánh cửa: tháp đẩy bạn ra ngoài, <b style="color:var(--red)">−3 ngày</b>. Nếu không còn ngày nào: GAME OVER.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>không</b></span>
-    <span>Phần thưởng <b>sự thật</b></span>
+    <span data-en="Days left <b id=&quot;stDays&quot;>3</b>">Ngày còn lại <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>none</b>">Phí vào cửa <b>không</b></span>
+    <span data-en="Reward <b>the truth</b>">Phần thưởng <b>sự thật</b></span>
   </div>
-  <div class="row"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn violet" id="startBtn">TIẾN VÀO THÁP ▸</button></div>
+  <div class="row"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn violet" id="startBtn" data-en="ENTER THE TOWER ▸">TIẾN VÀO THÁP ▸</button></div>
 </section>
 
 <!-- ============ LOCK ============ -->
 <section id="lock" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">✦ Ổ KHÓA CUỐI CÙNG</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 3</div>
+      <div class="name mono" data-en="✦ THE FINAL LOCK">✦ Ổ KHÓA CUỐI CÙNG</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 3">NGÀY CÒN LẠI: 3</div>
     </div>
     <div class="timer mono" id="timer">03:00</div>
   </div>
   <div class="counters mono">
-    <span>LẦN THỬ: <b id="tryHud">0/8</b></span>
-    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+    <span data-en="TRIES: <b id=&quot;tryHud&quot;>0/8</b>">LẦN THỬ: <b id="tryHud">0/8</b></span>
+    <button class="ext mono" id="extBtn" data-en="+30s · −1 DAY">+30s · −1 NGÀY</button>
   </div>
   <div class="vault" id="vault">
     <div class="slots" id="slots"></div>
-    <div class="msg" id="msg">Nhập 4 chữ số khác nhau.</div>
+    <div class="msg" id="msg" data-en="Enter 4 different digits.">Nhập 4 chữ số khác nhau.</div>
     <div class="keypad" id="keypad"></div>
   </div>
-  <div class="legend"><b class="ok">●</b> đúng số, đúng chỗ &nbsp;·&nbsp; <b class="half">○</b> đúng số, sai chỗ</div>
+  <div class="legend" data-en="<b class=&quot;ok&quot;>●</b> right digit, right spot &amp;nbsp;·&amp;nbsp; <b class=&quot;half&quot;>○</b> right digit, wrong spot"><b class="ok">●</b> đúng số, đúng chỗ &nbsp;·&nbsp; <b class="half">○</b> đúng số, sai chỗ</div>
   <div class="tries" id="tries"></div>
 </section>
 
@@ -196,10 +200,10 @@ body.light::before{opacity:.25}
 <section id="story" class="screen">
   <div class="prog mono" id="storyProg"></div>
   <div class="para" id="para"></div>
-  <div class="row" id="nextRow"><button class="btn violet" id="nextBtn">TIẾP ▸</button></div>
+  <div class="row" id="nextRow"><button class="btn violet" id="nextBtn" data-en="NEXT ▸">TIẾP ▸</button></div>
   <div class="choiceBox" id="choiceBox">
-    <button class="btn violet" id="chooseLoop">NGỒI VÀO GHẾ<small>Trở thành người dẫn trò. Thành phố sẽ cần những trò chơi mới.</small></button>
-    <button class="btn" id="chooseLight">BƯỚC QUA CÁNH CỬA<small>Rời khỏi thành phố, và không biết điều gì chờ ở phía bên kia.</small></button>
+    <button class="btn violet" id="chooseLoop" data-en="TAKE THE CHAIR<small>Become the game master. The city will need new games.</small>">NGỒI VÀO GHẾ<small>Trở thành người dẫn trò. Thành phố sẽ cần những trò chơi mới.</small></button>
+    <button class="btn" id="chooseLight" data-en="STEP THROUGH THE DOOR<small>Leave the city, not knowing what waits on the other side.</small>">BƯỚC QUA CÁNH CỬA<small>Rời khỏi thành phố, và không biết điều gì chờ ở phía bên kia.</small></button>
   </div>
 </section>
 
@@ -210,20 +214,21 @@ body.light::before{opacity:.25}
   <div class="para" id="endText"></div>
   <div class="stats" id="stats"></div>
   <div class="row">
-    <button class="btn" id="cityBtn">VỀ THÀNH PHỐ</button>
-    <button class="btn violet" id="restartBtn">CHƠI LẠI TỪ ĐẦU</button>
+    <button class="btn" id="cityBtn" data-en="BACK TO THE CITY">VỀ THÀNH PHỐ</button>
+    <button class="btn violet" id="restartBtn" data-en="START OVER">CHƠI LẠI TỪ ĐẦU</button>
   </div>
 </section>
 
 <!-- ============ FAIL ============ -->
 <section id="fail" class="screen">
-  <div class="tag mono">THÁP TRUNG TÂM</div>
+  <div class="tag mono" data-en="CENTRAL TOWER">THÁP TRUNG TÂM</div>
   <div class="big" id="failTitle"></div>
   <div class="reason" id="failReason"></div>
   <div class="daysBox mono" id="failDays"></div>
-  <button class="btn red" id="failBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="failBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'thap';
@@ -256,6 +261,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -292,16 +298,16 @@ const RUN = (() => {
   /* ---------- intro ---------- */
   $('stDays').textContent = DAYS_START;
   typeInto($('announce'), !allCleared()
-    ? '> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 5 trò chơi.'
+    ? T('> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 5 trò chơi.', '> The tower door is still sealed. You have not cleared all 5 games.')
     : liftDone()
-      ? '> Tầng 21. Trước mặt bạn là cánh cửa khóa cuối cùng.'
-      : '> Năm tòa nhà đã tắt đèn. Trong tháp chỉ có một chiếc thang máy đang mở cửa.', 32);
+      ? T('> Tầng 21. Trước mặt bạn là cánh cửa khóa cuối cùng.', '> Floor 21. Before you stands the last locked door.')
+      : T('> Năm tòa nhà đã tắt đèn. Trong tháp chỉ có một chiếc thang máy đang mở cửa.', '> Five buildings have gone dark. Inside the tower, a single elevator stands open.'), 32);
   $('stage1').classList.toggle('done', liftDone());
-  if (!allCleared()) { $('startBtn').disabled = true; $('startBtn').textContent = 'TÒA THÁP ĐANG KHÓA'; }
+  if (!allCleared()) { $('startBtn').disabled = true; $('startBtn').textContent = T('TÒA THÁP ĐANG KHÓA', 'THE TOWER IS SEALED'); }
   else if (!liftDone()) {
-    $('startBtn').textContent = 'VÀO THANG MÁY ▸';
-    if (DAYS_START < LIFT_MIN) { $('startBtn').disabled = true; $('startBtn').textContent = `CẦN ÍT NHẤT ${LIFT_MIN} NGÀY`; }
-  } else $('startBtn').textContent = 'MỞ CÁNH CỬA ▸';
+    $('startBtn').textContent = T('VÀO THANG MÁY ▸', 'TAKE THE ELEVATOR ▸');
+    if (DAYS_START < LIFT_MIN) { $('startBtn').disabled = true; $('startBtn').textContent = T(`CẦN ÍT NHẤT ${LIFT_MIN} NGÀY`, `NEED AT LEAST ${LIFT_MIN} DAYS`); }
+  } else $('startBtn').textContent = T('MỞ CÁNH CỬA ▸', 'OPEN THE DOOR ▸');
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
 
   /* ---------- lock state ---------- */
@@ -321,10 +327,10 @@ const RUN = (() => {
     const k = document.createElement('button'); k.className = 'key'; k.textContent = d;
     k.onclick = () => press(d); $('keypad').appendChild(k);
   }
-  const back = document.createElement('button'); back.className = 'key wide'; back.textContent = '⌫ XÓA';
+  const back = document.createElement('button'); back.className = 'key wide'; back.textContent = T('⌫ XÓA', '⌫ DEL');
   back.onclick = () => { if (!S || S.over) return; S.input.pop(); beep(240, .04, 'square', .03); renderLock(); };
   $('keypad').appendChild(back);
-  const go = document.createElement('button'); go.className = 'key wide go'; go.id = 'goKey'; go.textContent = 'THỬ MÃ ▸';
+  const go = document.createElement('button'); go.className = 'key wide go'; go.id = 'goKey'; go.textContent = T('THỬ MÃ ▸', 'TRY ▸');
   go.onclick = submit; $('keypad').appendChild(go);
   for (let i = 0; i < LEN; i++) { const s = document.createElement('div'); s.className = 'slot'; $('slots').appendChild(s); }
   document.addEventListener('keydown', e => {
@@ -336,7 +342,7 @@ const RUN = (() => {
 
   function press(d) {
     if (!S || S.over || S.input.length >= LEN) return;
-    if (S.input.includes(d)) { setMsg(`Chữ số ${d} đã có trong mã. Các chữ số không trùng nhau.`, 'err'); beep(110, .1, 'square', .05); return; }
+    if (S.input.includes(d)) { setMsg(T(`Chữ số ${d} đã có trong mã. Các chữ số không trùng nhau.`, `Digit ${d} is already in the code. Digits never repeat.`), 'err'); beep(110, .1, 'square', .05); return; }
     S.input.push(d); beep(380 + d * 40, .05, 'triangle', .05); setMsg(''); renderLock();
   }
 
@@ -348,7 +354,7 @@ const RUN = (() => {
     $('goKey').disabled = S.over || S.input.length !== LEN;
     $('keypad').querySelectorAll('.key').forEach((k, i) => { if (i < DIGITS) k.disabled = S.over || S.input.includes(i + 1); });
     $('tryHud').textContent = `${S.history.length}/${MAX_TRIES}`;
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('extBtn').disabled = S.over || S.days - EXT_COST < 1;
     $('timer').textContent = fmt(S.time);
     const t = $('tries'); t.innerHTML = '';
@@ -368,15 +374,15 @@ const RUN = (() => {
     S.history.push({ guess, ...r }); S.input = [];
     if (r.g === LEN) {
       S.over = true; clearInterval(tick); renderLock();
-      setMsg('Ổ khóa bật mở.', 'okm');
+      setMsg(T('Ổ khóa bật mở.', 'The lock clicks open.'), 'okm');
       [392, 523, 659, 784].forEach((f, i) => setTimeout(() => beep(f, .2, 'triangle', .08), i * 130));
       setTimeout(startStory, 1600);
       return;
     }
     beep(r.g ? 300 : 160, .2, 'sawtooth', .05, -40);
     const v = $('vault'); v.classList.remove('shake'); void v.offsetWidth; v.classList.add('shake');
-    if (S.history.length >= MAX_TRIES) return fail(`Bạn đã dùng hết ${MAX_TRIES} lần thử. Mã đúng là <b>${S.code.join('')}</b>.`);
-    setMsg(`${r.g} đúng chỗ, ${r.y} sai chỗ. Còn ${MAX_TRIES - S.history.length} lần thử.`);
+    if (S.history.length >= MAX_TRIES) return fail(T(`Bạn đã dùng hết ${MAX_TRIES} lần thử. Mã đúng là <b>${S.code.join('')}</b>.`, `You used all ${MAX_TRIES} tries. The code was <b>${S.code.join('')}</b>.`));
+    setMsg(T(`${r.g} đúng chỗ, ${r.y} sai chỗ. Còn ${MAX_TRIES - S.history.length} lần thử.`, `${r.g} right spot, ${r.y} wrong spot. ${MAX_TRIES - S.history.length} ${MAX_TRIES - S.history.length === 1 ? 'try' : 'tries'} left.`));
     renderLock();
   }
 
@@ -398,7 +404,7 @@ const RUN = (() => {
       if (S.over) return;
       S.time--; $('timer').textContent = fmt(S.time);
       if (S.time <= 20) { $('lock').classList.add('danger'); beep(S.time <= 5 ? 1200 : 880, .05, 'square', .04); }
-      if (S.time <= 0) fail(`Hết giờ. Mã đúng là <b>${S.code.join('')}</b>.`);
+      if (S.time <= 0) fail(T(`Hết giờ. Mã đúng là <b>${S.code.join('')}</b>.`, `Time's up. The code was <b>${S.code.join('')}</b>.`));
     }, 1000);
   }
 
@@ -407,11 +413,11 @@ const RUN = (() => {
     const left = Math.max(0, S.days - FAIL_COST);
     RUN.save({ days: left, done: RUN.get().done });
     $('fail').classList.toggle('soft', left > 0);
-    $('failTitle').textContent = left > 0 ? 'BỊ ĐẨY RA NGOÀI' : 'GAME OVER';
+    $('failTitle').textContent = left > 0 ? T('BỊ ĐẨY RA NGOÀI', 'THROWN OUT') : 'GAME OVER';
     $('failReason').innerHTML = why + (left > 0
-      ? `<br>Cánh cửa đóng sập. Bạn tỉnh dậy dưới chân tháp, mất <b>${FAIL_COST} ngày</b>.`
-      : '<br>Bạn không còn ngày nào để quay lại.');
-    $('failDays').textContent = `NGÀY CÒN LẠI: ${left}`;
+      ? T(`<br>Cánh cửa đóng sập. Bạn tỉnh dậy dưới chân tháp, mất <b>${FAIL_COST} ngày</b>.`, `<br>The door slams shut. You wake at the foot of the tower, <b>${FAIL_COST} days</b> lost.`)
+      : T('<br>Bạn không còn ngày nào để quay lại.', '<br>You have no days left to come back.'));
+    $('failDays').textContent = T(`NGÀY CÒN LẠI: ${left}`, `DAYS LEFT: ${left}`);
     beep(160, .9, 'sawtooth', .1, -140);
     setTimeout(() => show('fail'), 900);
   }
@@ -419,18 +425,26 @@ const RUN = (() => {
   $('extBtn').onclick = extend;
   $('startBtn').onclick = () => {
     beep(160, .6, 'sawtooth', .06, 200);
+    // lưu trạng thái trước mỗi chặng (thang máy / cánh cửa) để hồi sinh quay về đúng lúc này
+    try { const r = RUN.get(); localStorage.setItem('vong-gioi-snap', JSON.stringify({ days: r.days, done: r.done, id: 'thap' })); } catch (e) {}
     if (!liftDone()) return setTimeout(() => location.href = RUN.url(LIFT), 300);
     startLock();
   };
 
   /* ---------- câu chuyện ---------- */
   const STORY = [
-    'Ổ khóa bật mở. Sau cánh cửa ở tầng 21 là một cầu thang xoắn ốc dẫn thẳng lên đỉnh tháp. Không có ai canh gác. Chỉ có tiếng bước chân của chính bạn.',
-    'Trên đỉnh là một căn phòng tròn. Hàng trăm màn hình phủ kín bức tường, mỗi màn hình phát lại một trò chơi: căn phòng có chiếc cân, hành lang đèn, căn phòng ngập nước, chiếc thang máy không bao giờ dừng, bốn cánh cửa, chiếc bàn của những mặt nạ.',
-    'Bạn bước lại gần. Trong mọi màn hình, người chơi đều là <b>bạn</b>. Có màn hình bạn thắng, có màn hình bạn thua. Có những trò chơi bạn không hề nhớ mình đã chơi.',
-    'Giữa phòng có một chiếc ghế trống. Trên lưng ghế khắc dòng chữ: <b>NGƯỜI DẪN TRÒ</b>. Trên bàn là một tờ giấy gấp đôi, và nét chữ trên đó chính là của bạn:',
-    '<span class="note">“Nếu bạn đọc được dòng này, nghĩa là bạn đã thắng thêm một lần nữa. Thành phố không bắt ai cả. Nó được dựng lại mỗi khi có người chiến thắng. Người thắng sẽ ngồi vào chiếc ghế này, nghĩ ra những trò chơi tiếp theo, rồi quên tất cả.”</span>',
-    'Phía sau chiếc ghế là một cánh cửa nhỏ, không khóa. Ánh sáng trắng lọt qua khe cửa, ấm áp đến lạ lùng. Lần đầu tiên kể từ khi tỉnh dậy, không có chiếc đồng hồ nào đếm ngược.',
+    T('Ổ khóa bật mở. Sau cánh cửa ở tầng 21 là một cầu thang xoắn ốc dẫn thẳng lên đỉnh tháp. Không có ai canh gác. Chỉ có tiếng bước chân của chính bạn.',
+      'The lock clicks open. Beyond the door on floor 21, a spiral staircase climbs straight to the top of the tower. No one stands guard. There is only the sound of your own footsteps.'),
+    T('Trên đỉnh là một căn phòng tròn. Hàng trăm màn hình phủ kín bức tường, mỗi màn hình phát lại một trò chơi: căn phòng có chiếc cân, hành lang đèn, căn phòng ngập nước, chiếc thang máy không bao giờ dừng, bốn cánh cửa, chiếc bàn của những mặt nạ.',
+      'At the top is a round room. Hundreds of screens cover the walls, each one replaying a game: the room with the scales, the corridor of lights, the flooding room, the elevator that never stops, the four doors, the table of masks.'),
+    T('Bạn bước lại gần. Trong mọi màn hình, người chơi đều là <b>bạn</b>. Có màn hình bạn thắng, có màn hình bạn thua. Có những trò chơi bạn không hề nhớ mình đã chơi.',
+      'You step closer. On every screen, the player is <b>you</b>. On some you win, on some you lose. Some are games you have no memory of ever playing.'),
+    T('Giữa phòng có một chiếc ghế trống. Trên lưng ghế khắc dòng chữ: <b>NGƯỜI DẪN TRÒ</b>. Trên bàn là một tờ giấy gấp đôi, và nét chữ trên đó chính là của bạn:',
+      'In the middle of the room stands an empty chair. Carved into its back are the words: <b>THE GAME MASTER</b>. On the table lies a folded sheet of paper, and the handwriting on it is your own:'),
+    T('<span class="note">“Nếu bạn đọc được dòng này, nghĩa là bạn đã thắng thêm một lần nữa. Thành phố không bắt ai cả. Nó được dựng lại mỗi khi có người chiến thắng. Người thắng sẽ ngồi vào chiếc ghế này, nghĩ ra những trò chơi tiếp theo, rồi quên tất cả.”</span>',
+      '<span class="note">“If you are reading this, you have won once again. The city never takes anyone. It is rebuilt every time someone wins. The winner sits in this chair, dreams up the next games, and then forgets everything.”</span>'),
+    T('Phía sau chiếc ghế là một cánh cửa nhỏ, không khóa. Ánh sáng trắng lọt qua khe cửa, ấm áp đến lạ lùng. Lần đầu tiên kể từ khi tỉnh dậy, không có chiếc đồng hồ nào đếm ngược.',
+      'Behind the chair is a small door, unlocked. White light seeps through the gap, strangely warm. For the first time since you woke, no clock is counting down.'),
   ];
   let step = 0;
   async function startStory() {
@@ -439,7 +453,7 @@ const RUN = (() => {
     await playStep();
   }
   async function playStep() {
-    $('storyProg').textContent = `ĐỈNH THÁP · ${step + 1}/${STORY.length}`;
+    $('storyProg').textContent = T(`ĐỈNH THÁP · ${step + 1}/${STORY.length}`, `TOWER TOP · ${step + 1}/${STORY.length}`);
     $('nextBtn').disabled = true;
     beep(220 + step * 30, .3, 'sine', .04);
     await typeInto($('para'), STORY[step]);
@@ -451,12 +465,14 @@ const RUN = (() => {
   /* ---------- kết thúc ---------- */
   const ENDINGS = {
     loop: {
-      tag: 'KẾT THÚC 1/2', title: 'VÒNG LẶP',
-      text: d => `Bạn ngồi xuống. Chiếc ghế lạnh, rồi ấm dần. Các màn hình tắt phụt, rồi bật sáng trở lại.<br><br>Dưới phố, một người lạ vừa tỉnh dậy giữa ngã tư vắng tanh, ngước nhìn tấm biển quảng cáo: <b>“Thời gian còn lại của bạn: 3 ngày.”</b><br><br>Bạn mỉm cười, và bắt đầu nghĩ ra trò chơi đầu tiên.`,
+      tag: T('KẾT THÚC 1/2', 'ENDING 1/2'), title: T('VÒNG LẶP', 'THE LOOP'),
+      text: d => T(`Bạn ngồi xuống. Chiếc ghế lạnh, rồi ấm dần. Các màn hình tắt phụt, rồi bật sáng trở lại.<br><br>Dưới phố, một người lạ vừa tỉnh dậy giữa ngã tư vắng tanh, ngước nhìn tấm biển quảng cáo: <b>“Thời gian còn lại của bạn: 3 ngày.”</b><br><br>Bạn mỉm cười, và bắt đầu nghĩ ra trò chơi đầu tiên.`,
+        `You sit down. The chair is cold, then slowly warms. The screens blink out, then flicker back to life.<br><br>Down in the street, a stranger has just woken in the middle of an empty crossroads and looks up at a billboard: <b>“Time you have left: 3 days.”</b><br><br>You smile, and begin to dream up the first game.`),
     },
     light: {
-      tag: 'KẾT THÚC 2/2', title: 'ÁNH SÁNG',
-      text: d => `Bạn đẩy cánh cửa. Ánh sáng nuốt chửng mọi thứ: những màn hình, chiếc ghế, cả thành phố bên dưới.<br><br>Bạn giật mình tỉnh dậy trước một màn hình máy tính. Trên đó là một trang web tối màu với hàng chữ neon đỏ: <b>VONG GIỚI</b>. Ở góc màn hình, đồng hồ dừng ở con số <b>${d} ngày</b>.<br><br>Bạn không nhớ mình đã làm ra nó từ lúc nào.`,
+      tag: T('KẾT THÚC 2/2', 'ENDING 2/2'), title: T('ÁNH SÁNG', 'THE LIGHT'),
+      text: d => T(`Bạn đẩy cánh cửa. Ánh sáng nuốt chửng mọi thứ: những màn hình, chiếc ghế, cả thành phố bên dưới.<br><br>Bạn giật mình tỉnh dậy trước một màn hình máy tính. Trên đó là một trang web tối màu với hàng chữ neon đỏ: <b>VONG GIỚI</b>. Ở góc màn hình, đồng hồ dừng ở con số <b>${d} ngày</b>.<br><br>Bạn không nhớ mình đã làm ra nó từ lúc nào.`,
+        `You push the door open. The light swallows everything: the screens, the chair, the whole city below.<br><br>You jolt awake in front of a computer screen. On it is a dark web page with red neon letters: <b>VONG GIỚI</b>. In the corner of the screen, a clock has stopped at <b>${d} ${d === 1 ? 'day' : 'days'}</b>.<br><br>You don't remember when you made it.`),
     },
   };
   async function ending(kind) {
@@ -468,7 +484,11 @@ const RUN = (() => {
     else beep(80, 1.6, 'sawtooth', .07, 20);
     $('endTag').textContent = e.tag; $('endTitle').textContent = e.title;
     $('endText').innerHTML = '';
-    $('stats').innerHTML = `TÒA NHÀ ĐÃ VƯỢT QUA: 5/5<br>THANG MÁY 21: ĐÃ LÊN TỚI ĐỈNH<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}`;
+    // thống kê cả hành trình: số lần GAME OVER và số lần hồi sinh (đếm ở thành phố)
+    let st = { over: 0, revive: 0 };
+    try { st = Object.assign(st, JSON.parse(localStorage.getItem('vong-gioi-stats'))); localStorage.setItem('vong-gioi-stats', JSON.stringify(Object.assign({}, st, { finished: true }))); } catch (e) {}
+    $('stats').innerHTML = T(`TÒA NHÀ ĐÃ VƯỢT QUA: 5/5<br>THANG MÁY 21: ĐÃ LÊN TỚI ĐỈNH<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}<br>SỐ LẦN GAME OVER: <b>${st.over}</b><br>SỐ LẦN HỒI SINH: <b>${st.revive}</b>`,
+      `BUILDINGS CLEARED: 5/5<br>ELEVATOR 21: REACHED THE TOP<br>DAYS OF LIFE LEFT: ${run.days}<br>UNLOCK ATTEMPTS: ${S ? S.history.length : '–'}/${MAX_TRIES}<br>GAME OVERS: <b>${st.over}</b><br>REVIVES: <b>${st.revive}</b>`);
     show('ending');
     await wait(600);
     await typeInto($('endText'), e.text(run.days), 24);
@@ -477,7 +497,7 @@ const RUN = (() => {
   $('chooseLight').onclick = () => ending('light');
   $('cityBtn').onclick = () => location.href = RUN.url(HOME);
   $('restartBtn').onclick = () => {
-    try { localStorage.removeItem('vong-gioi-ads'); } catch (e) {}   // lượt chơi mới: được xem lại quảng cáo có thưởng
+    try { localStorage.removeItem('vong-gioi-ads'); localStorage.removeItem('vong-gioi-snap'); localStorage.removeItem('vong-gioi-stats'); } catch (e) {}   // lượt chơi mới: được xem lại quảng cáo có thưởng
     RUN.save({ days: RUN.START, done: [] }); location.href = RUN.url(HOME);
   };
 

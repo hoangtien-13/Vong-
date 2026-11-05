@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Bốn Cánh Cửa</title>
+<title data-en="Vong Giới · Four Doors">Vong Giới · Bốn Cánh Cửa</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -151,70 +151,71 @@ details p{margin-top:8px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★★★</div>
-  <div class="title">BỐN CÁNH CỬA</div>
+  <div class="tag mono" data-en="GAME · ◆ INTELLECT · ★★★★">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★★★</div>
+  <div class="title" data-en="FOUR DOORS">BỐN CÁNH CỬA</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Có <b>4 cánh cửa</b>, và <b>chỉ 1 cửa an toàn</b>. Mở nhầm cửa là chết.</li>
-    <li>Trước mỗi cửa có một <b>người gác</b>. Mỗi người nói đúng một câu.</li>
-    <li>Người <b class="truth">nói thật</b> luôn nói đúng. <b class="lie">Kẻ nói dối</b> luôn nói sai.</li>
-    <li>Có <b>3 vòng</b>. Vòng 1 và 2 cho biết có bao nhiêu kẻ nói dối. <b style="color:var(--red)">Vòng 3 thì không.</b></li>
-    <li>Bạn có thể đánh dấu từng người gác (THẬT / DỐI) và gạch bỏ cửa để ghi nhớ suy luận.</li>
-    <li>Thời gian: <b>90 / 120 / 150 giây</b> cho mỗi vòng. Có thể <b>đổi 1 ngày lấy thêm 30 giây</b>.</li>
-    <li>Trò chơi ★★★★: mở sai cửa hoặc hết giờ đều là <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li data-en="There are <b>4 doors</b>, and <b>only 1 is safe</b>. Open the wrong one and you die.">Có <b>4 cánh cửa</b>, và <b>chỉ 1 cửa an toàn</b>. Mở nhầm cửa là chết.</li>
+    <li data-en="A <b>guard</b> stands before each door. Each guard says exactly one sentence.">Trước mỗi cửa có một <b>người gác</b>. Mỗi người nói đúng một câu.</li>
+    <li data-en='A <b class="truth">truth-teller</b> always tells the truth. A <b class="lie">liar</b> always lies.'>Người <b class="truth">nói thật</b> luôn nói đúng. <b class="lie">Kẻ nói dối</b> luôn nói sai.</li>
+    <li data-en='There are <b>3 rounds</b>. Rounds 1 and 2 tell you how many liars there are. <b style="color:var(--red)">Round 3 does not.</b>'>Có <b>3 vòng</b>. Vòng 1 và 2 cho biết có bao nhiêu kẻ nói dối. <b style="color:var(--red)">Vòng 3 thì không.</b></li>
+    <li data-en="You can mark each guard (TRUTH / LIE) and strike out doors to track your deductions.">Bạn có thể đánh dấu từng người gác (THẬT / DỐI) và gạch bỏ cửa để ghi nhớ suy luận.</li>
+    <li data-en="Time: <b>90 / 120 / 150 seconds</b> per round. You can <b>trade 1 day for 30 more seconds</b>.">Thời gian: <b>90 / 120 / 150 giây</b> cho mỗi vòng. Có thể <b>đổi 1 ngày lấy thêm 30 giây</b>.</li>
+    <li data-en='★★★★ game: the wrong door or running out of time is <b style="color:var(--red)">GAME OVER</b>.'>Trò chơi ★★★★: mở sai cửa hoặc hết giờ đều là <b style="color:var(--red)">GAME OVER</b>.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+7 ngày</b></span>
+    <span><span data-en="Days left">Ngày còn lại</span> <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>−1 day</b>">Phí vào cửa <b>−1 ngày</b></span>
+    <span data-en="Reward <b>+7 days</b>">Phần thưởng <b>+7 ngày</b></span>
   </div>
-  <div class="warn">Lưu ý: mỗi bộ câu đố được tạo sao cho chỉ có đúng một đáp án. Đoán mò chỉ có 25% cơ hội sống.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="warn" data-en="Note: every puzzle is built to have exactly one answer. A blind guess gives you a 25% chance to live.">Lưu ý: mỗi bộ câu đố được tạo sao cho chỉ có đúng một đáp án. Đoán mò chỉ có 25% cơ hội sống.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn" data-en="ENTER ▸">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">◆ BỐN CÁNH CỬA</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="◆ FOUR DOORS">◆ BỐN CÁNH CỬA</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono paused" id="timer">01:30</div>
   </div>
   <div class="counters mono">
-    <span>VÒNG: <b id="roundHud">1/3</b></span>
-    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+    <span data-en='ROUND: <b id="roundHud">1/3</b>'>VÒNG: <b id="roundHud">1/3</b></span>
+    <button class="ext mono" id="extBtn" data-en="+30s · −1 DAY">+30s · −1 NGÀY</button>
   </div>
 
   <div class="law" id="law"></div>
   <div class="guards" id="guards"></div>
-  <div class="hint">Chạm vào nút bên phải mỗi người gác để ghi chú: ? → THẬT → DỐI</div>
+  <div class="hint" data-en="Tap the button to the right of each guard to take notes: ? → TRUTH → LIE">Chạm vào nút bên phải mỗi người gác để ghi chú: ? → THẬT → DỐI</div>
   <div class="doors" id="doors"></div>
-  <div class="hint">Chạm vào cửa để chọn. Nút ✕ ở góc cửa dùng để gạch bỏ.</div>
+  <div class="hint" data-en="Tap a door to select it. The ✕ in its corner strikes it out.">Chạm vào cửa để chọn. Nút ✕ ở góc cửa dùng để gạch bỏ.</div>
   <div class="msg" id="msg"></div>
-  <div class="actions"><button class="btn red" id="openBtn" disabled>MỞ CỬA ▸</button></div>
+  <div class="actions"><button class="btn red" id="openBtn" disabled data-en="OPEN DOOR ▸">MỞ CỬA ▸</button></div>
   <div class="log mono" id="log"></div>
 </section>
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="tag mono" data-en="GAME ENDED">TRÒ CHƠI KẾT THÚC</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <details id="solveBox">
-    <summary>LỜI GIẢI VÒNG CUỐI</summary>
+    <summary data-en="FINAL ROUND SOLUTION">LỜI GIẢI VÒNG CUỐI</summary>
     <div id="solveText"></div>
   </details>
   <details>
-    <summary>CÁCH SUY LUẬN</summary>
-    <p><b>Giả sử rồi kiểm tra:</b> chọn một cửa, giả sử nó an toàn, rồi xét từng câu nói xem đúng hay sai. Đếm số người nói sai. Nếu không khớp với số kẻ nói dối, giả thiết đó sai.</p>
-    <p><b>Tìm mâu thuẫn:</b> nếu A nói "B nói dối", thì A và B chắc chắn khác phe. Nếu A nói "B nói thật", thì hai người cùng phe.</p>
-    <p><b>Vòng 3:</b> không biết số kẻ nói dối, nên câu "Có đúng N kẻ nói dối" trở thành manh mối quan trọng. Hãy thử từng khả năng N = 0, 1, 2, 3, 4.</p>
+    <summary data-en="HOW TO REASON">CÁCH SUY LUẬN</summary>
+    <p data-en="<b>Assume, then check:</b> pick a door, assume it is safe, and test whether each statement is true or false. Count the false ones. If that doesn't match the number of liars, the assumption is wrong."><b>Giả sử rồi kiểm tra:</b> chọn một cửa, giả sử nó an toàn, rồi xét từng câu nói xem đúng hay sai. Đếm số người nói sai. Nếu không khớp với số kẻ nói dối, giả thiết đó sai.</p>
+    <p data-en="<b>Hunt for contradictions:</b> if A says &quot;B is a liar&quot;, A and B are on opposite sides. If A says &quot;B tells the truth&quot;, they are on the same side."><b>Tìm mâu thuẫn:</b> nếu A nói "B nói dối", thì A và B chắc chắn khác phe. Nếu A nói "B nói thật", thì hai người cùng phe.</p>
+    <p data-en="<b>Round 3:</b> the number of liars is unknown, so &quot;There are exactly N liars here&quot; becomes a key clue. Try every case N = 0, 1, 2, 3, 4."><b>Vòng 3:</b> không biết số kẻ nói dối, nên câu "Có đúng N kẻ nói dối" trở thành manh mối quan trọng. Hãy thử từng khả năng N = 0, 1, 2, 3, 4.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'cua';
@@ -253,6 +254,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -264,7 +266,7 @@ const RUN = (() => {
   }
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Bốn người gác. Bốn cánh cửa. Không phải ai cũng nói thật.';
+  const ANNOUNCE = T('> Bốn người gác. Bốn cánh cửa. Không phải ai cũng nói thật.', '> Four guards. Four doors. Not all of them tell the truth.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -277,20 +279,20 @@ const RUN = (() => {
   function makeStatement(i, type) {
     const others = [0, 1, 2, 3].filter(x => x !== i);
     switch (type) {
-      case 'safe':    { const x = rand(4); return { type, key: 's' + x, text: `Cửa ${x + 1} là cửa an toàn.`, ev: s => s === x }; }
+      case 'safe':    { const x = rand(4); return { type, key: 's' + x, text: T(`Cửa ${x + 1} là cửa an toàn.`, `Door ${x + 1} is the safe door.`), ev: s => s === x }; }
       case 'notSafe': { const x = rand(4); return { type, key: 'n' + x,
-                          text: x === i ? 'Cửa sau lưng tôi không an toàn.' : `Cửa ${x + 1} không an toàn.`, ev: s => s !== x }; }
+                          text: x === i ? T('Cửa sau lưng tôi không an toàn.', 'The door behind me is not safe.') : T(`Cửa ${x + 1} không an toàn.`, `Door ${x + 1} is not safe.`), ev: s => s !== x }; }
       case 'parity':  { const even = Math.random() < .5; return { type, key: 'p' + even,
-                          text: `Cửa an toàn mang số ${even ? 'chẵn' : 'lẻ'}.`, ev: s => ((s + 1) % 2 === 0) === even }; }
+                          text: T(`Cửa an toàn mang số ${even ? 'chẵn' : 'lẻ'}.`, `The safe door has an ${even ? 'even' : 'odd'} number.`), ev: s => ((s + 1) % 2 === 0) === even }; }
       case 'range': {
-        if (Math.random() < .5) { const x = 1 + rand(3); return { type, key: 'g' + x, text: `Số của cửa an toàn lớn hơn ${x}.`, ev: s => s + 1 > x }; }
-        const x = 2 + rand(3); return { type, key: 'l' + x, text: `Số của cửa an toàn nhỏ hơn ${x}.`, ev: s => s + 1 < x };
+        if (Math.random() < .5) { const x = 1 + rand(3); return { type, key: 'g' + x, text: T(`Số của cửa an toàn lớn hơn ${x}.`, `The safe door's number is greater than ${x}.`), ev: s => s + 1 > x }; }
+        const x = 2 + rand(3); return { type, key: 'l' + x, text: T(`Số của cửa an toàn nhỏ hơn ${x}.`, `The safe door's number is less than ${x}.`), ev: s => s + 1 < x };
       }
-      case 'near':    return { type, key: 'near', text: 'Cửa an toàn nằm ngay cạnh cửa của tôi.', ev: s => Math.abs(s - i) === 1 };
-      case 'liar':    { const y = pick(others); return { type, key: 'L' + y, text: `Người gác ${y + 1} là kẻ nói dối.`, ev: (s, L) => L[y] }; }
-      case 'honest':  { const y = pick(others); return { type, key: 'H' + y, text: `Người gác ${y + 1} nói thật.`, ev: (s, L) => !L[y] }; }
-      case 'same':    { const y = pick(others); return { type, key: 'S' + y, text: `Tôi và người gác ${y + 1} cùng phe.`, ev: (s, L) => L[i] === L[y] }; }
-      case 'count':   { const n = 1 + rand(3); return { type, key: 'c' + n, text: `Ở đây có đúng ${n} kẻ nói dối.`, ev: (s, L) => L.filter(Boolean).length === n }; }
+      case 'near':    return { type, key: 'near', text: T('Cửa an toàn nằm ngay cạnh cửa của tôi.', 'The safe door is right next to mine.'), ev: s => Math.abs(s - i) === 1 };
+      case 'liar':    { const y = pick(others); return { type, key: 'L' + y, text: T(`Người gác ${y + 1} là kẻ nói dối.`, `Guard ${y + 1} is a liar.`), ev: (s, L) => L[y] }; }
+      case 'honest':  { const y = pick(others); return { type, key: 'H' + y, text: T(`Người gác ${y + 1} nói thật.`, `Guard ${y + 1} tells the truth.`), ev: (s, L) => !L[y] }; }
+      case 'same':    { const y = pick(others); return { type, key: 'S' + y, text: T(`Tôi và người gác ${y + 1} cùng phe.`, `Guard ${y + 1} and I are on the same side.`), ev: (s, L) => L[i] === L[y] }; }
+      case 'count':   { const n = 1 + rand(3); return { type, key: 'c' + n, text: T(`Ở đây có đúng ${n} kẻ nói dối.`, `There ${n === 1 ? 'is' : 'are'} exactly ${n} liar${n === 1 ? '' : 's'} here.`), ev: (s, L) => L.filter(Boolean).length === n }; }
     }
   }
 
@@ -338,15 +340,15 @@ const RUN = (() => {
   function setMsg(t, cls = '') { const m = $('msg'); m.textContent = t; m.className = 'msg ' + cls; }
 
   function render() {
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('roundHud').textContent = `${Math.max(1, S.round)}/${ROUNDS.length}`;
     $('extBtn').disabled = S.over || S.phase !== 'play' || S.days - EXT_COST < 1;
     $('timer').textContent = fmt(S.time);
     $('timer').classList.toggle('paused', S.phase !== 'play');
     $('game').classList.toggle('locked', S.phase !== 'play');
     $('openBtn').disabled = S.phase !== 'play' || S.sel === null;
-    $('openBtn').textContent = S.sel === null ? 'MỞ CỬA ▸' : `MỞ CỬA ${S.sel + 1} ▸`;
-    const MARK = ['?', 'THẬT', 'DỐI'], CLS = ['', 't', 'l'];
+    $('openBtn').textContent = S.sel === null ? T('MỞ CỬA ▸', 'OPEN DOOR ▸') : T(`MỞ CỬA ${S.sel + 1} ▸`, `OPEN DOOR ${S.sel + 1} ▸`);
+    const MARK = ['?', T('THẬT', 'TRUTH'), T('DỐI', 'LIE')], CLS = ['', 't', 'l'];
     document.querySelectorAll('.guard').forEach((g, i) => {
       g.className = 'guard ' + CLS[S.marks[i]];
       const b = g.querySelector('.mark'); b.textContent = MARK[S.marks[i]]; b.className = 'mark ' + CLS[S.marks[i]];
@@ -360,12 +362,12 @@ const RUN = (() => {
   function drawRound() {
     const pz = S.pz;
     $('law').innerHTML = pz.K !== null
-      ? `Chỉ một cửa an toàn. Trong 4 người gác có <b>đúng ${pz.K} kẻ nói dối</b>.`
-      : `Chỉ một cửa an toàn. <b>Không ai biết có bao nhiêu kẻ nói dối.</b>`;
+      ? T(`Chỉ một cửa an toàn. Trong 4 người gác có <b>đúng ${pz.K} kẻ nói dối</b>.`, `Only one door is safe. Among the 4 guards there ${pz.K === 1 ? 'is' : 'are'} <b>exactly ${pz.K} liar${pz.K === 1 ? '' : 's'}</b>.`)
+      : T(`Chỉ một cửa an toàn. <b>Không ai biết có bao nhiêu kẻ nói dối.</b>`, `Only one door is safe. <b>No one knows how many liars there are.</b>`);
     const g = $('guards'); g.innerHTML = '';
     pz.stmts.forEach((st, i) => {
       const row = document.createElement('div'); row.className = 'guard';
-      row.innerHTML = `<div class="who"><div class="head"></div><div class="gid mono">GÁC ${i + 1}</div><div class="gid mono">CỬA ${i + 1}</div></div>
+      row.innerHTML = `<div class="who"><div class="head"></div><div class="gid mono">${T('GÁC', 'GUARD')} ${i + 1}</div><div class="gid mono">${T('CỬA', 'DOOR')} ${i + 1}</div></div>
         <div class="say">${st.text}</div><button class="mark">?</button>`;
       row.querySelector('.mark').onclick = () => { S.marks[i] = (S.marks[i] + 1) % 3; beep(500 + S.marks[i] * 120, .05, 'square', .03); render(); };
       g.appendChild(row);
@@ -373,7 +375,7 @@ const RUN = (() => {
     const d = $('doors'); d.innerHTML = '';
     for (let i = 0; i < 4; i++) {
       const el = document.createElement('div'); el.className = 'door';
-      el.innerHTML = `<button class="strike" title="Gạch bỏ">✕</button><div class="dn">${i + 1}</div><div class="knob"></div>`;
+      el.innerHTML = `<button class="strike" title="${T('Gạch bỏ', 'Strike out')}">✕</button><div class="dn">${i + 1}</div><div class="knob"></div>`;
       el.onclick = () => { if (S.strikes[i]) return; S.sel = S.sel === i ? null : i; beep(420, .05, 'triangle', .04); render(); };
       el.querySelector('.strike').onclick = e => {
         e.stopPropagation(); S.strikes[i] = !S.strikes[i];
@@ -394,7 +396,7 @@ const RUN = (() => {
     S.phase = 'ready';
     $('game').classList.remove('danger');
     drawRound(); render();
-    setMsg(`Vòng ${S.round}/${ROUNDS.length}. Hãy đọc thật kỹ.`);
+    setMsg(T(`Vòng ${S.round}/${ROUNDS.length}. Hãy đọc thật kỹ.`, `Round ${S.round}/${ROUNDS.length}. Read carefully.`));
     beep(140, .5, 'sawtooth', .05, -40);
     await wait(900); if (my !== runId) return;
     S.phase = 'play'; setMsg(''); render();
@@ -404,31 +406,34 @@ const RUN = (() => {
     // liệt kê các cách phân phe hợp lệ (thường chỉ có một)
     return pz.worlds.map(w => {
       const liars = w.L.map((x, i) => x ? i + 1 : 0).filter(Boolean);
-      return liars.length ? `kẻ nói dối là người gác ${liars.join(', ')}` : 'không ai nói dối';
-    }).filter((v, i, a) => a.indexOf(v) === i).join('; hoặc ');
+      return liars.length
+        ? T(`kẻ nói dối là người gác ${liars.join(', ')}`, `the liar${liars.length === 1 ? ' is guard' : 's are guards'} ${liars.join(', ')}`)
+        : T('không ai nói dối', 'nobody is lying');
+    }).filter((v, i, a) => a.indexOf(v) === i).join(T('; hoặc ', '; or '));
   }
 
   function solutionHTML(pz) {
     const w = pz.worlds[0];
     const lines = pz.stmts.map((st, i) =>
-      `<p>Gác ${i + 1}: “${st.text}” → <span class="${w.L[i] ? 'lie' : 'truth'}">${w.L[i] ? 'NÓI DỐI' : 'NÓI THẬT'}</span></p>`).join('');
-    return `<p>Cửa an toàn: <b class="truth">Cửa ${pz.safe + 1}</b>. Với cửa này, ${liarsText(pz)}.</p>${lines}`
-      + (pz.worlds.length > 1 ? `<p style="color:var(--dim)">(Có nhiều cách phân phe, nhưng tất cả đều chỉ ra cùng một cửa.)</p>` : '');
+      `<p>${T('Gác', 'Guard')} ${i + 1}: “${st.text}” → <span class="${w.L[i] ? 'lie' : 'truth'}">${w.L[i] ? T('NÓI DỐI', 'LYING') : T('NÓI THẬT', 'TRUTHFUL')}</span></p>`).join('');
+    return T(`<p>Cửa an toàn: <b class="truth">Cửa ${pz.safe + 1}</b>. Với cửa này, ${liarsText(pz)}.</p>${lines}`,
+             `<p>Safe door: <b class="truth">Door ${pz.safe + 1}</b>. With this door, ${liarsText(pz)}.</p>${lines}`)
+      + (pz.worlds.length > 1 ? T(`<p style="color:var(--dim)">(Có nhiều cách phân phe, nhưng tất cả đều chỉ ra cùng một cửa.)</p>`, `<p style="color:var(--dim)">(Several ways to split the sides exist, but all of them point to the same door.)</p>`) : '');
   }
 
   async function openDoor() {
     if (S.phase !== 'play' || S.sel === null) return;
     const my = runId, pz = S.pz, door = S.sel, doors = document.querySelectorAll('.door');
     S.phase = 'opening'; render();
-    setMsg('Cánh cửa đang mở…');
+    setMsg(T('Cánh cửa đang mở…', 'The door is opening…'));
     beep(90, .8, 'sawtooth', .06, 40);
     await wait(1100); if (my !== runId) return;
     if (door === pz.safe) {
       doors[door].classList.add('safe');
       const line = document.createElement('div');
-      line.innerHTML = `VÒNG ${S.round}: cửa ${door + 1} · ${liarsText(pz)} → <b>Sống sót</b>`;
+      line.innerHTML = T(`VÒNG ${S.round}: cửa ${door + 1} · ${liarsText(pz)} → <b>Sống sót</b>`, `ROUND ${S.round}: door ${door + 1} · ${liarsText(pz)} → <b>Survived</b>`);
       $('log').appendChild(line);
-      setMsg('Cửa an toàn.', 'ok');
+      setMsg(T('Cửa an toàn.', 'Safe door.'), 'ok');
       [392, 523, 659].forEach((f, i) => setTimeout(() => beep(f, .15, 'triangle', .07), i * 100));
       await wait(1300); if (my !== runId) return;
       if (S.round === ROUNDS.length) return finish('win');
@@ -436,7 +441,7 @@ const RUN = (() => {
     } else {
       doors[door].classList.add('boom'); doors[pz.safe].classList.add('safe');
       S.days = 0;
-      finish('lose', `Bạn mở cửa ${door + 1}. Cửa an toàn là <b>cửa ${pz.safe + 1}</b>.`);
+      finish('lose', T(`Bạn mở cửa ${door + 1}. Cửa an toàn là <b>cửa ${pz.safe + 1}</b>.`, `You opened door ${door + 1}. The safe door was <b>door ${pz.safe + 1}</b>.`));
     }
   }
 
@@ -446,7 +451,7 @@ const RUN = (() => {
     S.days -= EXT_COST; S.time += EXT_SEC; S.exts++;
     if (S.time > 15) $('game').classList.remove('danger');
     const line = document.createElement('div');
-    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    line.innerHTML = T(`GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`, `EXTENSION: <b>+${EXT_SEC} seconds</b> · −${EXT_COST} day${EXT_COST === 1 ? '' : 's'}`);
     $('log').appendChild(line);
     [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
     render();
@@ -464,13 +469,14 @@ const RUN = (() => {
 
   function timeout() {
     S.over = true; S.phase = 'done'; clearInterval(tick); render();
-    const where = `Hết giờ ở vòng ${S.round}/${ROUNDS.length}.`;
+    const where = T(`Hết giờ ở vòng ${S.round}/${ROUNDS.length}.`, `Time ran out in round ${S.round}/${ROUNDS.length}.`);
     if (STARS <= SOFT_MAX_STARS) {
       S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
-      if (S.days > 0) return finish('penalty', `${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
+      if (S.days > 0) return finish('penalty', T(`${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`, `${where}<br>Penalty: <b>−${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'}</b>.`));
     }
     S.days = 0;
-    finish('lose', `${where} Cửa an toàn là <b>cửa ${S.pz.safe + 1}</b>.<br><span style="color:var(--dim)">Trò chơi ★★★★ không có phạt nhẹ khi hết giờ.</span>`);
+    finish('lose', T(`${where} Cửa an toàn là <b>cửa ${S.pz.safe + 1}</b>.<br><span style="color:var(--dim)">Trò chơi ★★★★ không có phạt nhẹ khi hết giờ.</span>`,
+                     `${where} The safe door was <b>door ${S.pz.safe + 1}</b>.<br><span style="color:var(--dim)">★★★★ games have no soft penalty when time runs out.</span>`));
   }
 
   /* ---------- end ---------- */
@@ -482,23 +488,23 @@ const RUN = (() => {
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
     $('solveText').innerHTML = S.pz ? solutionHTML(S.pz) : '';
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Bạn đã chọn đúng cửa trong cả ${ROUNDS.length} vòng.`
-        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      $('endTitle').textContent = T('SỐNG SÓT', 'SURVIVED');
+      $('endReason').innerHTML = T(`Bạn đã chọn đúng cửa trong cả ${ROUNDS.length} vòng.`, `You picked the right door in all ${ROUNDS.length} rounds.`)
+        + (S.exts ? T(`<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>`, `<br><span style="color:var(--dim)">Extended ${S.exts} time${S.exts === 1 ? '' : 's'}.</span>`) : '');
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`, `DAYS LEFT: ${S.days} + ${REWARD} = ${S.days + REWARD}`);
       S.days += REWARD;
       [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'THẤT BẠI';
+      $('endTitle').textContent = T('THẤT BẠI', 'FAILED');
       $('endReason').innerHTML = why;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       beep(220, .5, 'sawtooth', .07, -100);
       show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       beep(160, .9, 'sawtooth', .1, -140);
       setTimeout(() => { $('game').classList.add('crtoff'); setTimeout(() => show('end'), 800); }, 900);
     }
@@ -517,7 +523,7 @@ const RUN = (() => {
   $('stDays').textContent = DAYS_START;
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
-  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = T('KHÔNG ĐỦ NGÀY', 'NOT ENOUGH DAYS'); }
 
   // kiểm thử: tạo nhiều câu đố và kiểm tra tính duy nhất (chỉ dùng khi mở với ?selftest)
   if (new URLSearchParams(location.search).has('selftest')) {

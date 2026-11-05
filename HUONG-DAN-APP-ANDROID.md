@@ -12,7 +12,7 @@ Vào repo **Vong-** trên GitHub.
 
 1. Bấm **Add file → Upload files**, rồi tải lên toàn bộ file trong thư mục `ban-phat-hanh`:
    - các file `.html`
-   - `ads.js`, `sw.js`, `manifest.json`
+   - `ads.js`, `settings.js`, `sw.js`, `manifest.json`
    - `package.json`, `capacitor.config.json`
    - thư mục `icons`
 
@@ -44,7 +44,7 @@ Bản này dùng **quảng cáo thử nghiệm của Google**, có dòng chữ "
 | Vị trí | Loại | Giới hạn |
 |---|---|---|
 | Nút **📺 +1 NGÀY** ở màn hình thành phố | Có thưởng: xem hết thì +1 ngày | 3 lần mỗi lượt chơi |
-| Nút **📺 HỒI SINH** khi GAME OVER | Có thưởng: quay lại với 3 ngày, giữ các tòa nhà đã qua | 1 lần mỗi lượt chơi |
+| Khi GAME OVER: **VÀO PHÒNG HÌNH PHẠT** → **📺 XEM VIDEO** | Có thưởng: quay về lúc trước khi bước vào trò vừa thua (số ngày và các tòa nhà đã qua lúc đó) | 1 lần mỗi lượt chơi |
 
 Game **chỉ có quảng cáo có thưởng**: người chơi tự bấm nút khi muốn xem. Không có quảng cáo chen giữa, không có banner, và không có quảng cáo nào tự bật lên.
 

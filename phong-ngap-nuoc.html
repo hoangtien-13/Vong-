@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Căn Phòng Ngập Nước</title>
+<title data-en="Vong Giới · The Flooded Room">Vong Giới · Căn Phòng Ngập Nước</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,49 +150,49 @@ details p{margin-top:8px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ▲ ÁP LỰC · ★★★</div>
-  <div class="title">CĂN PHÒNG<br>NGẬP NƯỚC</div>
+  <div class="tag mono" data-en="GAME · ▲ PRESSURE · ★★★">TRÒ CHƠI · ▲ ÁP LỰC · ★★★</div>
+  <div class="title" data-en="THE FLOODED<br>ROOM">CĂN PHÒNG<br>NGẬP NƯỚC</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Căn phòng đang ngập, và <b>mực nước dâng liên tục</b>.</li>
-    <li>Chạm vào một ô ống để <b>xoay 90°</b>. Hãy nối đường ống từ <b style="color:var(--cyan)">VAN</b> (bên trái) đến <b>CỐNG</b> (bên phải) để xả nước.</li>
-    <li>Ô nào đã có nước chảy tới sẽ <b style="color:var(--cyan)">sáng xanh</b>.</li>
-    <li>Có <b>3 căn phòng</b>, mỗi phòng lớn hơn phòng trước: 5×5, 6×6, 7×7.</li>
-    <li>Mỗi phòng có thời gian riêng (<b>40 / 50 / 60 giây</b>). Đó cũng chính là mực nước.</li>
-    <li><b>Bơm khẩn cấp</b>: đổi 1 ngày sống lấy thêm 30 giây.</li>
-    <li>Trò chơi ★★★: nước ngập tới trần là <b style="color:var(--red)">GAME OVER</b>, không có phạt nhẹ.</li>
+    <li data-en="The room is flooding, and <b>the water keeps rising</b>.">Căn phòng đang ngập, và <b>mực nước dâng liên tục</b>.</li>
+    <li data-en='Tap a pipe tile to <b>rotate it 90°</b>. Connect the pipes from the <b style="color:var(--cyan)">VALVE</b> (left) to the <b>DRAIN</b> (right) to flush the water.'>Chạm vào một ô ống để <b>xoay 90°</b>. Hãy nối đường ống từ <b style="color:var(--cyan)">VAN</b> (bên trái) đến <b>CỐNG</b> (bên phải) để xả nước.</li>
+    <li data-en='Tiles the water has reached <b style="color:var(--cyan)">glow blue</b>.'>Ô nào đã có nước chảy tới sẽ <b style="color:var(--cyan)">sáng xanh</b>.</li>
+    <li data-en="There are <b>3 rooms</b>, each bigger than the last: 5×5, 6×6, 7×7.">Có <b>3 căn phòng</b>, mỗi phòng lớn hơn phòng trước: 5×5, 6×6, 7×7.</li>
+    <li data-en="Each room has its own clock (<b>40 / 50 / 60 seconds</b>). The clock is the water level.">Mỗi phòng có thời gian riêng (<b>40 / 50 / 60 giây</b>). Đó cũng chính là mực nước.</li>
+    <li data-en="<b>Emergency pump</b>: trade 1 day of life for 30 more seconds."><b>Bơm khẩn cấp</b>: đổi 1 ngày sống lấy thêm 30 giây.</li>
+    <li data-en='★★★ game: water hits the ceiling and it is <b style="color:var(--red)">GAME OVER</b>. No soft penalty.'>Trò chơi ★★★: nước ngập tới trần là <b style="color:var(--red)">GAME OVER</b>, không có phạt nhẹ.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+5 ngày</b></span>
+    <span><span data-en="Days left">Ngày còn lại</span> <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>−1 day</b>">Phí vào cửa <b>−1 ngày</b></span>
+    <span data-en="Reward <b>+5 days</b>">Phần thưởng <b>+5 ngày</b></span>
   </div>
-  <div class="warn">Lưu ý: nước không chờ bạn suy nghĩ.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="warn" data-en="Warning: the water won't wait for you to think.">Lưu ý: nước không chờ bạn suy nghĩ.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn" data-en="ENTER ▸">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">▲ PHÒNG NGẬP NƯỚC</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="▲ THE FLOODED ROOM">▲ PHÒNG NGẬP NƯỚC</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono paused" id="timer">00:40</div>
   </div>
   <div class="counters mono">
-    <span>PHÒNG: <b id="stageHud">1/3</b></span>
-    <span>LƯỢT XOAY: <b id="movesHud">0</b></span>
-    <button class="ext mono" id="extBtn">BƠM +30s · −1 NGÀY</button>
+    <span data-en='ROOM: <b id="stageHud">1/3</b>'>PHÒNG: <b id="stageHud">1/3</b></span>
+    <span data-en='ROTATIONS: <b id="movesHud">0</b>'>LƯỢT XOAY: <b id="movesHud">0</b></span>
+    <button class="ext mono" id="extBtn" data-en="PUMP +30s · −1 DAY">BƠM +30s · −1 NGÀY</button>
   </div>
-  <div class="meter mono"><span>MỰC NƯỚC</span><div class="bar"><div class="fill" id="meter"></div></div><span id="pct">0%</span></div>
+  <div class="meter mono"><span data-en="WATER LEVEL">MỰC NƯỚC</span><div class="bar"><div class="fill" id="meter"></div></div><span id="pct">0%</span></div>
 
-  <div class="msg" id="msg">Chuẩn bị…</div>
+  <div class="msg" id="msg" data-en="Get ready…">Chuẩn bị…</div>
 
   <div class="board" id="board">
     <div class="grid locked" id="grid"></div>
-    <div class="port in" id="portIn"><div class="stub"></div><small class="mono">VAN</small></div>
-    <div class="port out" id="portOut"><div class="stub"></div><small class="mono">CỐNG</small></div>
+    <div class="port in" id="portIn"><div class="stub"></div><small class="mono" data-en="VALVE">VAN</small></div>
+    <div class="port out" id="portOut"><div class="stub"></div><small class="mono" data-en="DRAIN">CỐNG</small></div>
   </div>
 
   <div class="log mono" id="log"></div>
@@ -201,20 +201,21 @@ details p{margin-top:8px}
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="tag mono" data-en="GAME ENDED">TRÒ CHƠI KẾT THÚC</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <details>
-    <summary>MẸO</summary>
-    <p><b>Làm từ hai đầu:</b> ô sát VAN và ô sát CỐNG chỉ có rất ít cách xoay hợp lệ. Hãy cố định chúng trước rồi nối dần vào giữa.</p>
-    <p><b>Nhìn màu xanh:</b> nước chỉ chảy qua những ô đã nối đúng. Hãy đi theo đầu dòng nước xanh và xoay ô ngay phía trước nó.</p>
-    <p><b>Ống thẳng chỉ có 2 trạng thái</b> (ngang hoặc dọc), ống cong có 4. Đừng mất thời gian xoay ống thẳng nhiều lần.</p>
-    <p><b>Ô ở cạnh và góc</b> không thể có ống chĩa ra ngoài lưới. Điều này loại bớt rất nhiều khả năng.</p>
+    <summary data-en="TIPS">MẸO</summary>
+    <p data-en="<b>Work from both ends:</b> the tiles next to the VALVE and the DRAIN have very few valid rotations. Lock them in first, then build toward the middle."><b>Làm từ hai đầu:</b> ô sát VAN và ô sát CỐNG chỉ có rất ít cách xoay hợp lệ. Hãy cố định chúng trước rồi nối dần vào giữa.</p>
+    <p data-en="<b>Follow the blue:</b> water only flows through correctly linked tiles. Track the head of the blue stream and rotate the tile right in front of it."><b>Nhìn màu xanh:</b> nước chỉ chảy qua những ô đã nối đúng. Hãy đi theo đầu dòng nước xanh và xoay ô ngay phía trước nó.</p>
+    <p data-en="<b>Straight pipes have only 2 states</b> (horizontal or vertical); bends have 4. Don't waste time spinning straight pipes."><b>Ống thẳng chỉ có 2 trạng thái</b> (ngang hoặc dọc), ống cong có 4. Đừng mất thời gian xoay ống thẳng nhiều lần.</p>
+    <p data-en="<b>Edge and corner tiles</b> can't have pipes pointing out of the grid. That rules out a lot of options."><b>Ô ở cạnh và góc</b> không thể có ống chĩa ra ngoài lưới. Điều này loại bớt rất nhiều khả năng.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'nuoc';
@@ -252,6 +253,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -264,7 +266,7 @@ const RUN = (() => {
   const drip = () => beep(900 + rand(500), .08, 'sine', .04, -600);
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Cánh cửa đã khóa. Nước bắt đầu tràn vào.';
+  const ANNOUNCE = T('> Cánh cửa đã khóa. Nước bắt đầu tràn vào.', '> The door is locked. The water is pouring in.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -385,7 +387,7 @@ const RUN = (() => {
   const waterLevel = () => 1 - S.time / S.total;
 
   function render() {
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('stageHud').textContent = `${Math.max(1, S.stage)}/${STAGES.length}`;
     $('movesHud').textContent = S.moves;
     $('extBtn').disabled = S.over || S.phase !== 'play' || S.days - EXT_COST < 1;
@@ -446,10 +448,10 @@ const RUN = (() => {
     $('game').classList.remove('danger'); $('water').classList.remove('dangerW', 'draining');
     setWater(0);
     drawBoard(); render();
-    setMsg(`Phòng ${S.stage}/${STAGES.length} · ${def.size}×${def.size}. Nước sắp tràn vào…`);
+    setMsg(T(`Phòng ${S.stage}/${STAGES.length} · ${def.size}×${def.size}. Nước sắp tràn vào…`, `Room ${S.stage}/${STAGES.length} · ${def.size}×${def.size}. The water is coming…`));
     await wait(1200); if (my !== runId) return;
     S.phase = 'play';
-    setMsg('Xoay các ô ống để nối VAN với CỐNG.');
+    setMsg(T('Xoay các ô ống để nối VAN với CỐNG.', 'Rotate the pipes to connect the VALVE to the DRAIN.'));
     beep(140, .5, 'sawtooth', .05, -40);
     render();
   }
@@ -460,10 +462,11 @@ const RUN = (() => {
     $('grid').classList.add('solved'); $('board').classList.add('solved');
     $('game').classList.remove('danger'); $('water').classList.remove('dangerW');
     const line = document.createElement('div');
-    line.innerHTML = `PHÒNG ${S.stage}: ${S.st.R}×${S.st.C} · ${S.moves} lượt xoay · còn ${S.time}s → <b>Thoát nước</b>`;
+    line.innerHTML = T(`PHÒNG ${S.stage}: ${S.st.R}×${S.st.C} · ${S.moves} lượt xoay · còn ${S.time}s → <b>Thoát nước</b>`,
+      `ROOM ${S.stage}: ${S.st.R}×${S.st.C} · ${S.moves} rotation${S.moves === 1 ? '' : 's'} · ${S.time}s left → <b>Drained</b>`);
     $('log').appendChild(line);
     render();
-    setMsg('Thông rồi! Nước đang rút…', 'ok');
+    setMsg(T('Thông rồi! Nước đang rút…', 'Flowing! The water is draining…'), 'ok');
     [392, 523, 659].forEach((f, i) => setTimeout(() => beep(f, .15, 'triangle', .07), i * 100));
     $('water').classList.add('draining'); setWater(0);
     await wait(1500); if (my !== runId) return;
@@ -479,7 +482,7 @@ const RUN = (() => {
     if (S.time / S.total > .25) { $('game').classList.remove('danger'); $('water').classList.remove('dangerW'); }
     setWater(waterLevel());
     const line = document.createElement('div');
-    line.innerHTML = `BƠM KHẨN CẤP: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    line.innerHTML = T(`BƠM KHẨN CẤP: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`, `EMERGENCY PUMP: <b>+${EXT_SEC} seconds</b> · −${EXT_COST} day${EXT_COST === 1 ? '' : 's'}`);
     $('log').appendChild(line);
     beep(180, .5, 'sawtooth', .06, -120);
     render();
@@ -504,13 +507,13 @@ const RUN = (() => {
 
   function timeout() {
     S.over = true; S.phase = 'done'; clearInterval(tick); render();
-    const where = `Căn phòng ${S.stage}/${STAGES.length} đã ngập hoàn toàn.`;
+    const where = T(`Căn phòng ${S.stage}/${STAGES.length} đã ngập hoàn toàn.`, `Room ${S.stage}/${STAGES.length} is completely flooded.`);
     if (STARS <= SOFT_MAX_STARS) {
       S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
-      if (S.days > 0) return finish('penalty', `${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
+      if (S.days > 0) return finish('penalty', T(`${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`, `${where}<br>Penalty: <b>−${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'}</b>.`));
     }
     S.days = 0;
-    finish('lose', `${where}<br><span style="color:var(--dim)">Trò chơi ★★★ không có phạt nhẹ khi hết giờ.</span>`);
+    finish('lose', T(`${where}<br><span style="color:var(--dim)">Trò chơi ★★★ không có phạt nhẹ khi hết giờ.</span>`, `${where}<br><span style="color:var(--dim)">★★★ games have no soft penalty when time runs out.</span>`));
   }
 
   /* ---------- end ---------- */
@@ -521,24 +524,25 @@ const RUN = (() => {
     const end = $('end');
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Bạn đã xả nước cả ${STAGES.length} căn phòng với tổng cộng ${S.totalMoves} lượt xoay.`
-        + (S.exts ? `<br><span style="color:var(--dim)">Đã bơm khẩn cấp ${S.exts} lần.</span>` : '');
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      $('endTitle').textContent = T('SỐNG SÓT', 'SURVIVED');
+      $('endReason').innerHTML = T(`Bạn đã xả nước cả ${STAGES.length} căn phòng với tổng cộng ${S.totalMoves} lượt xoay.`,
+          `You drained all ${STAGES.length} rooms in ${S.totalMoves} rotation${S.totalMoves === 1 ? '' : 's'} total.`)
+        + (S.exts ? T(`<br><span style="color:var(--dim)">Đã bơm khẩn cấp ${S.exts} lần.</span>`, `<br><span style="color:var(--dim)">Emergency pump used ${S.exts} time${S.exts === 1 ? '' : 's'}.</span>`) : '');
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`, `DAYS LEFT: ${S.days} + ${REWARD} = ${S.days + REWARD}`);
       S.days += REWARD;
       [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
       setWater(0);
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'THẤT BẠI';
+      $('endTitle').textContent = T('THẤT BẠI', 'FAILED');
       $('endReason').innerHTML = why;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       beep(220, .5, 'sawtooth', .07, -100);
       setWater(0); show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       beep(160, .9, 'sawtooth', .1, -140);
       setWater(1);
       $('game').classList.add('crtoff');
@@ -562,7 +566,7 @@ const RUN = (() => {
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
   // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
   $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
-  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = T('KHÔNG ĐỦ NGÀY', 'NOT ENOUGH DAYS'); }
 
   typeAnnounce();
 })();

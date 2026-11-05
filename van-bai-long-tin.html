@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Ván Bài Lòng Tin</title>
+<title data-en="Vong Giới · The Trust Game">Vong Giới · Ván Bài Lòng Tin</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -170,86 +170,87 @@ details.tips p{margin-top:8px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ■ LÒNG TIN · ★★★★★</div>
-  <div class="title">VÁN BÀI<br>LÒNG TIN</div>
+  <div class="tag mono" data-en="GAME · ■ TRUST · ★★★★★">TRÒ CHƠI · ■ LÒNG TIN · ★★★★★</div>
+  <div class="title" data-en="THE TRUST<br>GAME">VÁN BÀI<br>LÒNG TIN</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Bạn ngồi cùng bàn với <b>3 người đeo mặt nạ</b>. Ván bài có <b>5 vòng</b>.</li>
-    <li>Mỗi vòng, tất cả cùng lúc chọn <b class="c">HỢP TÁC</b> hoặc <b class="b">PHẢN BỘI</b>. Lựa chọn được lật ra cùng một lúc.</li>
-    <li>Điểm được tính giữa <b>từng cặp</b> người chơi (xem bảng bên dưới).</li>
-    <li>Nếu có <b class="b">từ 3 người phản bội</b> trong cùng một vòng, ván bài sụp đổ: <b>mọi người −4 điểm</b>.</li>
-    <li>Mỗi người có một <b>tính cách riêng</b> và hành động theo quy luật của mình. Hãy quan sát để đọc ra họ.</li>
-    <li>Để sống sót: <b>đạt ít nhất 15 điểm</b> và <b>không đứng cuối bảng</b> (đồng hạng cuối cũng tính là cuối).</li>
-    <li>Mỗi vòng có <b>45 giây</b> để quyết định. Có thể <b>đổi 1 ngày lấy thêm 30 giây</b>. Trò chơi ★★★★★: hết giờ là <b class="b">GAME OVER</b>.</li>
+    <li data-en="You sit at a table with <b>3 masked players</b>. The game lasts <b>5 rounds</b>.">Bạn ngồi cùng bàn với <b>3 người đeo mặt nạ</b>. Ván bài có <b>5 vòng</b>.</li>
+    <li data-en="Each round, everyone picks <b class=&quot;c&quot;>COOPERATE</b> or <b class=&quot;b&quot;>BETRAY</b> at once. All cards flip at the same time.">Mỗi vòng, tất cả cùng lúc chọn <b class="c">HỢP TÁC</b> hoặc <b class="b">PHẢN BỘI</b>. Lựa chọn được lật ra cùng một lúc.</li>
+    <li data-en="Points are scored between <b>every pair</b> of players (see the table below).">Điểm được tính giữa <b>từng cặp</b> người chơi (xem bảng bên dưới).</li>
+    <li data-en="If <b class=&quot;b&quot;>3 or more players betray</b> in the same round, the table collapses: <b>everyone −4 points</b>.">Nếu có <b class="b">từ 3 người phản bội</b> trong cùng một vòng, ván bài sụp đổ: <b>mọi người −4 điểm</b>.</li>
+    <li data-en="Each player has a <b>hidden personality</b> and follows its own rule. Watch them. Read them.">Mỗi người có một <b>tính cách riêng</b> và hành động theo quy luật của mình. Hãy quan sát để đọc ra họ.</li>
+    <li data-en="To survive: <b>score at least 15 points</b> and <b>don't finish last</b> (tied for last counts as last).">Để sống sót: <b>đạt ít nhất 15 điểm</b> và <b>không đứng cuối bảng</b> (đồng hạng cuối cũng tính là cuối).</li>
+    <li data-en="Each round gives you <b>45 seconds</b> to decide. You can <b>trade 1 day for 30 more seconds</b>. A ★★★★★ game: time out and it's <b class=&quot;b&quot;>GAME OVER</b>.">Mỗi vòng có <b>45 giây</b> để quyết định. Có thể <b>đổi 1 ngày lấy thêm 30 giây</b>. Trò chơi ★★★★★: hết giờ là <b class="b">GAME OVER</b>.</li>
   </ul>
   <div class="rules pay" style="display:grid">
-    <span>Bạn <b class="c">hợp tác</b>, đối phương <b class="c">hợp tác</b></span><span>+2 / +2</span>
-    <span>Bạn <b class="b">phản bội</b>, đối phương <b class="c">hợp tác</b></span><span>+3 / −1</span>
-    <span>Bạn <b class="c">hợp tác</b>, đối phương <b class="b">phản bội</b></span><span>−1 / +3</span>
-    <span>Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
+    <span data-en="You <b class=&quot;c&quot;>cooperate</b>, they <b class=&quot;c&quot;>cooperate</b>">Bạn <b class="c">hợp tác</b>, đối phương <b class="c">hợp tác</b></span><span>+2 / +2</span>
+    <span data-en="You <b class=&quot;b&quot;>betray</b>, they <b class=&quot;c&quot;>cooperate</b>">Bạn <b class="b">phản bội</b>, đối phương <b class="c">hợp tác</b></span><span>+3 / −1</span>
+    <span data-en="You <b class=&quot;c&quot;>cooperate</b>, they <b class=&quot;b&quot;>betray</b>">Bạn <b class="c">hợp tác</b>, đối phương <b class="b">phản bội</b></span><span>−1 / +3</span>
+    <span data-en="Both <b class=&quot;b&quot;>betray</b>">Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
   </div>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+9 ngày</b></span>
+    <span><span data-en="DAYS LEFT">Ngày còn lại</span> <b id="stDays">3</b></span>
+    <span data-en="ENTRY FEE <b>−1 day</b>">Phí vào cửa <b>−1 ngày</b></span>
+    <span data-en="REWARD <b>+9 days</b>">Phần thưởng <b>+9 ngày</b></span>
   </div>
-  <div class="warn">Lưu ý: ở bàn này, sự tin tưởng có giá, và sự phản bội cũng vậy.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">NGỒI VÀO BÀN ▸</button></div>
+  <div class="warn" data-en="Note: at this table, trust has a price. So does betrayal.">Lưu ý: ở bàn này, sự tin tưởng có giá, và sự phản bội cũng vậy.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn" data-en="TAKE A SEAT ▸">NGỒI VÀO BÀN ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">■ VÁN BÀI LÒNG TIN</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="■ THE TRUST GAME">■ VÁN BÀI LÒNG TIN</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono paused" id="timer">00:45</div>
   </div>
   <div class="counters mono">
-    <span>VÒNG: <b id="roundHud">1/5</b></span>
-    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+    <span><span data-en="ROUND:">VÒNG:</span> <b id="roundHud">1/5</b></span>
+    <button class="ext mono" id="extBtn" data-en="+30s · −1 DAY">+30s · −1 NGÀY</button>
   </div>
-  <div class="goal mono"><span>MỤC TIÊU: <b>≥ 15 điểm</b> và <b>không đứng cuối</b></span><span id="rankHud">HẠNG: –</span></div>
+  <div class="goal mono"><span data-en="GOAL: <b>≥ 15 points</b> and <b>not last</b>">MỤC TIÊU: <b>≥ 15 điểm</b> và <b>không đứng cuối</b></span><span id="rankHud" data-en="RANK: –">HẠNG: –</span></div>
 
   <div class="table" id="table"></div>
 
   <div class="msg" id="msg"></div>
   <div class="choices">
-    <button class="choice c" id="coopBtn" disabled>HỢP TÁC<small>Tin tưởng cả bàn</small></button>
-    <button class="choice b" id="betrayBtn" disabled>PHẢN BỘI<small>Lấy phần hơn về mình</small></button>
+    <button class="choice c" id="coopBtn" disabled data-en="COOPERATE<small>Trust the table</small>">HỢP TÁC<small>Tin tưởng cả bàn</small></button>
+    <button class="choice b" id="betrayBtn" disabled data-en="BETRAY<small>Take the bigger share</small>">PHẢN BỘI<small>Lấy phần hơn về mình</small></button>
   </div>
   <details class="legend">
-    <summary>BẢNG ĐIỂM</summary>
+    <summary data-en="SCORING">BẢNG ĐIỂM</summary>
     <div class="pay">
-      <span>Cả hai <b class="c">hợp tác</b></span><span>+2 / +2</span>
-      <span><b class="b">Phản bội</b> người <b class="c">hợp tác</b></span><span>+3 / −1</span>
-      <span>Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
-      <span>Từ 3 người phản bội trở lên</span><span>tất cả −4</span>
+      <span data-en="Both <b class=&quot;c&quot;>cooperate</b>">Cả hai <b class="c">hợp tác</b></span><span>+2 / +2</span>
+      <span data-en="<b class=&quot;b&quot;>Betray</b> a <b class=&quot;c&quot;>cooperator</b>"><b class="b">Phản bội</b> người <b class="c">hợp tác</b></span><span>+3 / −1</span>
+      <span data-en="Both <b class=&quot;b&quot;>betray</b>">Cả hai <b class="b">phản bội</b></span><span>0 / 0</span>
+      <span data-en="3 or more betrayers">Từ 3 người phản bội trở lên</span><span data-en="all −4">tất cả −4</span>
     </div>
   </details>
   <div class="log mono" id="log"></div>
 </section>
 
-<div class="banner" id="banner"><span>VÁN BÀI SỤP ĐỔ<small>Quá nhiều kẻ phản bội. Mọi người −4 điểm.</small></span></div>
+<div class="banner" id="banner"><span data-en="THE TABLE COLLAPSES<small>Too many traitors. Everyone −4 points.</small>">VÁN BÀI SỤP ĐỔ<small>Quá nhiều kẻ phản bội. Mọi người −4 điểm.</small></span></div>
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="tag mono" data-en="GAME ENDED">TRÒ CHƠI KẾT THÚC</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <div class="reveal" id="reveal"></div>
   <details class="tips">
-    <summary>MẸO</summary>
-    <p><b>Luôn phản bội</b> nghe có vẻ an toàn, nhưng bàn sẽ sụp đổ liên tục và bạn khó đạt 15 điểm.</p>
-    <p><b>Luôn hợp tác</b> giúp người khác giàu lên nhờ bạn, và bạn sẽ đứng cuối.</p>
-    <p><b>Quan sát lịch sử:</b> ai luôn làm lại điều bạn đã làm? Ai tốt bụng lúc đầu rồi trở mặt? Ai chẳng theo quy luật nào?</p>
-    <p><b>Vòng cuối</b> không còn vòng sau để bị trả đũa. Hãy nghĩ xem người khác cũng biết điều đó.</p>
+    <summary data-en="TIPS">MẸO</summary>
+    <p data-en="<b>Always betraying</b> sounds safe, but the table keeps collapsing and 15 points slips out of reach."><b>Luôn phản bội</b> nghe có vẻ an toàn, nhưng bàn sẽ sụp đổ liên tục và bạn khó đạt 15 điểm.</p>
+    <p data-en="<b>Always cooperating</b> makes everyone else rich off you, and you finish last."><b>Luôn hợp tác</b> giúp người khác giàu lên nhờ bạn, và bạn sẽ đứng cuối.</p>
+    <p data-en="<b>Study the history:</b> who always copies what you did? Who plays nice, then turns? Who follows no rule at all?"><b>Quan sát lịch sử:</b> ai luôn làm lại điều bạn đã làm? Ai tốt bụng lúc đầu rồi trở mặt? Ai chẳng theo quy luật nào?</p>
+    <p data-en="<b>The last round</b> has no next round for revenge. Remember: the others know that too."><b>Vòng cuối</b> không còn vòng sau để bị trả đũa. Hãy nghĩ xem người khác cũng biết điều đó.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'tin';
@@ -276,20 +277,20 @@ const RUN = (() => {
 
   // tính cách của người chơi máy. h = lịch sử các vòng (h[r][0] là bạn), me = vị trí của họ
   const PERSONAS = {
-    loyal:    { name: 'KẺ TRUNG THÀNH', desc: 'Luôn hợp tác, cho tới khi bị phản bội tổng cộng 3 lần. Sau đó không bao giờ tha thứ.',
+    loyal:    { name: T('KẺ TRUNG THÀNH', 'THE LOYALIST'), desc: T('Luôn hợp tác, cho tới khi bị phản bội tổng cộng 3 lần. Sau đó không bao giờ tha thứ.', 'Always cooperates, until betrayed 3 times in total. After that, never forgives.'),
                 act: (h, me) => h.reduce((n, row) => n + row.filter((a, j) => j !== me && a === 'B').length, 0) >= 3 ? 'B' : 'C' },
-    mirror:   { name: 'TẤM GƯƠNG', desc: 'Vòng đầu hợp tác. Sau đó làm lại đúng điều BẠN đã làm ở vòng trước.',
+    mirror:   { name: T('TẤM GƯƠNG', 'THE MIRROR'), desc: T('Vòng đầu hợp tác. Sau đó làm lại đúng điều BẠN đã làm ở vòng trước.', 'Cooperates in round 1. Then copies exactly what YOU did the round before.'),
                 act: (h, me, r) => r === 0 ? 'C' : h[r - 1][0] },
-    fox:      { name: 'CON CÁO', desc: 'Hợp tác 2 vòng đầu để lấy lòng tin. Sau đó phản bội khi thấy bàn dễ dãi, và luôn phản bội ở vòng cuối.',
+    fox:      { name: T('CON CÁO', 'THE FOX'), desc: T('Hợp tác 2 vòng đầu để lấy lòng tin. Sau đó phản bội khi thấy bàn dễ dãi, và luôn phản bội ở vòng cuối.', 'Cooperates for 2 rounds to earn trust. Then betrays when the table goes soft, and always betrays in the last round.'),
                 act: (h, me, r) => r < 2 ? 'C' : r === ROUNDS - 1 ? 'B' : (h[r - 1].filter((a, j) => j !== me && a === 'C').length >= 2 ? 'B' : 'C') },
-    chaos:    { name: 'KẺ ĐIÊN', desc: 'Không có quy luật nào. Mỗi vòng tung đồng xu trong đầu.',
+    chaos:    { name: T('KẺ ĐIÊN', 'THE MADMAN'), desc: T('Không có quy luật nào. Mỗi vòng tung đồng xu trong đầu.', 'No rules at all. Flips a coin in his head every round.'),
                 act: () => Math.random() < .5 ? 'C' : 'B' },
-    cautious: { name: 'KẺ THẬN TRỌNG', desc: 'Hợp tác, trừ khi vòng trước có từ 2 người khác trở lên phản bội.',
+    cautious: { name: T('KẺ THẬN TRỌNG', 'THE CAUTIOUS ONE'), desc: T('Hợp tác, trừ khi vòng trước có từ 2 người khác trở lên phản bội.', 'Cooperates, unless 2 or more others betrayed in the previous round.'),
                 act: (h, me, r) => r === 0 ? 'C' : (h[r - 1].filter((a, j) => j !== me && a === 'B').length >= 2 ? 'B' : 'C') },
   };
   const MASKS = [
-    { name: 'MẶT NẠ TRẮNG', color: '#e8ecf2' }, { name: 'MẶT NẠ ĐỎ', color: '#d8263f' },
-    { name: 'MẶT NẠ XÁM', color: '#7d8796' }, { name: 'MẶT NẠ VÀNG', color: '#e0a83a' }, { name: 'MẶT NẠ TÍM', color: '#8a5cd6' },
+    { name: T('MẶT NẠ TRẮNG', 'WHITE MASK'), color: '#e8ecf2' }, { name: T('MẶT NẠ ĐỎ', 'RED MASK'), color: '#d8263f' },
+    { name: T('MẶT NẠ XÁM', 'GRAY MASK'), color: '#7d8796' }, { name: T('MẶT NẠ VÀNG', 'GOLD MASK'), color: '#e0a83a' }, { name: T('MẶT NẠ TÍM', 'PURPLE MASK'), color: '#8a5cd6' },
   ];
 
   const $ = id => document.getElementById(id);
@@ -301,6 +302,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -312,7 +314,7 @@ const RUN = (() => {
   }
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Trò chơi cuối cùng trước tòa tháp. Ba chiếc mặt nạ đang chờ bạn ngồi xuống.';
+  const ANNOUNCE = T('> Trò chơi cuối cùng trước tòa tháp. Ba chiếc mặt nạ đang chờ bạn ngồi xuống.', '> The last game before the tower. Three masks are waiting for you to sit down.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -328,7 +330,7 @@ const RUN = (() => {
     const personas = shuffle(Object.keys(PERSONAS)).slice(0, 3);
     const masks = shuffle(MASKS).slice(0, 3);
     S = { round: 0, phase: 'idle', time: ROUND_TIME, over: false, days: DAYS_START - FEE, exts: 0,
-          players: [{ name: 'BẠN', me: true }, ...personas.map((p, k) => ({ name: masks[k].name, color: masks[k].color, persona: p }))],
+          players: [{ name: T('BẠN', 'YOU'), me: true }, ...personas.map((p, k) => ({ name: masks[k].name, color: masks[k].color, persona: p }))],
           score: [0, 0, 0, 0], hist: [] };
     $('game').classList.remove('danger', 'crtoff');
     $('log').innerHTML = '';
@@ -353,7 +355,7 @@ const RUN = (() => {
   }
 
   function render() {
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('roundHud').textContent = `${Math.max(1, S.round)}/${ROUNDS}`;
     $('extBtn').disabled = S.over || S.phase !== 'choose' || S.days - EXT_COST < 1;
     $('timer').textContent = fmt(S.time);
@@ -364,11 +366,11 @@ const RUN = (() => {
       row.querySelector('.score').textContent = S.score[i];
       row.querySelectorAll('.hist i').forEach((cell, r) => {
         const a = S.hist[r] && S.hist[r][i];
-        cell.className = a || ''; cell.textContent = a ? (a === 'C' ? 'H' : 'P') : r + 1;
+        cell.className = a || ''; cell.textContent = a ? (a === 'C' ? T('H', 'C') : T('P', 'B')) : r + 1;
       });
     });
     const rk = S.round ? rankOfMe() : 0;
-    $('rankHud').innerHTML = rk ? `HẠNG: <b style="color:${rk === 4 ? 'var(--red)' : 'var(--amber)'}">${rk}/4</b>` : 'HẠNG: –';
+    $('rankHud').innerHTML = rk ? `${T('HẠNG', 'RANK')}: <b style="color:${rk === 4 ? 'var(--red)' : 'var(--amber)'}">${rk}/4</b>` : T('HẠNG: –', 'RANK: –');
   }
 
   async function nextRound() {
@@ -379,7 +381,7 @@ const RUN = (() => {
       const c = row.querySelector('.card'); c.className = 'card'; c.textContent = i === 0 ? '' : '…';
       row.querySelector('.delta').className = 'delta';
     });
-    setMsg(S.round === ROUNDS ? `<b style="color:var(--red)">Vòng cuối.</b>&nbsp;Không còn vòng sau để trả đũa.` : `Vòng ${S.round}/${ROUNDS}. Bạn chọn gì?`);
+    setMsg(S.round === ROUNDS ? T(`<b style="color:var(--red)">Vòng cuối.</b>&nbsp;Không còn vòng sau để trả đũa.`, `<b style="color:var(--red)">Final round.</b>&nbsp;No next round for revenge.`) : T(`Vòng ${S.round}/${ROUNDS}. Bạn chọn gì?`, `Round ${S.round}/${ROUNDS}. Your move?`));
     render();
   }
 
@@ -390,14 +392,14 @@ const RUN = (() => {
     beep(mine === 'C' ? 520 : 200, .12, 'triangle', .06);
     const r = S.round - 1;
     const acts = [mine, ...S.players.slice(1).map((p, k) => PERSONAS[p.persona].act(S.hist, k + 1, r))];
-    setMsg('Các lá bài đang được lật…');
+    setMsg(T('Các lá bài đang được lật…', 'The cards are turning…'));
     const rows = document.querySelectorAll('.pl');
-    rows[0].querySelector('.card').textContent = mine === 'C' ? 'HỢP TÁC' : 'PHẢN BỘI';
+    rows[0].querySelector('.card').textContent = mine === 'C' ? T('HỢP TÁC', 'COOPERATE') : T('PHẢN BỘI', 'BETRAY');
     rows[0].querySelector('.card').className = 'card ' + mine;
     await wait(600); if (my !== runId) return;
     for (let i = 1; i < 4; i++) {
       const c = rows[i].querySelector('.card');
-      c.textContent = acts[i] === 'C' ? 'HỢP TÁC' : 'PHẢN BỘI';
+      c.textContent = acts[i] === 'C' ? T('HỢP TÁC', 'COOPERATE') : T('PHẢN BỘI', 'BETRAY');
       c.className = 'card flip ' + acts[i];
       beep(acts[i] === 'C' ? 440 : 160, .14, acts[i] === 'C' ? 'triangle' : 'sawtooth', .06);
       await wait(550); if (my !== runId) return;
@@ -425,9 +427,10 @@ const RUN = (() => {
     });
     render();
     const line = document.createElement('div');
-    line.innerHTML = `VÒNG ${S.round}: ${betrayers} người phản bội${collapse ? ' · <b style="color:var(--red)">SỤP ĐỔ</b>' : ''} → bạn <b>${delta[0] > 0 ? '+' : ''}${delta[0]}</b> (tổng ${S.score[0]})`;
+    line.innerHTML = T(`VÒNG ${S.round}: ${betrayers} người phản bội${collapse ? ' · <b style="color:var(--red)">SỤP ĐỔ</b>' : ''} → bạn <b>${delta[0] > 0 ? '+' : ''}${delta[0]}</b> (tổng ${S.score[0]})`,
+      `ROUND ${S.round}: ${betrayers} ${betrayers === 1 ? 'betrayer' : 'betrayers'}${collapse ? ' · <b style="color:var(--red)">COLLAPSE</b>' : ''} → you <b>${delta[0] > 0 ? '+' : ''}${delta[0]}</b> (total ${S.score[0]})`);
     $('log').appendChild(line);
-    setMsg(delta[0] >= 0 ? `Bạn nhận ${delta[0] > 0 ? '+' : ''}${delta[0]} điểm.` : `Bạn mất ${-delta[0]} điểm.`, delta[0] > 0 ? 'ok' : delta[0] < 0 ? 'err' : '');
+    setMsg(delta[0] >= 0 ? T(`Bạn nhận ${delta[0] > 0 ? '+' : ''}${delta[0]} điểm.`, `You gain ${delta[0] > 0 ? '+' : ''}${delta[0]} ${Math.abs(delta[0]) === 1 ? 'point' : 'points'}.`) : T(`Bạn mất ${-delta[0]} điểm.`, `You lose ${-delta[0]} ${-delta[0] === 1 ? 'point' : 'points'}.`), delta[0] > 0 ? 'ok' : delta[0] < 0 ? 'err' : '');
     await wait(1800); if (my !== runId) return;
     if (S.round === ROUNDS) return judge();
     nextRound();
@@ -437,9 +440,9 @@ const RUN = (() => {
     const rk = rankOfMe(), me = S.score[0];
     if (me >= TARGET && rk < 4) return finish('win');
     S.days = 0;
-    const why = me < TARGET && rk === 4 ? `Bạn chỉ có ${me} điểm, chưa đạt ${TARGET}, và còn đứng cuối bàn.`
-      : me < TARGET ? `Bạn có ${me} điểm, chưa đạt mức ${TARGET} điểm.`
-      : `Bạn có ${me} điểm nhưng ${S.score.slice(1).some(x => x === me) ? 'đồng hạng cuối' : 'đứng cuối'} bàn.`;
+    const why = me < TARGET && rk === 4 ? T(`Bạn chỉ có ${me} điểm, chưa đạt ${TARGET}, và còn đứng cuối bàn.`, `Only ${me} points. Short of ${TARGET}, and dead last at the table.`)
+      : me < TARGET ? T(`Bạn có ${me} điểm, chưa đạt mức ${TARGET} điểm.`, `You have ${me} points. Short of the ${TARGET}-point mark.`)
+      : T(`Bạn có ${me} điểm nhưng ${S.score.slice(1).some(x => x === me) ? 'đồng hạng cuối' : 'đứng cuối'} bàn.`, `You have ${me} points, but you ${S.score.slice(1).some(x => x === me) ? 'tied for last' : 'finished last'} at the table.`);
     finish('lose', why);
   }
 
@@ -449,7 +452,7 @@ const RUN = (() => {
     S.days -= EXT_COST; S.time += EXT_SEC; S.exts++;
     if (S.time > 10) $('game').classList.remove('danger');
     const line = document.createElement('div');
-    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    line.innerHTML = T(`GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`, `EXTENSION: <b>+${EXT_SEC} sec</b> · −${EXT_COST} ${EXT_COST === 1 ? 'day' : 'days'}`);
     $('log').appendChild(line);
     [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
     render();
@@ -467,7 +470,7 @@ const RUN = (() => {
 
   function timeout() {
     S.over = true; S.phase = 'done'; clearInterval(tick); render();
-    const where = `Hết giờ ở vòng ${S.round}/${ROUNDS}. Ở bàn này, im lặng cũng là một lựa chọn, và nó không được tha thứ.`;
+    const where = T(`Hết giờ ở vòng ${S.round}/${ROUNDS}. Ở bàn này, im lặng cũng là một lựa chọn, và nó không được tha thứ.`, `Time ran out in round ${S.round}/${ROUNDS}. At this table, silence is a choice too, and it is never forgiven.`);
     if (STARS <= SOFT_MAX_STARS) {
       S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
       if (S.days > 0) return finish('penalty', where);
@@ -490,22 +493,22 @@ const RUN = (() => {
     $('reveal').innerHTML = order.map((i, k) => {
       const p = S.players[i];
       return p.me
-        ? `<div style="border-color:rgba(61,225,255,.45)"><span class="rk">#${k + 1} · ${S.score[i]} điểm</span><b>BẠN</b></div>`
-        : `<div><span class="rk">#${k + 1} · ${S.score[i]} điểm</span><b>${p.name}</b> là <b style="color:${p.color}">${PERSONAS[p.persona].name}</b><br>${PERSONAS[p.persona].desc}</div>`;
+        ? `<div style="border-color:rgba(61,225,255,.45)"><span class="rk">#${k + 1} · ${S.score[i]} ${T('điểm', 'pts')}</span><b>${T('BẠN', 'YOU')}</b></div>`
+        : `<div><span class="rk">#${k + 1} · ${S.score[i]} ${T('điểm', 'pts')}</span><b>${p.name}</b> ${T('là', 'was')} <b style="color:${p.color}">${PERSONAS[p.persona].name}</b><br>${PERSONAS[p.persona].desc}</div>`;
     }).join('');
 
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Bạn kết thúc với <b>${S.score[0]} điểm</b>, xếp hạng ${rankOfMe()}/4.`
-        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      $('endTitle').textContent = T('SỐNG SÓT', 'SURVIVED');
+      $('endReason').innerHTML = T(`Bạn kết thúc với <b>${S.score[0]} điểm</b>, xếp hạng ${rankOfMe()}/4.`, `You finish with <b>${S.score[0]} points</b>, ranked ${rankOfMe()}/4.`)
+        + (S.exts ? T(`<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>`, `<br><span style="color:var(--dim)">Extended ${S.exts} ${S.exts === 1 ? 'time' : 'times'}.</span>`) : '');
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`, `DAYS LEFT: ${S.days} + ${REWARD} = ${S.days + REWARD}`);
       S.days += REWARD;
       [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
       show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       beep(160, .9, 'sawtooth', .1, -140);
       $('game').classList.add('crtoff');
       setTimeout(() => show('end'), 800);
@@ -526,7 +529,7 @@ const RUN = (() => {
   $('stDays').textContent = DAYS_START;
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
-  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = T('KHÔNG ĐỦ NGÀY', 'NOT ENOUGH DAYS'); }
 
   if (new URLSearchParams(location.search).has('selftest')) window.__state = () => S;
 

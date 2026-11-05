@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Thang Máy 21</title>
+<title data-en="Vong Giới · Elevator 21">Vong Giới · Thang Máy 21</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -73,6 +73,17 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:49;
 .ext:disabled{opacity:.3;cursor:default;box-shadow:none}
 .danger .ext:not(:disabled){animation:pulseA 1s infinite}
 @keyframes pulseA{50%{box-shadow:0 0 18px rgba(255,181,71,.8)}}
+/* tạm dừng */
+.pz{margin-left:auto;font-size:13px;letter-spacing:.08em;color:var(--violet);background:transparent;
+  border:1px solid var(--violet);padding:6px 10px;cursor:pointer;box-shadow:0 0 10px rgba(185,140,255,.2)}
+.pz:hover{background:rgba(185,140,255,.12)}
+.pauseVeil{position:fixed;inset:0;z-index:30;background:rgba(3,4,6,.72);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px;text-align:center}
+.pauseVeil.on{display:flex}
+.pauseVeil .big{font-size:clamp(34px,10vw,56px);font-weight:800;color:var(--violet);letter-spacing:.1em;text-shadow:0 0 22px rgba(185,140,255,.7)}
+.pauseVeil .dim{color:var(--dim);font-size:14px;letter-spacing:.08em;max-width:360px;line-height:1.6}
+.pauseVeil .btn{min-width:220px}
+.pauseVeil .pzc{font-size:44px;color:#fff;font-variant-numeric:tabular-nums}
+.pauseVeil .pzc.low{color:var(--red);text-shadow:0 0 14px rgba(255,46,77,.6)}
 
 .msg{min-height:2.8em;text-align:center;font-size:15px;color:var(--amber);padding:0 4px;line-height:1.4;display:flex;align-items:center;justify-content:center}
 .msg.err{color:var(--red)}
@@ -178,43 +189,45 @@ details .chip{display:inline-block;margin:2px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">✦ THÁP TRUNG TÂM · CHẶNG 1</div>
-  <div class="title">THANG MÁY 21</div>
+  <div class="tag mono" data-en="✦ CENTRAL TOWER · STAGE 1">✦ THÁP TRUNG TÂM · CHẶNG 1</div>
+  <div class="title" data-en="ELEVATOR 21">THANG MÁY 21</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Bạn đang ở <b>tầng 1</b>. Lối thoát duy nhất là <b style="color:var(--green)">tầng 21</b>, và chỉ thang máy mới lên được tới đó.</li>
-    <li>Thang máy tự chạy theo <b>một quy luật cố định</b>, mỗi lần chơi một quy luật khác.</li>
-    <li>Khi thang dừng ở tầng của bạn, cửa mở rất nhanh: bạn có thể <b>bước vào</b> hoặc chờ lượt sau. Đang ở trong thang, mỗi lần cửa mở bạn có thể <b>bước ra</b>.</li>
-    <li>Thang chạy xuống <b style="color:var(--red)">tầng 0 hoặc tầng âm</b> khi bạn đang ở trong: <b style="color:var(--red)">GAME OVER</b>.</li>
-    <li>Thang lên tới <b style="color:var(--green)">tầng 21</b> lần đầu tiên mà bạn <b>không ở trong</b>: <b style="color:var(--red)">GAME OVER</b>.</li>
-    <li>Hết giờ: <b style="color:var(--red)">GAME OVER</b>. Ở thang máy không có lần thử lại.</li>
-    <li><b>Thang bộ</b>: đi lên hoặc xuống, cứ <b>3 tầng tốn 1 ngày sống</b> (làm tròn lên). Không thể đi bộ tới tầng 21.</li>
-    <li>Bảng lịch sử ghi lại các tầng thang đã dừng kèm <b>số thứ tự lượt chạy</b>. Thời gian <b>100 giây</b>.</li>
+    <li data-en="You are on <b>floor 1</b>. The only exit is <b style='color:var(--green)'>floor 21</b>, and only the elevator goes that high.">Bạn đang ở <b>tầng 1</b>. Lối thoát duy nhất là <b style="color:var(--green)">tầng 21</b>, và chỉ thang máy mới lên được tới đó.</li>
+    <li data-en="The elevator moves by <b>a fixed rule</b>. Each game has a different rule.">Thang máy tự chạy theo <b>một quy luật cố định</b>, mỗi lần chơi một quy luật khác.</li>
+    <li data-en="When it stops on your floor, the doors open only briefly: you can <b>step in</b> or wait for the next trip. Once inside, you can <b>step out</b> whenever the doors open.">Khi thang dừng ở tầng của bạn, cửa mở rất nhanh: bạn có thể <b>bước vào</b> hoặc chờ lượt sau. Đang ở trong thang, mỗi lần cửa mở bạn có thể <b>bước ra</b>.</li>
+    <li data-en="It goes down to <b style='color:var(--red)'>floor 0 or below</b> with you inside: <b style='color:var(--red)'>GAME OVER</b>.">Thang chạy xuống <b style="color:var(--red)">tầng 0 hoặc tầng âm</b> khi bạn đang ở trong: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li data-en="It reaches <b style='color:var(--green)'>floor 21</b> for the first time and you are <b>not inside</b>: <b style='color:var(--red)'>GAME OVER</b>.">Thang lên tới <b style="color:var(--green)">tầng 21</b> lần đầu tiên mà bạn <b>không ở trong</b>: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li data-en="Time runs out: <b style='color:var(--red)'>GAME OVER</b>. The elevator gives no second try.">Hết giờ: <b style="color:var(--red)">GAME OVER</b>. Ở thang máy không có lần thử lại.</li>
+    <li data-en="<b>Stairs</b>: up or down, every <b>3 floors cost 1 day of life</b> (rounded up). You cannot walk to floor 21."><b>Thang bộ</b>: đi lên hoặc xuống, cứ <b>3 tầng tốn 1 ngày sống</b> (làm tròn lên). Không thể đi bộ tới tầng 21.</li>
+    <li data-en="The history board records each floor the elevator stopped at, with its <b>trip number</b>. Time limit: <b>100 seconds</b>.">Bảng lịch sử ghi lại các tầng thang đã dừng kèm <b>số thứ tự lượt chạy</b>. Thời gian <b>100 giây</b>.</li>
+    <li data-en="Have <b>more than 15 days</b>? You can <b>pause</b> up to <b>3 times</b>, <b>30 seconds</b> each: the elevator and the clock freeze while you think.">Có <b>trên 15 ngày</b>: được <b>tạm dừng 3 lần</b>, mỗi lần tối đa <b>30 giây</b>: thang máy và đồng hồ đứng yên để bạn suy nghĩ.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>không</b></span>
-    <span>Cần ít nhất <b>2 ngày</b></span>
-    <span>Tầng 21 <b>cánh cửa khóa</b></span>
+    <span data-en="Days left <b id='stDays'>3</b>">Ngày còn lại <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>none</b>">Phí vào cửa <b>không</b></span>
+    <span data-en="Needs at least <b>2 days</b>">Cần ít nhất <b>2 ngày</b></span>
+    <span data-en="Floor 21 <b>the locked door</b>">Tầng 21 <b>cánh cửa khóa</b></span>
   </div>
-  <div class="warn">Lưu ý: chiếc thang đang mở cửa chờ bạn ở tầng 1. Đừng vội tin nó, nhưng cũng đừng chờ quá lâu.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ CHÂN THÁP</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="warn" data-en="Note: the elevator is waiting for you on floor 1 with its doors open. Don't trust it too fast, but don't wait too long either.">Lưu ý: chiếc thang đang mở cửa chờ bạn ở tầng 1. Đừng vội tin nó, nhưng cũng đừng chờ quá lâu.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ TOWER BASE">◂ CHÂN THÁP</button><button class="btn red" id="startBtn" data-en="STEP IN ▸">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">◆ THANG MÁY 21</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="◆ ELEVATOR 21">◆ THANG MÁY 21</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono" id="timer">01:40</div>
   </div>
   <div class="counters mono">
-    <span>LƯỢT CHẠY TIẾP THEO: <b id="nextMove">1</b></span>
+    <span data-en="NEXT TRIP: <b id='nextMove'>1</b>">LƯỢT CHẠY TIẾP THEO: <b id="nextMove">1</b></span>
+    <button class="pz mono" id="pauseBtn" style="display:none"></button>
   </div>
 
-  <div class="msg" id="msg">Quan sát thang máy.</div>
+  <div class="msg" id="msg" data-en="Watch the elevator.">Quan sát thang máy.</div>
 
   <div class="play">
     <div class="shaft mono" id="shaft">
@@ -223,50 +236,57 @@ details .chip{display:inline-block;margin:2px}
     </div>
     <div class="side">
       <div class="panel">
-        <h3>THANG MÁY</h3>
+        <h3 data-en="ELEVATOR">THANG MÁY</h3>
         <div class="ind"><span class="arrow" id="arUp">▲</span><span class="val" id="indVal">1</span><span class="arrow" id="arDn">▼</span></div>
         <div class="doors" id="doors"><div class="leaf"></div><div class="leaf"></div><div class="where mono" id="doorTxt"></div></div>
         <div class="where-me" id="whereMe"></div>
-        <button class="btn" id="boardBtn">BƯỚC VÀO</button>
+        <button class="btn" id="boardBtn" data-en="STEP IN">BƯỚC VÀO</button>
       </div>
       <div class="panel" id="stairPanel">
-        <h3>THANG BỘ</h3>
+        <h3 data-en="STAIRS">THANG BỘ</h3>
         <div class="stair">
           <button class="btn step" id="stDown">−</button>
           <div class="tgt" id="stTgt">1</div>
           <button class="btn step" id="stUp">+</button>
         </div>
         <div class="cost" id="stCost"></div>
-        <button class="btn amber" id="walkBtn">ĐI THANG BỘ</button>
+        <button class="btn amber" id="walkBtn" data-en="TAKE THE STAIRS">ĐI THANG BỘ</button>
       </div>
     </div>
   </div>
 
-  <div class="stops" id="stops"><span class="lbl mono">LỊCH SỬ</span></div>
+  <div class="stops" id="stops"><span class="lbl mono" data-en="HISTORY">LỊCH SỬ</span></div>
   <div class="log mono" id="log"></div>
+  <div class="pauseVeil mono" id="pauseVeil">
+    <div class="big" data-en="PAUSED">TẠM DỪNG</div>
+    <div class="pzc" id="pauseCount">30</div>
+    <div class="dim" id="pauseLeft"></div>
+    <button class="btn" id="resumeBtn" data-en="RESUME ▸">TIẾP TỤC ▸</button>
+  </div>
 </section>
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="tag mono" data-en="GAME ENDED">TRÒ CHƠI KẾT THÚC</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <details open>
-    <summary>QUY LUẬT CỦA THANG MÁY</summary>
+    <summary data-en="THE ELEVATOR'S RULE">QUY LUẬT CỦA THANG MÁY</summary>
     <div id="ruleBox"></div>
   </details>
   <details>
-    <summary>MẸO</summary>
-    <p><b>Đọc bảng lịch sử:</b> mỗi ô ghi tầng thang dừng và lượt chạy đưa nó tới đó (L1, L2…). So sánh các lượt lẻ với các lượt chẵn: thang lên bao nhiêu tầng, đổi chiều ở tầng nào.</p>
-    <p><b>Tính trước đường đi:</b> khi đã đoán ra quy luật, hãy tính tiếp các tầng thang sẽ tới. Lần ghé an toàn là lần thang ghé qua <b>sau lần xuống tầng âm cuối cùng</b> và <b>trước khi lên 21</b>.</p>
-    <p><b>Cùng một tầng, khác lượt:</b> thang có thể ghé tầng của bạn nhiều lần. Chỉ bước vào ở đúng lần an toàn.</p>
-    <p><b>Thang máy là phương tiện miễn phí:</b> đi một đoạn rồi bước ra trước khi nó lao xuống, sau đó đi bộ vài tầng tới điểm an toàn.</p>
+    <summary data-en="TIPS">MẸO</summary>
+    <p data-en="<b>Read the history:</b> each chip shows where the elevator stopped and which trip took it there (L1, L2…). Compare odd trips with even trips: how far it climbs, and on which floor it turns back."><b>Đọc bảng lịch sử:</b> mỗi ô ghi tầng thang dừng và lượt chạy đưa nó tới đó (L1, L2…). So sánh các lượt lẻ với các lượt chẵn: thang lên bao nhiêu tầng, đổi chiều ở tầng nào.</p>
+    <p data-en="<b>Plan ahead:</b> once you guess the rule, work out the floors it will visit next. A safe stop is one that comes <b>after its last drop below floor 1</b> and <b>before it reaches 21</b>."><b>Tính trước đường đi:</b> khi đã đoán ra quy luật, hãy tính tiếp các tầng thang sẽ tới. Lần ghé an toàn là lần thang ghé qua <b>sau lần xuống tầng âm cuối cùng</b> và <b>trước khi lên 21</b>.</p>
+    <p data-en="<b>Same floor, different trip:</b> the elevator may stop on your floor several times. Step in only at the safe stop."><b>Cùng một tầng, khác lượt:</b> thang có thể ghé tầng của bạn nhiều lần. Chỉ bước vào ở đúng lần an toàn.</p>
+    <p data-en="<b>The elevator rides free:</b> ride part of the way, step out before it plunges, then walk a few floors to the safe spot."><b>Thang máy là phương tiện miễn phí:</b> đi một đoạn rồi bước ra trước khi nó lao xuống, sau đó đi bộ vài tầng tới điểm an toàn.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
-  <button class="btn violet" id="doorBtn" style="display:none">TỚI CÁNH CỬA KHÓA ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn violet" id="doorBtn" style="display:none" data-en="TO THE LOCKED DOOR ▸">TỚI CÁNH CỬA KHÓA ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'lift';
@@ -297,7 +317,28 @@ const RUN = (() => {
   const $ = id => document.getElementById(id);
   const screens = ['intro', 'game', 'end'];
   const show = id => screens.forEach(s => $(s).classList.toggle('on', s === id));
-  const wait = ms => new Promise(r => setTimeout(r, ms));
+  /* đồng hồ của trò chơi: mọi khoảng chờ đều đứng yên khi tạm dừng */
+  const PAUSE_MAX = 3, PAUSE_MIN_DAYS = 16, PAUSE_SEC = 30;   // mỗi lần tạm dừng tối đa 30 giây   // tạm dừng: chỉ khi còn trên 15 ngày, tối đa 3 lần mỗi lần chơi
+  let paused = false, pausedAt = 0, pausedTotal = 0;
+  const timers = new Set();
+  const clock = () => (paused ? pausedAt : performance.now()) - pausedTotal;
+  const wait = ms => new Promise(r => {
+    const t = { left: ms, start: performance.now(), h: 0 };
+    t.fire = () => { timers.delete(t); r(); };
+    timers.add(t);
+    if (!paused) t.h = setTimeout(t.fire, ms);
+  });
+  function pauseClock() {
+    if (paused) return;
+    paused = true; pausedAt = performance.now();
+    timers.forEach(t => { clearTimeout(t.h); t.left -= pausedAt - t.start; });
+  }
+  function resumeClock() {
+    if (!paused) return;
+    const now = performance.now();
+    pausedTotal += now - pausedAt; paused = false;
+    timers.forEach(t => { t.start = now; t.h = setTimeout(t.fire, Math.max(0, t.left)); });
+  }
   const rand = n => Math.floor(Math.random() * n);
   const ri = (a, b) => a + rand(b - a + 1);
   const mod = (x, m) => ((x % m) + m) % m;
@@ -306,6 +347,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -318,7 +360,8 @@ const RUN = (() => {
   const ding = () => { beep(1046, .25, 'sine', .06); setTimeout(() => beep(784, .35, 'sine', .05), 160); };
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Sảnh tầng 1. Đèn báo tầng nhấp nháy. Có thứ gì đó đang điều khiển chiếc thang này.';
+  const ANNOUNCE = T('> Sảnh tầng 1. Đèn báo tầng nhấp nháy. Có thứ gì đó đang điều khiển chiếc thang này.',
+    '> Floor 1 lobby. The floor indicator flickers. Something is controlling this elevator.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -336,13 +379,19 @@ const RUN = (() => {
   const FAMILIES = [
     () => { const k = ri(9, 18), a = ri(3, 11), c = ri(3, 11), b = ri(6, 18); if (a === c) return null;
       return { f: (x, m) => x >= k ? x - b : m % 2 ? up(x, a) : up(x, c),
-        txt: [`Từ tầng ${k} trở lên: xuống ${b} tầng`, `Dưới tầng ${k}, lượt chạy lẻ: lên ${a} tầng`, `Dưới tầng ${k}, lượt chạy chẵn: lên ${c} tầng`] }; },
+        txt: [T(`Từ tầng ${k} trở lên: xuống ${b} tầng`, `Floor ${k} and above: down ${b} floors`),
+              T(`Dưới tầng ${k}, lượt chạy lẻ: lên ${a} tầng`, `Below floor ${k}, odd trips: up ${a} floors`),
+              T(`Dưới tầng ${k}, lượt chạy chẵn: lên ${c} tầng`, `Below floor ${k}, even trips: up ${c} floors`)] }; },
     () => { const k = ri(9, 18), a = ri(3, 11), b = ri(6, 18), d = ri(6, 18); if (b === d) return null;
       return { f: (x, m) => x < k ? up(x, a) : m % 2 ? x - b : x - d,
-        txt: [`Dưới tầng ${k}: lên ${a} tầng`, `Từ tầng ${k} trở lên, lượt chạy lẻ: xuống ${b} tầng`, `Từ tầng ${k} trở lên, lượt chạy chẵn: xuống ${d} tầng`] }; },
+        txt: [T(`Dưới tầng ${k}: lên ${a} tầng`, `Below floor ${k}: up ${a} floors`),
+              T(`Từ tầng ${k} trở lên, lượt chạy lẻ: xuống ${b} tầng`, `Floor ${k} and above, odd trips: down ${b} floors`),
+              T(`Từ tầng ${k} trở lên, lượt chạy chẵn: xuống ${d} tầng`, `Floor ${k} and above, even trips: down ${d} floors`)] }; },
     () => { const k = ri(9, 18), a = ri(3, 11), c = ri(2, 9), b = ri(6, 18);
       return { f: (x, m) => m % 2 ? up(x, a) : x >= k ? x - b : up(x, c),
-        txt: [`Lượt chạy lẻ: lên ${a} tầng`, `Lượt chạy chẵn, từ tầng ${k} trở lên: xuống ${b} tầng`, `Lượt chạy chẵn, dưới tầng ${k}: lên ${c} tầng`] }; },
+        txt: [T(`Lượt chạy lẻ: lên ${a} tầng`, `Odd trips: up ${a} floors`),
+              T(`Lượt chạy chẵn, từ tầng ${k} trở lên: xuống ${b} tầng`, `Even trips, floor ${k} and above: down ${b} floors`),
+              T(`Lượt chạy chẵn, dưới tầng ${k}: lên ${c} tầng`, `Even trips, below floor ${k}: up ${c} floors`)] }; },
   ];
   const cost = dist => Math.ceil(Math.abs(dist) / STEP);
   const travel = (a, b) => 350 + 110 * Math.abs(b - a);
@@ -407,12 +456,12 @@ const RUN = (() => {
     runId++;
     S = { R: makeRule(), car: 1, carPos: 1, dir: 0, doors: false, inside: false, me: 1, tgt: 1, moves: 0,
           walking: false, stops: [], time: TIME, over: false, days: DAYS_START - FEE, exts: 0,
-          spent: 0, walked: 0, rides: 0 };
+          spent: 0, walked: 0, rides: 0, pauses: 0 };
     $('game').classList.remove('danger', 'crtoff', 'fall');
     $('log').innerHTML = '';
     document.querySelectorAll('.floor').forEach(e => e.classList.remove('seen', 'me'));
-    $('stops').innerHTML = '<span class="lbl mono">LỊCH SỬ</span>';
-    setMsg('Thang đang mở cửa ở tầng 1. Bước vào ngay, hay quan sát trước?');
+    $('stops').innerHTML = `<span class="lbl mono">${T('LỊCH SỬ', 'HISTORY')}</span>`;
+    setMsg(T('Thang đang mở cửa ở tầng 1. Bước vào ngay, hay quan sát trước?', 'The doors are open on floor 1. Step in now, or watch first?'));
     $('timer').textContent = fmt(S.time);
     render();
   }
@@ -423,8 +472,11 @@ const RUN = (() => {
   const maxReach = () => (S.days - 1) * STEP;   // luôn giữ lại ít nhất 1 ngày
 
   function render() {
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('nextMove').textContent = S.moves + 1;
+    const pzLeft = PAUSE_MAX - S.pauses;
+    $('pauseBtn').style.display = !S.over && S.days >= PAUSE_MIN_DAYS && pzLeft > 0 ? '' : 'none';
+    $('pauseBtn').textContent = T(`⏸ TẠM DỪNG (${pzLeft})`, `⏸ PAUSE (${pzLeft})`);
 
     // thang
     const car = $('car');
@@ -437,7 +489,7 @@ const RUN = (() => {
     $('arUp').classList.toggle('on', S.dir > 0);
     $('arDn').classList.toggle('on', S.dir < 0);
     $('doors').classList.toggle('open', S.doors && (S.inside || S.car === S.me));
-    $('doorTxt').textContent = S.doors ? '' : S.dir ? 'ĐANG CHẠY' : '';
+    $('doorTxt').textContent = S.doors ? '' : S.dir ? T('ĐANG CHẠY', 'MOVING') : '';
 
     // người chơi
     $('me').classList.toggle('hide', S.inside);
@@ -448,13 +500,13 @@ const RUN = (() => {
     const canBoard = !S.over && !S.walking && S.doors && !S.inside && S.car === S.me;
     const canExit = !S.over && S.doors && S.inside && S.car >= 1 && S.car < TOP;
     const b = $('boardBtn');
-    b.textContent = S.inside ? 'BƯỚC RA Ở TẦNG ' + fl(S.car) : 'BƯỚC VÀO';
+    b.textContent = S.inside ? T('BƯỚC RA Ở TẦNG ', 'STEP OUT AT ') + fl(S.car) : T('BƯỚC VÀO', 'STEP IN');
     b.disabled = S.inside ? !canExit : !canBoard;
     b.classList.toggle('red', S.inside);
     $('whereMe').innerHTML = S.inside
-      ? `Bạn đang <b>ở trong thang</b>.`
-      : S.walking ? `Bạn đang đi thang bộ… tầng <b>${fl(S.me)}</b>`
-      : `Bạn đang đứng ở sảnh tầng <b>${fl(S.me)}</b>.`;
+      ? T(`Bạn đang <b>ở trong thang</b>.`, `You are <b>inside the elevator</b>.`)
+      : S.walking ? T(`Bạn đang đi thang bộ… tầng <b>${fl(S.me)}</b>`, `On the stairs… floor <b>${fl(S.me)}</b>`)
+      : T(`Bạn đang đứng ở sảnh tầng <b>${fl(S.me)}</b>.`, `You are in the floor <b>${fl(S.me)}</b> lobby.`);
 
     // thang bộ
     const inStair = !S.over && !S.inside && !S.walking;
@@ -463,9 +515,9 @@ const RUN = (() => {
     $('stDown').disabled = !inStair || S.tgt <= 1 || Math.abs(S.tgt - 1 - S.me) > maxReach() && S.tgt - 1 < S.me;
     $('stUp').disabled = !inStair || S.tgt >= TOP - 1 || Math.abs(S.tgt + 1 - S.me) > maxReach() && S.tgt + 1 > S.me;
     $('walkBtn').disabled = !inStair || d === 0 || d > maxReach();
-    $('stCost').innerHTML = S.inside ? 'Bước ra khỏi thang để dùng thang bộ.'
-      : d === 0 ? (maxReach() ? `Đi được tối đa <b>${maxReach()}</b> tầng.` : 'Không đủ ngày để đi thang bộ.')
-      : `${d} tầng · <b>−${c} ngày</b> · còn ${S.days - c}`;
+    $('stCost').innerHTML = S.inside ? T('Bước ra khỏi thang để dùng thang bộ.', 'Step out to use the stairs.')
+      : d === 0 ? (maxReach() ? T(`Đi được tối đa <b>${maxReach()}</b> tầng.`, `Up to <b>${maxReach()}</b> floors.`) : T('Không đủ ngày để đi thang bộ.', 'Not enough days for the stairs.'))
+      : T(`${d} tầng · <b>−${c} ngày</b> · còn ${S.days - c}`, `${d} fl · <b>−${c} day${c === 1 ? '' : 's'}</b> · ${S.days - c} left`);
   }
 
   /* ---------- thang chạy ---------- */
@@ -477,8 +529,8 @@ const RUN = (() => {
     box.querySelectorAll('.chip.last').forEach(e => e.classList.remove('last'));
     const c = document.createElement('span');
     c.className = 'chip last' + (f <= 0 ? ' neg' : '') + (f === TOP ? ' top' : '') + (S.inside ? ' mine' : '');
-    c.innerHTML = `${fl(f)}<small>${n ? 'L' + n : 'ĐẦU'}</small>`;
-    c.title = n ? `Sau lượt chạy ${n}` : 'Vị trí ban đầu';
+    c.innerHTML = `${fl(f)}<small>${n ? 'L' + n : T('ĐẦU', 'START')}</small>`;
+    c.title = n ? T(`Sau lượt chạy ${n}`, `After trip ${n}`) : T('Vị trí ban đầu', 'Starting position');
     box.appendChild(c);
     const chips = box.querySelectorAll('.chip');
     if (chips.length > 14) chips[0].remove();
@@ -492,14 +544,14 @@ const RUN = (() => {
       await wait(CLOSE); if (my !== runId || S.over) return;
       const from = S.car, to = S.R.f(from, S.moves + 1);
       S.dir = Math.sign(to - from);
-      const dur = travel(from, to), t0 = performance.now();
+      const dur = travel(from, to), t0 = clock();
       beep(70, dur / 1000, 'sawtooth', .02, S.dir * 30);
       // hiệu ứng chạy bằng requestAnimationFrame, còn logic chạy theo đồng hồ
       // (để thang vẫn chạy đúng khi trình duyệt tạm dừng hiệu ứng ở chế độ nền)
       let moving = true;
       (function step() {
         if (!moving || my !== runId) return;
-        const k = Math.min(1, (performance.now() - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        const k = Math.min(1, (clock() - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
         S.carPos = from + (to - from) * e; render();
         if (k < 1) requestAnimationFrame(step);
       })();
@@ -509,33 +561,33 @@ const RUN = (() => {
       addStop(to); ding(); render();
       if (to === TOP) return S.inside ? win() : missed();
       if (S.inside && to <= 0) return crash(to);
-      if (S.inside) setMsg(`Thang dừng ở tầng ${fl(to)}. Ở lại hay bước ra?`);
-      else if (to === S.me && !S.walking) setMsg(`Thang dừng ở tầng của bạn (tầng ${fl(to)}). Cửa đang mở.`);
-      else if (!S.walking) setMsg(`Thang dừng ở tầng ${fl(to)}.`);
+      if (S.inside) setMsg(T(`Thang dừng ở tầng ${fl(to)}. Ở lại hay bước ra?`, `Stopped at floor ${fl(to)}. Stay or step out?`));
+      else if (to === S.me && !S.walking) setMsg(T(`Thang dừng ở tầng của bạn (tầng ${fl(to)}). Cửa đang mở.`, `Stopped on your floor (floor ${fl(to)}). Doors open.`));
+      else if (!S.walking) setMsg(T(`Thang dừng ở tầng ${fl(to)}.`, `Stopped at floor ${fl(to)}.`));
     }
   }
 
   /* ---------- hành động ---------- */
   function board() {
-    if (S.over) return;
+    if (S.over || paused) return;
     if (S.inside) {
       if (!(S.doors && S.car >= 1 && S.car < TOP)) return;
       S.inside = false; S.me = S.car; S.tgt = S.me;
-      logLine(`BƯỚC RA ở tầng <b>${fl(S.me)}</b>`);
-      setMsg(`Bạn đã bước ra ở tầng ${fl(S.me)}.`);
+      logLine(T(`BƯỚC RA ở tầng <b>${fl(S.me)}</b>`, `STEPPED OUT at floor <b>${fl(S.me)}</b>`));
+      setMsg(T(`Bạn đã bước ra ở tầng ${fl(S.me)}.`, `You stepped out at floor ${fl(S.me)}.`));
       beep(300, .08, 'triangle', .06);
     } else {
       if (!(S.doors && !S.walking && S.car === S.me)) return;
       S.inside = true; S.rides++;
-      logLine(`BƯỚC VÀO thang ở tầng <b>${fl(S.me)}</b>`);
-      setMsg('Bạn đã vào thang. Cửa có thể đóng bất cứ lúc nào.');
+      logLine(T(`BƯỚC VÀO thang ở tầng <b>${fl(S.me)}</b>`, `STEPPED IN at floor <b>${fl(S.me)}</b>`));
+      setMsg(T('Bạn đã vào thang. Cửa có thể đóng bất cứ lúc nào.', 'You are in. The doors may close at any moment.'));
       beep(440, .08, 'triangle', .06);
     }
     render();
   }
 
   function nudge(d) {
-    if (S.over || S.inside || S.walking) return;
+    if (S.over || paused || S.inside || S.walking) return;
     const t = S.tgt + d;
     if (t < 1 || t > TOP - 1) return;
     if (Math.abs(t - S.me) > maxReach() && Math.abs(t - S.me) > Math.abs(S.tgt - S.me)) return beep(110, .1, 'square', .04);
@@ -543,20 +595,20 @@ const RUN = (() => {
   }
 
   async function walk() {
-    if (S.over || S.inside || S.walking) return;
+    if (S.over || paused || S.inside || S.walking) return;
     const d = S.tgt - S.me, n = Math.abs(d), c = cost(d);
     if (!n || n > maxReach()) return;
     const my = runId;
     S.days -= c; S.spent += c; S.walked += n; S.walking = true;
-    logLine(`THANG BỘ: tầng ${fl(S.me)} → <b>${fl(S.tgt)}</b> · −${c} ngày`);
-    setMsg(`Đang đi thang bộ tới tầng ${fl(S.tgt)}…`);
+    logLine(T(`THANG BỘ: tầng ${fl(S.me)} → <b>${fl(S.tgt)}</b> · −${c} ngày`, `STAIRS: floor ${fl(S.me)} → <b>${fl(S.tgt)}</b> · −${c} day${c === 1 ? '' : 's'}`));
+    setMsg(T(`Đang đi thang bộ tới tầng ${fl(S.tgt)}…`, `Taking the stairs to floor ${fl(S.tgt)}…`));
     render();
     for (let i = 0; i < n; i++) {
       await wait(WALK_MS); if (my !== runId || S.over) return;
       S.me += Math.sign(d); beep(180 + rand(40), .03, 'square', .025); render();
     }
     S.walking = false;
-    setMsg(`Bạn đã tới sảnh tầng ${fl(S.me)}. Chờ thang dừng ở đây.`);
+    setMsg(T(`Bạn đã tới sảnh tầng ${fl(S.me)}. Chờ thang dừng ở đây.`, `You reached the floor ${fl(S.me)} lobby. Wait for the elevator here.`));
     render();
   }
 
@@ -564,7 +616,7 @@ const RUN = (() => {
   function startTimer() {
     clearInterval(tick);
     tick = setInterval(() => {
-      if (S.over) return;
+      if (S.over || paused) return;
       S.time--;
       $('timer').textContent = fmt(S.time);
       const danger = S.time <= 20;
@@ -576,8 +628,9 @@ const RUN = (() => {
 
   function timeout() {
     S.over = true; clearInterval(tick); render();
-    const where = S.inside ? 'Đèn tắt khi bạn vẫn còn kẹt trong thang.' : `Đèn tắt khi bạn vẫn đứng ở sảnh tầng ${fl(S.me)}.`;
-    fail(`Hết giờ. ${where}`);
+    const where = S.inside ? T('Đèn tắt khi bạn vẫn còn kẹt trong thang.', 'The lights went out with you still stuck in the elevator.')
+      : T(`Đèn tắt khi bạn vẫn đứng ở sảnh tầng ${fl(S.me)}.`, `The lights went out with you still in the floor ${fl(S.me)} lobby.`);
+    fail(T(`Hết giờ. ${where}`, `Time's up. ${where}`));
   }
   // thua ở thang máy: GAME OVER ngay
   function fail(why) {
@@ -587,41 +640,49 @@ const RUN = (() => {
 
   function win() {
     S.over = true;
-    setMsg('Tầng 21. Cửa mở ra sân thượng.', 'ok');
+    setMsg(T('Tầng 21. Cửa mở ra sân thượng.', 'Floor 21. The doors open onto the roof.'), 'ok');
     [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
     setTimeout(() => finish('win'), 1300);
   }
 
   function missed() {
     S.over = true;
-    setMsg('Thang đã lên tầng 21… mà không có bạn.', 'err');
+    setMsg(T('Thang đã lên tầng 21… mà không có bạn.', 'The elevator reached floor 21… without you.'), 'err');
     beep(140, 1.2, 'sawtooth', .09, -60);
-    const where = S.walking ? 'vẫn đang trên thang bộ' : `vẫn đứng ở sảnh tầng ${fl(S.me)}`;
-    setTimeout(() => fail(`Thang đã lên tới <b style="color:var(--green)">tầng 21</b> khi bạn ${where}.`), 1100);
+    const where = S.walking ? T('vẫn đang trên thang bộ', 'were still on the stairs') : T(`vẫn đứng ở sảnh tầng ${fl(S.me)}`, `were still in the floor ${fl(S.me)} lobby`);
+    setTimeout(() => fail(T(`Thang đã lên tới <b style="color:var(--green)">tầng 21</b> khi bạn ${where}.`,
+      `The elevator reached <b style="color:var(--green)">floor 21</b> while you ${where}.`)), 1100);
   }
 
   function crash(f) {
     S.over = true;
-    setMsg(`Thang lao xuống tầng ${fl(f)}…`, 'err');
+    setMsg(T(`Thang lao xuống tầng ${fl(f)}…`, `The elevator plunges to floor ${fl(f)}…`), 'err');
     beep(160, 1, 'sawtooth', .1, -140);
     $('game').classList.add('fall');
-    setTimeout(() => fail(`Thang lao xuống <b style="color:var(--red)">tầng ${fl(f)}</b> khi bạn vẫn ở bên trong.`), 1100);
+    setTimeout(() => fail(T(`Thang lao xuống <b style="color:var(--red)">tầng ${fl(f)}</b> khi bạn vẫn ở bên trong.`,
+      `The elevator plunged to <b style="color:var(--red)">floor ${fl(f)}</b> with you still inside.`)), 1100);
   }
 
   /* ---------- end ---------- */
   function ruleHTML() {
     const R = S.R, b = R.best;
-    const chips = R.seq.map((f, i) => `<span class="chip${f <= 0 ? ' neg' : ''}${f === TOP ? ' top' : ''}${i > R.lastNeg && i < R.T ? ' mine' : ''}" title="sau lượt ${i}">${fl(f)}</span>`).join('→');
+    const chips = R.seq.map((f, i) => `<span class="chip${f <= 0 ? ' neg' : ''}${f === TOP ? ' top' : ''}${i > R.lastNeg && i < R.T ? ' mine' : ''}" title="${T(`sau lượt ${i}`, `after trip ${i}`)}">${fl(f)}</span>`).join('→');
     const start = R.seq.slice(0, R.firstNeg + 1).map(fl).join(' → ');
-    const safe = R.seq.map((f, i) => ({ f, i })).filter(o => o.i > R.lastNeg && o.i < R.T).map(o => `tầng ${fl(o.f)} (sau lượt ${o.i})`).join(', ');
+    const safe = R.seq.map((f, i) => ({ f, i })).filter(o => o.i > R.lastNeg && o.i < R.T)
+      .map(o => T(`tầng ${fl(o.f)} (sau lượt ${o.i})`, `floor ${fl(o.f)} (after trip ${o.i})`)).join(', ');
     const plan = b.q === 1
-      ? `đi bộ từ tầng 1 lên tầng ${fl(b.p)}`
-      : `vào thang ở tầng 1, bước ra ở tầng ${fl(b.q)} (sau lượt ${b.j}), đi bộ ${b.p > b.q ? 'lên' : 'xuống'} tầng ${fl(b.p)}`;
-    return `<p>${R.txt.map(t => `▸ ${t}`).join('<br>')}<br>▸ Thang không bao giờ vượt quá tầng 21.</p>`
-      + `<p><b>Đường đi của thang</b> từ tầng 1 tới tầng 21 (${R.T} lượt chạy):<br>${chips}</p>`
-      + `<p><b>Nếu bước vào ngay ở tầng 1:</b> ${start}. Rơi xuống tầng âm.</p>`
-      + `<p><b>Lần ghé an toàn để bước vào</b> (viền vàng): ${safe}.</p>`
-      + `<p><b>Cách rẻ nhất (−${b.c} ngày):</b> ${plan}, rồi chờ thang tới đó sau lượt ${b.i} và đi thẳng lên tầng 21.</p>`;
+      ? T(`đi bộ từ tầng 1 lên tầng ${fl(b.p)}`, `walk from floor 1 up to floor ${fl(b.p)}`)
+      : T(`vào thang ở tầng 1, bước ra ở tầng ${fl(b.q)} (sau lượt ${b.j}), đi bộ ${b.p > b.q ? 'lên' : 'xuống'} tầng ${fl(b.p)}`,
+          `step in on floor 1, step out at floor ${fl(b.q)} (after trip ${b.j}), walk ${b.p > b.q ? 'up' : 'down'} to floor ${fl(b.p)}`);
+    return `<p>${R.txt.map(t => `▸ ${t}`).join('<br>')}<br>▸ ${T('Thang không bao giờ vượt quá tầng 21.', 'The elevator never goes above floor 21.')}</p>`
+      + T(`<p><b>Đường đi của thang</b> từ tầng 1 tới tầng 21 (${R.T} lượt chạy):<br>${chips}</p>`,
+          `<p><b>The elevator's path</b> from floor 1 to floor 21 (${R.T} trips):<br>${chips}</p>`)
+      + T(`<p><b>Nếu bước vào ngay ở tầng 1:</b> ${start}. Rơi xuống tầng âm.</p>`,
+          `<p><b>If you step in right away on floor 1:</b> ${start}. Down below floor 1.</p>`)
+      + T(`<p><b>Lần ghé an toàn để bước vào</b> (viền vàng): ${safe}.</p>`,
+          `<p><b>Safe stops to step in</b> (amber border): ${safe}.</p>`)
+      + T(`<p><b>Cách rẻ nhất (−${b.c} ngày):</b> ${plan}, rồi chờ thang tới đó sau lượt ${b.i} và đi thẳng lên tầng 21.</p>`,
+          `<p><b>Cheapest way (−${b.c} day${b.c === 1 ? '' : 's'}):</b> ${plan}, then wait for the elevator there after trip ${b.i} and ride straight to floor 21.</p>`);
   }
 
   function finish(kind, why = '') {
@@ -634,21 +695,23 @@ const RUN = (() => {
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
     $('ruleBox').innerHTML = ruleHTML();
     if (kind === 'win') {
-      $('endTitle').textContent = 'TẦNG 21';
-      $('endReason').innerHTML = `Bạn đã lên tới tầng 21 sau ${S.moves} lượt chạy. Cửa thang mở ra một hành lang tối, cuối hành lang là cánh cửa khóa.`
-        + `<br><span style="color:var(--dim)">Đi bộ ${S.walked} tầng (−${S.spent} ngày).</span>`;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endTitle').textContent = T('TẦNG 21', 'FLOOR 21');
+      $('endReason').innerHTML = T(`Bạn đã lên tới tầng 21 sau ${S.moves} lượt chạy. Cửa thang mở ra một hành lang tối, cuối hành lang là cánh cửa khóa.`,
+          `You reached floor 21 after ${S.moves} trips. The doors open onto a dark corridor. At its end stands the locked door.`)
+        + T(`<br><span style="color:var(--dim)">Đi bộ ${S.walked} tầng (−${S.spent} ngày).</span>`,
+            `<br><span style="color:var(--dim)">Walked ${S.walked} floor${S.walked === 1 ? '' : 's'} (−${S.spent} day${S.spent === 1 ? '' : 's'}).</span>`);
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'BỊ ĐẨY RA NGOÀI';
+      $('endTitle').textContent = T('BỊ ĐẨY RA NGOÀI', 'THROWN OUT');
       $('endReason').innerHTML = why;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       beep(220, .5, 'sawtooth', .07, -100);
       show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       $('game').classList.remove('fall'); $('game').classList.add('crtoff');
       setTimeout(() => show('end'), 800);
     }
@@ -661,7 +724,37 @@ const RUN = (() => {
   $('stDown').onclick = () => nudge(-1);
   $('startBtn').onclick = () => {
     beep(220, .3, 'sawtooth', .06, 300);
+    if (paused) resumeClock();
+    timers.forEach(t => clearTimeout(t.h)); timers.clear();
     reset(); show('game'); startTimer(); elevator(runId);
+  };
+  let pzTick;
+  $('pauseBtn').onclick = () => {
+    if (!S || S.over || paused || S.pauses >= PAUSE_MAX || S.days < PAUSE_MIN_DAYS) return;
+    S.pauses++; pauseClock();
+    const left = PAUSE_MAX - S.pauses;
+    $('pauseLeft').textContent = T(`Thang máy và đồng hồ đang đứng yên. Hết ${PAUSE_SEC} giây sẽ tự chạy tiếp. Còn ${left} lần tạm dừng.`,
+                                   `The elevator and the clock are frozen. They resume by themselves after ${PAUSE_SEC} seconds. ${left} pause${left === 1 ? '' : 's'} left.`);
+    // đếm ngược thời gian tạm dừng (đồng hồ thật), hết giờ thì tự tiếp tục
+    let n = PAUSE_SEC;
+    const pc = $('pauseCount'); pc.textContent = n; pc.classList.remove('low');
+    clearInterval(pzTick);
+    pzTick = setInterval(() => {
+      n--; pc.textContent = Math.max(0, n); pc.classList.toggle('low', n <= 5);
+      if (n <= 5 && n > 0) beep(660, .05, 'square', .03);
+      if (n <= 0) $('resumeBtn').onclick();
+    }, 1000);
+    $('pauseVeil').classList.add('on');
+    beep(300, .2, 'sine', .05, -100);
+    render();
+  };
+  $('resumeBtn').onclick = () => {
+    if (!paused) return;
+    clearInterval(pzTick);
+    $('pauseVeil').classList.remove('on');
+    resumeClock();
+    beep(300, .2, 'sine', .05, 150);
+    render();
   };
 
   /* ---------- nối với Vong Giới ---------- */
@@ -674,7 +767,7 @@ const RUN = (() => {
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
   // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
   $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
-  if (DAYS_START < MIN_DAYS) { $('startBtn').disabled = true; $('startBtn').textContent = `CẦN ÍT NHẤT ${MIN_DAYS} NGÀY`; }
+  if (DAYS_START < MIN_DAYS) { $('startBtn').disabled = true; $('startBtn').textContent = T(`CẦN ÍT NHẤT ${MIN_DAYS} NGÀY`, `NEED ${MIN_DAYS}+ DAYS`); }
 
   if (new URLSearchParams(location.search).has('selftest')) window.__lift = { get S() { return S; }, makeRule, analyse, FAMILIES };
   typeAnnounce();

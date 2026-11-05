@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới · Hành Lang Đèn</title>
+<title data-en="Vong Giới · Hall of Lights">Vong Giới · Hành Lang Đèn</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -147,67 +147,68 @@ details p{margin-top:8px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ● TRÍ NHỚ · ★★</div>
-  <div class="title">HÀNH LANG ĐÈN</div>
+  <div class="tag mono" data-en="GAME · ● MEMORY · ★★">TRÒ CHƠI · ● TRÍ NHỚ · ★★</div>
+  <div class="title" data-en="HALL OF LIGHTS">HÀNH LANG ĐÈN</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Hành lang có <b>9 cánh cửa</b>. Đèn trên các cửa sẽ lần lượt sáng lên theo một thứ tự.</li>
-    <li>Chạm lại các cửa <b>đúng thứ tự</b> đó.</li>
-    <li>Có <b>6 vòng</b>. Mỗi vòng chuỗi đèn dài thêm 1 cửa (từ 3 đến 8), và đèn chớp ngày càng nhanh.</li>
-    <li>Từ <b style="color:var(--red)">vòng 5</b>: phải chạm theo thứ tự <b style="color:var(--red)">NGƯỢC LẠI</b>.</li>
-    <li>Đồng hồ <b>60 giây</b> chỉ chạy khi đến lượt bạn. Có thể <b>đổi 1 ngày sống lấy thêm 30 giây</b>.</li>
-    <li>Hết giờ: bị <b style="color:var(--amber)">phạt −1 ngày</b> (trò chơi dưới ★★★ không loại người chơi vì hết giờ).</li>
-    <li>Chạm sai cửa, hoặc ngày sống về 0: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li data-en="The hall has <b>9 doors</b>. The lamps above them light up one by one, in a sequence.">Hành lang có <b>9 cánh cửa</b>. Đèn trên các cửa sẽ lần lượt sáng lên theo một thứ tự.</li>
+    <li data-en="Tap the doors back in <b>that exact order</b>.">Chạm lại các cửa <b>đúng thứ tự</b> đó.</li>
+    <li data-en="There are <b>6 rounds</b>. Each round the sequence grows by 1 door (from 3 to 8), and the lamps flash faster and faster.">Có <b>6 vòng</b>. Mỗi vòng chuỗi đèn dài thêm 1 cửa (từ 3 đến 8), và đèn chớp ngày càng nhanh.</li>
+    <li data-en='From <b style="color:var(--red)">round 5</b>: tap in <b style="color:var(--red)">REVERSE</b> order.'>Từ <b style="color:var(--red)">vòng 5</b>: phải chạm theo thứ tự <b style="color:var(--red)">NGƯỢC LẠI</b>.</li>
+    <li data-en="The <b>60-second</b> clock only runs on your turn. You may <b>trade 1 day of life for 30 more seconds</b>.">Đồng hồ <b>60 giây</b> chỉ chạy khi đến lượt bạn. Có thể <b>đổi 1 ngày sống lấy thêm 30 giây</b>.</li>
+    <li data-en='Time runs out: <b style="color:var(--amber)">−1 day penalty</b> (games below ★★★ do not eliminate players for timing out).'>Hết giờ: bị <b style="color:var(--amber)">phạt −1 ngày</b> (trò chơi dưới ★★★ không loại người chơi vì hết giờ).</li>
+    <li data-en='Wrong door, or days of life hit 0: <b style="color:var(--red)">GAME OVER</b>.'>Chạm sai cửa, hoặc ngày sống về 0: <b style="color:var(--red)">GAME OVER</b>.</li>
   </ul>
   <div class="stakes mono">
-    <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+3 ngày</b></span>
+    <span data-en='Days left <b id="stDays">3</b>'>Ngày còn lại <b id="stDays">3</b></span>
+    <span data-en="Entry fee <b>−1 day</b>">Phí vào cửa <b>−1 ngày</b></span>
+    <span data-en="Reward <b>+3 days</b>">Phần thưởng <b>+3 ngày</b></span>
   </div>
-  <div class="warn">Lưu ý: hành lang chỉ cho xem một lần. Không có lần chiếu lại.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="warn" data-en="Warning: the hall shows you once. There are no replays.">Lưu ý: hành lang chỉ cho xem một lần. Không có lần chiếu lại.</div>
+  <div class="introBtns"><button class="btn" id="homeBtn" data-en="◂ CITY">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn" data-en="ENTER ▸">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
 <section id="game" class="screen">
   <div class="hud">
     <div>
-      <div class="name mono">● HÀNH LANG ĐÈN</div>
-      <div class="days mono" id="daysHud">NGÀY CÒN LẠI: 2</div>
+      <div class="name mono" data-en="● HALL OF LIGHTS">● HÀNH LANG ĐÈN</div>
+      <div class="days mono" id="daysHud" data-en="DAYS LEFT: 2">NGÀY CÒN LẠI: 2</div>
     </div>
     <div class="timer mono paused" id="timer">01:00</div>
   </div>
   <div class="counters mono">
-    <span>VÒNG: <b id="roundHud">1/6</b></span>
-    <span>CHUỖI: <b id="lenHud">3</b></span>
-    <button class="ext mono" id="extBtn">+30s · −1 NGÀY</button>
+    <span data-en='ROUND: <b id="roundHud">1/6</b>'>VÒNG: <b id="roundHud">1/6</b></span>
+    <span data-en='SEQUENCE: <b id="lenHud">3</b>'>CHUỖI: <b id="lenHud">3</b></span>
+    <button class="ext mono" id="extBtn" data-en="+30s · −1 DAY">+30s · −1 NGÀY</button>
   </div>
 
-  <div class="msg" id="msg">Chuẩn bị…</div>
+  <div class="msg" id="msg" data-en="Get ready…">Chuẩn bị…</div>
   <div class="prog" id="prog"></div>
   <div class="hall locked" id="hall"></div>
 
   <div class="log mono" id="log"></div>
 </section>
 
-<div class="banner" id="banner"><span>ĐẢO NGƯỢC<small>Từ giờ, chạm theo thứ tự ngược lại</small></span></div>
+<div class="banner" id="banner"><span data-en="REVERSED<small>From now on, tap in reverse order</small>">ĐẢO NGƯỢC<small>Từ giờ, chạm theo thứ tự ngược lại</small></span></div>
 
 <!-- ============ END ============ -->
 <section id="end" class="screen">
-  <div class="tag mono">TRÒ CHƠI KẾT THÚC</div>
+  <div class="tag mono" data-en="GAME FINISHED">TRÒ CHƠI KẾT THÚC</div>
   <div class="big" id="endTitle"></div>
   <div class="reason" id="endReason"></div>
   <div class="daysBox mono" id="endDays"></div>
   <details>
-    <summary>MẸO GHI NHỚ</summary>
-    <p><b>Gom nhóm:</b> đừng nhớ từng cửa riêng lẻ. Chia chuỗi thành các cụm 3–4 cửa, ví dụ "7-2-9 · 4-1-6".</p>
-    <p><b>Nhớ theo hình:</b> 9 cửa giống bàn phím số điện thoại. Hãy hình dung đường đèn vẽ ra trên lưới (đi chéo, đi xuống, quay về...).</p>
-    <p><b>Đọc thầm:</b> nhẩm số cửa thành tiếng trong đầu khi đèn sáng. Trí nhớ âm thanh thường giữ lâu hơn hình ảnh.</p>
-    <p><b>Vòng đảo ngược:</b> mỗi vòng chỉ thêm 1 cửa vào cuối chuỗi cũ, nên bạn chỉ cần nhớ cửa mới rồi chạm nó <b>đầu tiên</b>, sau đó lần ngược phần còn lại.</p>
+    <summary data-en="MEMORY TIPS">MẸO GHI NHỚ</summary>
+    <p data-en='<b>Chunking:</b> do not memorize doors one by one. Break the sequence into clusters of 3–4 doors, e.g. "7-2-9 · 4-1-6".'><b>Gom nhóm:</b> đừng nhớ từng cửa riêng lẻ. Chia chuỗi thành các cụm 3–4 cửa, ví dụ "7-2-9 · 4-1-6".</p>
+    <p data-en="<b>Remember the shape:</b> the 9 doors are laid out like a phone keypad. Picture the path the lights draw on the grid (diagonal, down, back...)."><b>Nhớ theo hình:</b> 9 cửa giống bàn phím số điện thoại. Hãy hình dung đường đèn vẽ ra trên lưới (đi chéo, đi xuống, quay về...).</p>
+    <p data-en="<b>Say it silently:</b> recite the door numbers in your head as the lights flash. Sound memory often lasts longer than visual memory."><b>Đọc thầm:</b> nhẩm số cửa thành tiếng trong đầu khi đèn sáng. Trí nhớ âm thanh thường giữ lâu hơn hình ảnh.</p>
+    <p data-en="<b>Reverse rounds:</b> each round only adds 1 door to the end of the old sequence, so just remember the new door, tap it <b>first</b>, then trace the rest backwards."><b>Vòng đảo ngược:</b> mỗi vòng chỉ thêm 1 cửa vào cuối chuỗi cũ, nên bạn chỉ cần nhớ cửa mới rồi chạm nó <b>đầu tiên</b>, sau đó lần ngược phần còn lại.</p>
   </details>
-  <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn red" id="againBtn" data-en="BACK TO THE CITY ▸">VỀ THÀNH PHỐ ▸</button>
 </section>
 
+<script src="settings.js"></script>
 <script>
 /* ---------- lượt chơi chung với Vong Giới ---------- */
 const GAME_ID = 'den';
@@ -242,6 +243,7 @@ const RUN = (() => {
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .08, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -256,7 +258,7 @@ const RUN = (() => {
   const doorTone = (i, dur) => beep(NOTES[i], dur / 1000, 'triangle', .09);
 
   /* ---------- intro typewriter ---------- */
-  const ANNOUNCE = '> Trò chơi tiếp theo. Hãy nhìn thật kỹ, hành lang chỉ cho xem một lần.';
+  const ANNOUNCE = T('> Trò chơi tiếp theo. Hãy nhìn thật kỹ, hành lang chỉ cho xem một lần.', '> Next game. Watch closely. The hall shows you only once.');
   let typeTimer;
   function typeAnnounce() {
     const el = $('announce'); el.textContent = ''; let i = 0;
@@ -295,7 +297,7 @@ const RUN = (() => {
   const expected = () => isReverse() ? S.seq[S.seq.length - 1 - S.idx] : S.seq[S.idx];
 
   function render() {
-    $('daysHud').textContent = 'NGÀY CÒN LẠI: ' + S.days;
+    $('daysHud').textContent = T('NGÀY CÒN LẠI: ', 'DAYS LEFT: ') + S.days;
     $('roundHud').textContent = `${Math.max(1, S.round)}/${ROUNDS}`;
     $('lenHud').textContent = S.seq.length || START_LEN;
     $('extBtn').disabled = S.over || S.days - EXT_COST < 1;
@@ -332,7 +334,7 @@ const RUN = (() => {
       await wait(1900); if (my !== runId) return;
     }
 
-    setMsg(`Vòng ${S.round}: hãy quan sát…`, 'watch');
+    setMsg(T(`Vòng ${S.round}: hãy quan sát…`, `Round ${S.round}: watch…`), 'watch');
     await wait(700); if (my !== runId) return;
 
     const [on, off] = SPEED[S.round - 1];
@@ -344,7 +346,7 @@ const RUN = (() => {
     }
 
     S.phase = 'input';
-    setMsg(isReverse() ? 'Đến lượt bạn. Chạm theo thứ tự NGƯỢC LẠI.' : 'Đến lượt bạn. Chạm lại đúng thứ tự.',
+    setMsg(isReverse() ? T('Đến lượt bạn. Chạm theo thứ tự NGƯỢC LẠI.', 'Your turn. Tap in REVERSE order.') : T('Đến lượt bạn. Chạm lại đúng thứ tự.', 'Your turn. Tap them back in order.'),
            isReverse() ? 'err' : '');
     render();
   }
@@ -367,11 +369,12 @@ const RUN = (() => {
     const my = runId;
     S.phase = 'done';
     const line = document.createElement('div');
-    line.innerHTML = `VÒNG ${S.round}: ${S.seq.length} cửa${isReverse() ? ' (ngược)' : ''} → <b>Vượt qua</b>`;
+    line.innerHTML = T(`VÒNG ${S.round}: ${S.seq.length} cửa${isReverse() ? ' (ngược)' : ''} → <b>Vượt qua</b>`,
+                       `ROUND ${S.round}: ${S.seq.length} doors${isReverse() ? ' (reversed)' : ''} → <b>Cleared</b>`);
     $('log').appendChild(line);
     render();
     if (S.round === ROUNDS) { await wait(400); if (my === runId) finish('win'); return; }
-    setMsg('Chính xác.', 'ok');
+    setMsg(T('Chính xác.', 'Correct.'), 'ok');
     beep(660, .1, 'triangle', .06); setTimeout(() => beep(880, .14, 'triangle', .06), 90);
     await wait(1000); if (my !== runId) return;
     nextRound();
@@ -383,13 +386,15 @@ const RUN = (() => {
     doors[i].classList.add('bad');
     doors[right].classList.add('should');
     beep(90, .5, 'square', .08, -30);
-    setMsg(`Sai cửa. Cửa đúng là số ${right + 1}.`, 'err');
+    setMsg(T(`Sai cửa. Cửa đúng là số ${right + 1}.`, `Wrong door. The right one was ${right + 1}.`), 'err');
     render();
     const order = (isReverse() ? [...S.seq].reverse() : S.seq).map(x => x + 1).join(' → ');
     S.days = 0;
     setTimeout(() => finish('lose',
-      `Bạn chạm cửa số <b>${i + 1}</b>, nhưng cửa đúng là số <b>${right + 1}</b>.<br>`
-      + `<span style="color:var(--dim)">Vòng ${S.round}, thứ tự cần chạm: ${order}</span>`), 1500);
+      T(`Bạn chạm cửa số <b>${i + 1}</b>, nhưng cửa đúng là số <b>${right + 1}</b>.<br>`,
+        `You tapped door <b>${i + 1}</b>, but the right door was <b>${right + 1}</b>.<br>`)
+      + T(`<span style="color:var(--dim)">Vòng ${S.round}, thứ tự cần chạm: ${order}</span>`,
+          `<span style="color:var(--dim)">Round ${S.round}, required order: ${order}</span>`)), 1500);
   }
 
   /* ---------- gia hạn ---------- */
@@ -399,7 +404,7 @@ const RUN = (() => {
     $('timer').textContent = fmt(S.time);
     if (S.time > 15) $('game').classList.remove('danger');
     const line = document.createElement('div');
-    line.innerHTML = `GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`;
+    line.innerHTML = T(`GIA HẠN: <b>+${EXT_SEC} giây</b> · −${EXT_COST} ngày`, `EXTENSION: <b>+${EXT_SEC} sec</b> · −${EXT_COST} day${EXT_COST === 1 ? '' : 's'}`);
     $('log').appendChild(line);
     [700, 500].forEach((f, i) => setTimeout(() => beep(f, .12, 'triangle', .07), i * 90));
     render();
@@ -420,12 +425,14 @@ const RUN = (() => {
 
   function timeout() {
     S.over = true; S.phase = 'done'; clearInterval(tick); render();
-    const where = `Hết giờ ở vòng ${S.round}/${ROUNDS}.`;
+    const where = T(`Hết giờ ở vòng ${S.round}/${ROUNDS}.`, `Time ran out in round ${S.round}/${ROUNDS}.`);
     if (STARS <= SOFT_MAX_STARS) {
       S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
       if (S.days > 0)
-        return finish('penalty', `${where}<br>Trò chơi ★★ không loại bạn, nhưng bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
-      return finish('lose', `${where}<br>Bạn bị phạt −${TIMEOUT_PENALTY} ngày và không còn ngày sống nào.`);
+        return finish('penalty', T(`${where}<br>Trò chơi ★★ không loại bạn, nhưng bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`,
+                                   `${where}<br>A ★★ game does not eliminate you, but you are fined <b>−${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'}</b>.`));
+      return finish('lose', T(`${where}<br>Bạn bị phạt −${TIMEOUT_PENALTY} ngày và không còn ngày sống nào.`,
+                              `${where}<br>You are fined −${TIMEOUT_PENALTY} day${TIMEOUT_PENALTY === 1 ? '' : 's'} and have no days of life left.`));
     }
     S.days = 0;
     finish('lose', where);
@@ -439,23 +446,24 @@ const RUN = (() => {
     const end = $('end');
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Bạn đã nhớ đúng cả ${ROUNDS} vòng, chuỗi dài nhất ${S.seq.length} cửa.<br>Thời gian còn dư: ${S.time} giây.`
-        + (S.exts ? `<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>` : '');
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
+      $('endTitle').textContent = T('SỐNG SÓT', 'SURVIVED');
+      $('endReason').innerHTML = T(`Bạn đã nhớ đúng cả ${ROUNDS} vòng, chuỗi dài nhất ${S.seq.length} cửa.<br>Thời gian còn dư: ${S.time} giây.`,
+                                   `You remembered all ${ROUNDS} rounds, longest sequence ${S.seq.length} doors.<br>Time to spare: ${S.time} sec.`)
+        + (S.exts ? T(`<br><span style="color:var(--dim)">Đã gia hạn ${S.exts} lần.</span>`, `<br><span style="color:var(--dim)">Extended ${S.exts} time${S.exts === 1 ? '' : 's'}.</span>`) : '');
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`, `DAYS LEFT: ${S.days} + ${REWARD} = ${S.days + REWARD}`);
       S.days += REWARD;
       [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .08), i * 120));
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'THẤT BẠI';
+      $('endTitle').textContent = T('THẤT BẠI', 'FAILED');
       $('endReason').innerHTML = why;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
+      $('endDays').textContent = T(`NGÀY CÒN LẠI: ${S.days}`, `DAYS LEFT: ${S.days}`);
       beep(220, .5, 'sawtooth', .07, -100);
       show('end');
     } else {
       $('endTitle').textContent = 'GAME OVER';
       $('endReason').innerHTML = why;
-      $('endDays').textContent = 'NGÀY CÒN LẠI: 0';
+      $('endDays').textContent = T('NGÀY CÒN LẠI: 0', 'DAYS LEFT: 0');
       beep(160, .9, 'sawtooth', .1, -140);
       $('game').classList.add('crtoff');
       setTimeout(() => show('end'), 800);
@@ -466,7 +474,7 @@ const RUN = (() => {
   $('startBtn').onclick = () => {
     beep(220, .3, 'sawtooth', .06, 300);
     reset(); show('game'); startTimer();
-    setMsg('Chuẩn bị…');
+    setMsg(T('Chuẩn bị…', 'Get ready…'));
     const my = runId;
     setTimeout(() => { if (my === runId) nextRound(); }, 900);
   };
@@ -480,7 +488,7 @@ const RUN = (() => {
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
   // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
   $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));
-  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = 'KHÔNG ĐỦ NGÀY'; }
+  if (DAYS_START <= FEE) { $('startBtn').disabled = true; $('startBtn').textContent = T('KHÔNG ĐỦ NGÀY', 'NOT ENOUGH DAYS'); }
 
   typeAnnounce();
 })();

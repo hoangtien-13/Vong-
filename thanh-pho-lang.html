@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Vong Giới</title>
+<title data-en="Vong Giới">Vong Giới</title>
 <meta name="theme-color" content="#07080b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -113,6 +113,32 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
 .adbtn:hover{background:rgba(77,255,166,.1)}
 .btn.green{color:var(--green);border-color:var(--green);box-shadow:0 0 12px rgba(77,255,166,.25),inset 0 0 12px rgba(77,255,166,.08)}
 .btn.green:hover{background:rgba(77,255,166,.1)}
+/* cài đặt */
+.gear{margin-top:12px;font-family:'Chakra Petch',monospace;font-size:13px;letter-spacing:.12em;color:var(--dim);background:transparent;
+  border:1px solid var(--line);padding:6px 10px;cursor:pointer}
+.gear:hover{color:var(--cyan);border-color:var(--cyan)}
+.opt{display:flex;flex-direction:column;gap:8px}
+.olbl{font-size:13px;letter-spacing:.2em;color:var(--dim)}
+.seg{display:flex;border:1px solid var(--line)}
+.seg button{flex:1;font-family:'Chakra Petch',monospace;font-size:15px;letter-spacing:.1em;color:var(--dim);background:transparent;border:none;padding:12px 8px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{color:var(--bg);background:var(--cyan);box-shadow:0 0 14px rgba(61,225,255,.4)}
+#setVeil .tag{color:var(--cyan)}
+/* phòng hình phạt (hồi sinh bằng quảng cáo) */
+.penHint{border:1px dashed var(--red);padding:12px 14px;font-size:15px;line-height:1.6;color:#e4e8ef}
+.penHint b{color:var(--red)}
+.pen .sheet{border-color:var(--red);background:repeating-linear-gradient(-45deg,#140609 0 14px,#0d1016 14px 28px);box-shadow:0 0 50px rgba(255,46,77,.25)}
+.pen .tag{animation:flick 2.5s infinite}
+.pen h2{color:var(--red);text-shadow:0 0 18px rgba(255,46,77,.6)}
+.pen .calc b{color:var(--amber);font-weight:400}
+/* cảnh báo khi mở game */
+.warn{position:fixed;inset:0;z-index:60;background:#030406;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:24px;text-align:center}
+.warn.on{display:flex}
+.warn .wtag{font-size:13px;letter-spacing:.35em;color:var(--red);animation:flick 2.5s infinite}
+.warn .wtxt{max-width:520px;font-size:clamp(20px,5.4vw,28px);line-height:1.6;color:#fff;font-weight:600;min-height:4.8em}
+.warn .wtxt b{color:var(--red);text-shadow:0 0 16px rgba(255,46,77,.6)}
+.warn .btn{opacity:0;transition:opacity .6s;pointer-events:none}
+.warn .btn.show{opacity:1;pointer-events:auto}
 /* phông chữ: Chakra Petch cho tiêu đề, nhãn, số; Be Vietnam Pro cho đoạn văn */
 .title,.big,.bname,.sheet h2,#ending .big{font-family:'Chakra Petch',sans-serif;font-weight:700}
 .timer,.score,.slot,.clock .val,.try .code{font-variant-numeric:tabular-nums}
@@ -123,26 +149,27 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
   <header>
     <div>
       <div class="title">VONG GIỚI</div>
-      <div class="sub mono">CHỌN MỘT TÒA NHÀ ĐỂ BƯỚC VÀO</div>
+      <div class="sub mono" data-en="CHOOSE A BUILDING TO ENTER">CHỌN MỘT TÒA NHÀ ĐỂ BƯỚC VÀO</div>
+      <button class="gear" id="setBtn" data-en="⚙ SETTINGS">⚙ CÀI ĐẶT</button>
     </div>
     <div class="clock mono" id="clock">
-      <div class="lbl">THỜI GIAN CÒN LẠI</div>
-      <div class="val"><span id="days">3</span><small>NGÀY</small></div>
+      <div class="lbl" data-en="TIME REMAINING">THỜI GIAN CÒN LẠI</div>
+      <div class="val"><span id="days">3</span><small data-en="DAYS">NGÀY</small></div>
     </div>
   </header>
 
   <div class="announce mono" id="announce"></div>
   <div class="progress mono">
-    <span>ĐÃ VƯỢT QUA: <b id="cleared">0/5</b></span>
-    <span>PHÍ VÀO MỖI TÒA NHÀ: 1 NGÀY</span>
+    <span data-en='CLEARED: <b id="cleared">0/5</b>'>ĐÃ VƯỢT QUA: <b id="cleared">0/5</b></span>
+    <span data-en="ENTRY FEE PER BUILDING: 1 DAY">PHÍ VÀO MỖI TÒA NHÀ: 1 NGÀY</span>
     <button class="adbtn" id="adPlus" style="display:none"></button>
   </div>
 
   <div class="city" id="city"></div>
 
   <div class="foot">
-    <span>Thắng: được cộng ngày sống. Thua: bị loại. Hết ngày: bị loại.</span>
-    <button class="link" id="resetLink">CHƠI LẠI TỪ ĐẦU</button>
+    <span data-en="Win: gain days. Lose: you are out. Run out of days: you are out.">Thắng: được cộng ngày sống. Thua: bị loại. Hết ngày: bị loại.</span>
+    <button class="link" id="resetLink" data-en="START OVER">CHƠI LẠI TỪ ĐẦU</button>
   </div>
 </main>
 
@@ -154,8 +181,8 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
     <p id="eDesc"></p>
     <div class="calc mono" id="eCalc"></div>
     <div class="row">
-      <button class="btn" id="eCancel">◂ QUAY LẠI</button>
-      <button class="btn red" id="eGo">BƯỚC VÀO ▸</button>
+      <button class="btn" id="eCancel" data-en="◂ BACK">◂ QUAY LẠI</button>
+      <button class="btn red" id="eGo" data-en="ENTER ▸">BƯỚC VÀO ▸</button>
     </div>
   </div>
 </div>
@@ -166,14 +193,53 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
     <div class="tag mono">VONG GIỚI</div>
     <h2 id="oTitle">GAME OVER</h2>
     <p id="oText"></p>
-    <button class="btn green" id="oRevive" style="display:none">📺 XEM QUẢNG CÁO · HỒI SINH VỚI 3 NGÀY</button>
+    <div id="oPenalty" style="display:none;flex-direction:column;gap:12px">
+      <div class="penHint" data-en="Don't want to start over? Then you must enter the <b>PENALTY ROOM</b>.">Không muốn chơi lại từ đầu? Bạn phải vào <b>PHÒNG HÌNH PHẠT</b>.</div>
+      <button class="btn red" id="oPenGo" data-en="ENTER THE PENALTY ROOM ▸">VÀO PHÒNG HÌNH PHẠT ▸</button>
+    </div>
     <div class="row">
-      <button class="btn" id="oCancel" style="display:none">◂ QUAY LẠI</button>
-      <button class="btn red" id="oReset">CHƠI LẠI TỪ ĐẦU</button>
+      <button class="btn" id="oCancel" style="display:none" data-en="◂ BACK">◂ QUAY LẠI</button>
+      <button class="btn red" id="oReset" data-en="START OVER">CHƠI LẠI TỪ ĐẦU</button>
     </div>
   </div>
 </div>
 
+<!-- phòng hình phạt: xem video để quay về lúc trước khi bước vào trò chơi vừa thua -->
+<div class="veil pen" id="penVeil">
+  <div class="sheet">
+    <div class="tag mono" data-en="⛓ PENALTY ROOM">⛓ PHÒNG HÌNH PHẠT</div>
+    <h2 data-en="THE PRICE OF A SECOND LIFE">CÁI GIÁ CỦA MẠNG SỐNG THỨ HAI</h2>
+    <p data-en="The room has no windows, only a screen. Sit still and watch the video <b>to the very end</b>. Look away, and you stay here forever.">Căn phòng không có cửa sổ, chỉ có một màn hình. Ngồi yên và xem hết đoạn video <b>đến giây cuối cùng</b>. Rời mắt khỏi màn hình, bạn sẽ ở lại đây mãi mãi.</p>
+    <div class="calc mono" id="penCalc"></div>
+    <button class="btn green" id="penWatch" data-en="📺 WATCH THE VIDEO">📺 XEM VIDEO</button>
+    <button class="btn" id="penBack" data-en="◂ LEAVE">◂ RỜI ĐI</button>
+  </div>
+</div>
+
+<!-- cảnh báo khi mới vào game -->
+<div class="warn" id="warn">
+  <div class="wtag mono" data-en="⚠ WARNING">⚠ CẢNH BÁO</div>
+  <div class="wtxt" id="warnTxt"></div>
+  <button class="btn red" id="warnOk" data-en="I UNDERSTAND ▸">TÔI ĐÃ HIỂU ▸</button>
+</div>
+
+<!-- cài đặt: ngôn ngữ, âm thanh -->
+<div class="veil" id="setVeil">
+  <div class="sheet">
+    <div class="tag mono" data-en="⚙ SETTINGS">⚙ CÀI ĐẶT</div>
+    <div class="opt">
+      <div class="olbl mono" data-en="LANGUAGE">NGÔN NGỮ</div>
+      <div class="seg"><button data-lang="vi">TIẾNG VIỆT</button><button data-lang="en">ENGLISH</button></div>
+    </div>
+    <div class="opt">
+      <div class="olbl mono" data-en="SOUND">ÂM THANH</div>
+      <div class="seg"><button data-snd="1" data-en="ON">BẬT</button><button data-snd="0" data-en="OFF">TẮT</button></div>
+    </div>
+    <div class="row"><button class="btn" id="setClose" data-en="CLOSE">ĐÓNG</button></div>
+  </div>
+</div>
+
+<script src="settings.js"></script>
 <script src="ads.js"></script>
 <script>
 /* ---------- lượt chơi chung (dùng chung với các trò chơi) ---------- */
@@ -193,18 +259,18 @@ const RUN = (() => {
 (() => {
   const FEE = 1, LIFT_MIN = 2;   // thang máy trong tháp: cần ít nhất 2 ngày (đi thang bộ tốn ngày)
   const BUILDINGS = [
-    { id: 'can',  sym: '◆', type: 'TRÍ TUỆ', name: 'PHÒNG CÂN',         stars: 2, reward: 3, file: 'phong-can.html',       c: 'var(--cyan)',  h: 150,
-      desc: '9 quả cầu, một quả nặng hơn. 2 lần cân, 1 lần đoán.' },
-    { id: 'den',  sym: '●', type: 'TRÍ NHỚ', name: 'HÀNH LANG ĐÈN',     stars: 2, reward: 3, file: 'hanh-lang-den.html',   c: 'var(--amber)', h: 190,
-      desc: 'Ghi nhớ thứ tự đèn sáng trên 9 cánh cửa. Từ vòng 5, mọi thứ đảo ngược.' },
-    { id: 'nuoc', sym: '▲', type: 'ÁP LỰC',  name: 'PHÒNG NGẬP NƯỚC',   stars: 3, reward: 5, file: 'phong-ngap-nuoc.html', c: 'var(--red)',   h: 170,
-      desc: 'Xoay ống nối van với cống trước khi nước ngập tới trần. 3 căn phòng.' },
-    { id: 'cua',  sym: '◆', type: 'TRÍ TUỆ', name: 'BỐN CÁNH CỬA',      stars: 4, reward: 7, file: 'bon-canh-cua.html', c: 'var(--cyan)', h: 210,
-      desc: 'Bốn người gác, một vài kẻ nói dối. Chỉ một cửa an toàn.' },
-    { id: 'tin',  sym: '■', type: 'LÒNG TIN', name: 'VÁN BÀI LÒNG TIN', stars: 5, reward: 9, file: 'van-bai-long-tin.html', c: 'var(--green)', h: 230,
-      desc: 'Hợp tác hay phản bội? Đọc tâm lý ba người chơi còn lại.' },
-    { id: 'thap', sym: '✦', type: '???',     name: 'THÁP TRUNG TÂM',    stars: 0, reward: 0, file: 'thap-trung-tam.html', c: 'var(--violet)', h: 270, tower: true,
-      desc: 'Chỉ mở khi vượt qua cả 5 trò chơi.' },
+    { id: 'can',  sym: '◆', type: T('TRÍ TUỆ', 'INTELLECT'), name: T('PHÒNG CÂN', 'THE SCALE ROOM'), stars: 2, reward: 3, file: 'phong-can.html',       c: 'var(--cyan)',  h: 150,
+      desc: T('9 quả cầu, một quả nặng hơn. 2 lần cân, 1 lần đoán.', '9 orbs, one is heavier. 2 weighings, 1 guess.') },
+    { id: 'den',  sym: '●', type: T('TRÍ NHỚ', 'MEMORY'), name: T('HÀNH LANG ĐÈN', 'HALL OF LIGHTS'), stars: 2, reward: 3, file: 'hanh-lang-den.html',   c: 'var(--amber)', h: 190,
+      desc: T('Ghi nhớ thứ tự đèn sáng trên 9 cánh cửa. Từ vòng 5, mọi thứ đảo ngược.', 'Memorize the order the lights flash over 9 doors. From round 5, everything is reversed.') },
+    { id: 'nuoc', sym: '▲', type: T('ÁP LỰC', 'PRESSURE'), name: T('PHÒNG NGẬP NƯỚC', 'THE FLOODED ROOM'), stars: 3, reward: 5, file: 'phong-ngap-nuoc.html', c: 'var(--red)',   h: 170,
+      desc: T('Xoay ống nối van với cống trước khi nước ngập tới trần. 3 căn phòng.', 'Rotate the pipes to link the valve to the drain before the water hits the ceiling. 3 rooms.') },
+    { id: 'cua',  sym: '◆', type: T('TRÍ TUỆ', 'INTELLECT'), name: T('BỐN CÁNH CỬA', 'FOUR DOORS'), stars: 4, reward: 7, file: 'bon-canh-cua.html', c: 'var(--cyan)', h: 210,
+      desc: T('Bốn người gác, một vài kẻ nói dối. Chỉ một cửa an toàn.', 'Four guards, some of them liars. Only one door is safe.') },
+    { id: 'tin',  sym: '■', type: T('LÒNG TIN', 'TRUST'), name: T('VÁN BÀI LÒNG TIN', 'THE TRUST GAME'), stars: 5, reward: 9, file: 'van-bai-long-tin.html', c: 'var(--green)', h: 230,
+      desc: T('Hợp tác hay phản bội? Đọc tâm lý ba người chơi còn lại.', 'Cooperate or betray? Read the minds of the other three players.') },
+    { id: 'thap', sym: '✦', type: '???', name: T('THÁP TRUNG TÂM', 'CENTRAL TOWER'), stars: 0, reward: 0, file: 'thap-trung-tam.html', c: 'var(--violet)', h: 270, tower: true,
+      desc: T('Chỉ mở khi vượt qua cả 5 trò chơi.', 'Opens only after all 5 games are cleared.') },
   ];
   const GAMES = BUILDINGS.filter(b => !b.tower);
   const $ = id => document.getElementById(id);
@@ -213,11 +279,20 @@ const RUN = (() => {
   const AD_KEY = 'vong-gioi-ads', AD_PLUS_MAX = 3;
   const adGet = () => { try { return Object.assign({ plus: 0, revive: 0 }, JSON.parse(localStorage.getItem(AD_KEY))); } catch (e) { return { plus: 0, revive: 0 }; } };
   const adSet = o => { try { localStorage.setItem(AD_KEY, JSON.stringify(Object.assign(adGet(), o))); } catch (e) {} };
-  const adClear = () => { try { localStorage.removeItem(AD_KEY); } catch (e) {} };
+  const adClear = () => { try { localStorage.removeItem(AD_KEY); localStorage.removeItem(SNAP_KEY); } catch (e) {} };
+  // thống kê cả hành trình (tính từ lúc bắt đầu cho tới khi phá đảo, kể cả các lần chơi lại từ đầu)
+  const STAT_KEY = 'vong-gioi-stats';
+  const statGet = () => { try { return Object.assign({ over: 0, revive: 0, inOver: false, finished: false }, JSON.parse(localStorage.getItem(STAT_KEY))); } catch (e) { return { over: 0, revive: 0, inOver: false, finished: false }; } };
+  const statSet = o => { try { localStorage.setItem(STAT_KEY, JSON.stringify(Object.assign(statGet(), o))); } catch (e) {} };
+  // trạng thái ngay trước khi bước vào trò chơi gần nhất (để hồi sinh quay về đúng lúc đó)
+  const SNAP_KEY = 'vong-gioi-snap';
+  const snapGet = () => { try { const o = JSON.parse(localStorage.getItem(SNAP_KEY)); return o && Number.isFinite(o.days) && Array.isArray(o.done) ? o : null; } catch (e) { return null; } };
+  const snapSave = id => { try { const r = RUN.get(); localStorage.setItem(SNAP_KEY, JSON.stringify({ days: r.days, done: r.done, id })); } catch (e) {} };
 
   /* ---------- audio ---------- */
   let ac = null;
   function beep(freq, dur = .12, type = 'sine', vol = .06, slide = 0) {
+    if (window.SETTINGS && !SETTINGS.sound) return;   // âm thanh đã tắt trong Cài đặt
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
       const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime;
@@ -236,7 +311,8 @@ const RUN = (() => {
     if (run.days < (b.minDays || FEE + 1)) return 'broke';
     return 'open';
   }
-  const STATUS_TEXT = { open: '▸ ĐANG SÁNG ĐÈN', done: '✓ ĐÃ VƯỢT QUA', soon: '— CHƯA MỞ CỬA', lock: '🔒 ĐANG KHÓA', broke: '— KHÔNG ĐỦ NGÀY' };
+  const STATUS_TEXT = T({ open: '▸ ĐANG SÁNG ĐÈN', done: '✓ ĐÃ VƯỢT QUA', soon: '— CHƯA MỞ CỬA', lock: '🔒 ĐANG KHÓA', broke: '— KHÔNG ĐỦ NGÀY' },
+                          { open: '▸ LIGHTS ON', done: '✓ CLEARED', soon: '— NOT OPEN YET', lock: '🔒 SEALED', broke: '— NOT ENOUGH DAYS' });
 
   function windows(n, litRatio) {
     let s = '';
@@ -264,7 +340,7 @@ const RUN = (() => {
         <div class="info">
           <div class="bname">${b.name}</div>
           <div class="meta mono">${b.sym} ${b.type}${b.stars ? ' · ' + '★'.repeat(b.stars) : ''}</div>
-          <div class="deal mono">${b.tower ? 'Bí ẩn cuối cùng' : `−${FEE} ngày · +${b.reward} ngày`}</div>
+          <div class="deal mono">${b.tower ? T('Bí ẩn cuối cùng', 'The final mystery') : T(`−${FEE} ngày · +${b.reward} ngày`, `−${FEE} day · +${b.reward} days`)}</div>
           <div class="status">${STATUS_TEXT[st]}</div>
         </div>`;
       if (st === 'open') el.onclick = () => askEnter(b);
@@ -276,17 +352,17 @@ const RUN = (() => {
     const remaining = GAMES.filter(g => g.file && !run.done.includes(g.id));
     const ad = adGet(), plusLeft = AD_PLUS_MAX - ad.plus;
     $('adPlus').style.display = ADS.enabled && plusLeft > 0 && run.days > 0 && !run.done.includes('thap') ? '' : 'none';
-    $('adPlus').textContent = `📺 +1 NGÀY (còn ${plusLeft} lần)`;
-    if (run.days <= 0) return showOver('GAME OVER', 'Thời gian của bạn đã hết. Thành phố đã nuốt chửng thêm một người chơi.');
+    $('adPlus').textContent = T(`📺 +1 NGÀY (còn ${plusLeft} lần)`, `📺 +1 DAY (${plusLeft} left)`);
+    if (run.days <= 0) return showOver('GAME OVER', T('Thời gian của bạn đã hết. Thành phố đã nuốt chửng thêm một người chơi.', 'Your time is up. The city has swallowed one more player.'));
     if (remaining.length && remaining.every(g => run.days < (g.minDays || FEE + 1)))
-      return showOver('GAME OVER', `Bạn chỉ còn ${run.days} ngày, không đủ trả phí vào bất kỳ tòa nhà nào. Khi đồng hồ điểm, bạn sẽ biến mất cùng thành phố.`);
+      return showOver('GAME OVER', T(`Bạn chỉ còn ${run.days} ngày, không đủ trả phí vào bất kỳ tòa nhà nào. Khi đồng hồ điểm, bạn sẽ biến mất cùng thành phố.`, `You have only ${run.days} day${run.days === 1 ? '' : 's'} left, not enough to enter any building. When the clock strikes, you will vanish with the city.`));
     if (!remaining.length && !run.done.includes('thap') && !run.done.includes('lift') && run.days < LIFT_MIN)
-      return showOver('GAME OVER', `Bạn chỉ còn ${run.days} ngày. Thang máy trong tháp cần ít nhất ${LIFT_MIN} ngày, và bạn không còn đường nào để đi tiếp.`);
+      return showOver('GAME OVER', T(`Bạn chỉ còn ${run.days} ngày. Thang máy trong tháp cần ít nhất ${LIFT_MIN} ngày, và bạn không còn đường nào để đi tiếp.`, `You have only ${run.days} day${run.days === 1 ? '' : 's'} left. The tower elevator needs at least ${LIFT_MIN}, and there is nowhere else to go.`));
     typeAnnounce(remaining.length
-      ? `> Thời gian còn lại của bạn: ${run.days} ngày. Các tòa nhà đang sáng đèn đang chờ bạn.`
+      ? T(`> Thời gian còn lại của bạn: ${run.days} ngày. Các tòa nhà đang sáng đèn đang chờ bạn.`, `> Time remaining: ${run.days} day${run.days === 1 ? '' : 's'}. The lit buildings are waiting for you.`)
       : run.done.includes('thap')
-        ? `> Bạn đã đi tới tận cùng thành phố. Có lẽ đã đến lúc bắt đầu lại.`
-        : `> Năm tòa nhà đã tắt đèn. Tháp Trung Tâm đang chờ bạn.`);
+        ? T(`> Bạn đã đi tới tận cùng thành phố. Có lẽ đã đến lúc bắt đầu lại.`, `> You have reached the end of the city. Perhaps it is time to begin again.`)
+        : T(`> Năm tòa nhà đã tắt đèn. Tháp Trung Tâm đang chờ bạn.`, `> Five buildings have gone dark. The Central Tower is waiting.`));
   }
 
   let typeTimer;
@@ -306,13 +382,17 @@ const RUN = (() => {
       $('eTag').textContent = '✦ ???';
       const up = RUN.get().done.includes('lift');
       $('eDesc').textContent = up
-        ? 'Bạn đã lên tới tầng 21. Cánh cửa khóa cuối cùng vẫn đang chờ.'
-        : 'Năm tòa nhà đã tắt đèn. Bên trong tháp chỉ có một chiếc thang máy dẫn lên tầng 21, nơi có cánh cửa khóa cuối cùng.';
-      $('eCalc').innerHTML = `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>không</b>${up ? '' : `<br>Thang máy: cần ít nhất <b>${LIFT_MIN}</b> ngày, thua là <b>GAME OVER</b>`}<br>Thất bại ở cánh cửa: <b>−3</b> ngày`;
+        ? T('Bạn đã lên tới tầng 21. Cánh cửa khóa cuối cùng vẫn đang chờ.', 'You have reached floor 21. The final locked door is still waiting.')
+        : T('Năm tòa nhà đã tắt đèn. Bên trong tháp chỉ có một chiếc thang máy dẫn lên tầng 21, nơi có cánh cửa khóa cuối cùng.', 'Five buildings have gone dark. Inside the tower there is only an elevator to floor 21, where the final locked door stands.');
+      $('eCalc').innerHTML = T(
+        `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>không</b>${up ? '' : `<br>Thang máy: cần ít nhất <b>${LIFT_MIN}</b> ngày, thua là <b>GAME OVER</b>`}<br>Thất bại ở cánh cửa: <b>−3</b> ngày`,
+        `Days now: <b>${d}</b><br>Entry fee: <b>none</b>${up ? '' : `<br>Elevator: needs at least <b>${LIFT_MIN}</b> days, losing is <b>GAME OVER</b>`}<br>Failing at the door: <b>−3</b> days`);
     } else {
       $('eTag').textContent = `${b.sym} ${b.type} · ${'★'.repeat(b.stars)}`;
       $('eDesc').textContent = b.desc;
-      $('eCalc').innerHTML = `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>−${FEE}</b> → còn <b>${d - FEE}</b> khi bắt đầu<br>Nếu thắng: <b>+${b.reward}</b> → <b>${d - FEE + b.reward}</b> ngày`;
+      $('eCalc').innerHTML = T(
+        `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>−${FEE}</b> → còn <b>${d - FEE}</b> khi bắt đầu<br>Nếu thắng: <b>+${b.reward}</b> → <b>${d - FEE + b.reward}</b> ngày`,
+        `Days now: <b>${d}</b><br>Entry fee: <b>−${FEE}</b> → <b>${d - FEE}</b> left at the start<br>If you win: <b>+${b.reward}</b> → <b>${d - FEE + b.reward}</b> days`);
     }
     $('enterVeil').classList.add('on');
     beep(330, .12, 'triangle', .05);
@@ -321,6 +401,7 @@ const RUN = (() => {
   $('eGo').onclick = () => {
     if (!pending) return;
     beep(220, .3, 'sawtooth', .06, 300);
+    snapSave(pending.id);
     const url = RUN.url(pending.file);
     setTimeout(() => location.href = url, 250);
   };
@@ -331,17 +412,20 @@ const RUN = (() => {
     $('oText').textContent = text;
     $('oCancel').style.display = cancellable ? '' : 'none';
     $('oReset').style.display = cancellable ? 'none' : '';
-    $('oRevive').style.display = !cancellable && ADS.enabled && !adGet().revive ? '' : 'none';
+    $('oPenalty').style.display = !cancellable && ADS.enabled && !adGet().revive ? 'flex' : 'none';   // hồi sinh: 1 lần mỗi lượt chơi
+    // đếm GAME OVER một lần cho mỗi lần thua (mở lại trang không đếm thêm)
+    if (!cancellable && !statGet().inOver) { const st = statGet(); statSet({ over: st.over + 1, inOver: true }); }
     $('overVeil').classList.add('on');
   }
   $('oCancel').onclick = () => $('overVeil').classList.remove('on');
   $('oReset').onclick = resetRun;
   $('resetLink').onclick = () => {
-    showOver('CHƠI LẠI TỪ ĐẦU?', 'Toàn bộ tiến trình sẽ bị xóa. Bạn quay lại với 3 ngày sống và mọi tòa nhà sáng đèn trở lại.', true);
+    showOver(T('CHƠI LẠI TỪ ĐẦU?', 'START OVER?'), T('Toàn bộ tiến trình sẽ bị xóa. Bạn quay lại với 3 ngày sống và mọi tòa nhà sáng đèn trở lại.', 'All progress will be erased. You return with 3 days to live and every building lights up again.'), true);
     $('oReset').style.display = '';
   };
   function resetRun() {
     adClear();
+    statSet(statGet().finished ? { over: 0, revive: 0, inOver: false, finished: false } : { inOver: false });   // đã phá đảo: bắt đầu hành trình mới
     RUN.save({ days: RUN.START, done: [] });
     location.href = RUN.url('thanh-pho-lang.html');
   }
@@ -360,18 +444,79 @@ const RUN = (() => {
     beep(660, .15, 'triangle', .07); setTimeout(() => beep(880, .2, 'triangle', .07), 120);
     render();
   };
-  $('oRevive').onclick = async () => {
+  // hồi sinh: quay về lúc trước khi bước vào trò chơi vừa thua (nếu không có thì: 3 ngày, giữ các tòa nhà đã qua)
+  const reviveTo = () => snapGet() || { days: RUN.START, done: RUN.get().done, id: null };
+  $('oPenGo').onclick = () => {
+    const to = reviveTo(), b = BUILDINGS.find(x => x.id === to.id);
+    const cleared = to.done.filter(id => GAMES.some(g => g.id === id)).length;
+    $('penCalc').innerHTML = b
+      ? T(`Xem hết video, bạn quay về lúc <b>trước khi bước vào ${b.name}</b>:<br>Ngày sống: <b>${to.days}</b><br>Tòa nhà đã vượt qua: <b>${cleared}/${GAMES.length}</b>`,
+          `Watch it all and you return to the moment <b>before you entered ${b.name}</b>:<br>Days: <b>${to.days}</b><br>Buildings cleared: <b>${cleared}/${GAMES.length}</b>`)
+      : T(`Xem hết video, bạn sống lại với <b>${to.days}</b> ngày và giữ các tòa nhà đã vượt qua.`,
+          `Watch it all and you come back with <b>${to.days}</b> days, keeping the buildings you cleared.`);
+    $('overVeil').classList.remove('on');
+    $('penVeil').classList.add('on');
+    beep(90, .9, 'sawtooth', .07, -30);
+  };
+  $('penBack').onclick = () => { $('penVeil').classList.remove('on'); $('overVeil').classList.add('on'); };
+  $('penWatch').onclick = async () => {
     if (adBusy || adGet().revive) return;
     adBusy = true;
     const ok = await ADS.rewarded();
     adBusy = false;
-    if (!ok) return;
+    if (!ok) return;   // không xem hết: vẫn ở trong phòng hình phạt
+    const to = reviveTo();
     adSet({ revive: 1 });
-    RUN.save({ days: RUN.START, done: RUN.get().done });   // giữ nguyên các tòa nhà đã vượt qua
-    $('overVeil').classList.remove('on');
+    RUN.save({ days: to.days, done: to.done });
+    { const st = statGet(); statSet({ revive: st.revive + 1, inOver: false }); }
+    $('penVeil').classList.remove('on');
     [523, 659, 784].forEach((f, i) => setTimeout(() => beep(f, .18, 'triangle', .07), i * 110));
     render();
   };
+
+  /* ---------- cảnh báo: hiện mỗi lần mở game (một lần cho mỗi phiên) ---------- */
+  (() => {
+    let seen = false;
+    try { seen = sessionStorage.getItem('vong-gioi-warned') === '1'; } catch (e) {}
+    if (seen) return;
+    const html = T('Đây <b>không phải</b> game giải trí.<br>Đây là trải nghiệm <b>sinh tồn</b> với chi phí rẻ.',
+                   'This is <b>not</b> a game for fun.<br>This is a <b>survival</b> experience, at a cheap price.');
+    const el = $('warnTxt'), parts = html.split(/(<[^>]+>)/).filter(Boolean);
+    $('warn').classList.add('on');
+    let out = '', pi = 0, ci = 0;
+    const done = () => { clearInterval(tw); el.innerHTML = html; $('warnOk').classList.add('show'); };
+    const tw = setInterval(() => {
+      while (pi < parts.length && parts[pi].startsWith('<')) out += parts[pi++];
+      if (pi >= parts.length) return done();
+      out += parts[pi][ci++];
+      if (ci >= parts[pi].length) { pi++; ci = 0; }
+      el.innerHTML = out;
+    }, 45);
+    $('warn').onclick = e => { if (e.target !== $('warnOk')) done(); };   // chạm để hiện ngay
+    $('warnOk').onclick = () => {
+      try { sessionStorage.setItem('vong-gioi-warned', '1'); } catch (e) {}
+      beep(160, .5, 'sawtooth', .06, -60);
+      $('warn').classList.remove('on');
+    };
+  })();
+
+  /* ---------- cài đặt: ngôn ngữ, âm thanh ---------- */
+  function renderSet() {
+    document.querySelectorAll('#setVeil [data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === SETTINGS.lang));
+    document.querySelectorAll('#setVeil [data-snd]').forEach(b => b.classList.toggle('on', (b.dataset.snd === '1') === SETTINGS.sound));
+  }
+  $('setBtn').onclick = () => { renderSet(); $('setVeil').classList.add('on'); beep(330, .12, 'triangle', .05); };
+  $('setClose').onclick = () => $('setVeil').classList.remove('on');
+  $('setVeil').onclick = e => { if (e.target === $('setVeil')) $('setVeil').classList.remove('on'); };
+  document.querySelectorAll('#setVeil [data-lang]').forEach(b => b.onclick = () => {
+    if (b.dataset.lang === SETTINGS.lang) return;
+    SETTINGS.setLang(b.dataset.lang);
+    location.reload();   // tải lại trang để đổi toàn bộ chữ
+  });
+  document.querySelectorAll('#setVeil [data-snd]').forEach(b => b.onclick = () => {
+    SETTINGS.setSound(b.dataset.snd === '1'); renderSet();
+    beep(660, .15, 'triangle', .07);   // chỉ kêu khi vừa bật
+  });
 
   render();
 })();
