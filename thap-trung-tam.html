@@ -99,6 +99,7 @@ body.light::before{opacity:.25}
 .peg.g{background:var(--green);border-color:var(--green);box-shadow:0 0 8px var(--green)}
 .peg.y{background:transparent;border:2px solid var(--amber)}
 .try.empty{opacity:.35}
+#stage1.done{opacity:.45;text-decoration:line-through}
 .shake{animation:shake .35s}
 @keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 
@@ -152,13 +153,14 @@ body.light::before{opacity:.25}
   <div class="title">ĐỈNH THÁP</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
-    <li>Cửa tháp được khóa bằng một <b>mã 4 chữ số</b>. Các chữ số từ <b>1 đến 6</b> và <b>không trùng nhau</b>.</li>
+    <li id="stage1"><b>Chặng 1 · THANG MÁY 21.</b> Lối duy nhất lên đỉnh tháp là chiếc thang máy chạy theo một quy luật bí ẩn. Cần ít nhất <b>2 ngày</b>. Thua ở thang máy là <b style="color:var(--red)">GAME OVER</b> ngay. Đã lên tới tầng 21 thì những lần sau đi thẳng tới cánh cửa.</li>
+    <li><b>Chặng 2 · CÁNH CỬA KHÓA.</b> Cánh cửa ở tầng 21 được khóa bằng một <b>mã 4 chữ số</b>. Các chữ số từ <b>1 đến 6</b> và <b>không trùng nhau</b>.</li>
     <li>Bạn có <b>8 lần thử</b>. Sau mỗi lần, ổ khóa sẽ trả lời:
       <br><b class="ok">●</b> một chữ số đúng và đúng vị trí
       <br><b class="half">○</b> một chữ số có trong mã nhưng sai vị trí</li>
     <li>Ổ khóa không cho biết chữ số nào đúng, chỉ cho biết có bao nhiêu.</li>
     <li>Thời gian: <b>180 giây</b>. Có thể đổi 1 ngày lấy thêm 30 giây.</li>
-    <li>Thất bại: tháp đẩy bạn ra ngoài, <b style="color:var(--red)">−3 ngày</b>. Nếu không còn ngày nào: GAME OVER.</li>
+    <li>Thất bại ở cánh cửa: tháp đẩy bạn ra ngoài, <b style="color:var(--red)">−3 ngày</b>. Nếu không còn ngày nào: GAME OVER.</li>
   </ul>
   <div class="stakes mono">
     <span>Ngày còn lại <b id="stDays">3</b></span>
@@ -241,7 +243,9 @@ const RUN = (() => {
   const DAYS_START = RUN.get().days;
   const LEN = 4, DIGITS = 6, MAX_TRIES = 8, TIME = 180, FAIL_COST = 3;
   const EXT_SEC = 30, EXT_COST = 1;
-  const GAMES = ['can', 'den', 'nuoc', 'lift', 'cua', 'tin'];
+  const GAMES = ['can', 'den', 'nuoc', 'cua', 'tin'];
+  const LIFT = 'thang-may.html', LIFT_MIN = 2;
+  const liftDone = () => RUN.get().done.includes('lift');
   const HOME = 'thanh-pho-lang.html';
 
   const $ = id => document.getElementById(id);
@@ -287,10 +291,17 @@ const RUN = (() => {
 
   /* ---------- intro ---------- */
   $('stDays').textContent = DAYS_START;
-  typeInto($('announce'), allCleared()
-    ? '> Sáu tòa nhà đã tắt đèn. Chỉ còn tòa tháp này sáng.'
-    : '> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 6 trò chơi.', 32);
+  typeInto($('announce'), !allCleared()
+    ? '> Cánh cửa tháp vẫn khóa chặt. Bạn chưa vượt qua đủ 5 trò chơi.'
+    : liftDone()
+      ? '> Tầng 21. Trước mặt bạn là cánh cửa khóa cuối cùng.'
+      : '> Năm tòa nhà đã tắt đèn. Trong tháp chỉ có một chiếc thang máy đang mở cửa.', 32);
+  $('stage1').classList.toggle('done', liftDone());
   if (!allCleared()) { $('startBtn').disabled = true; $('startBtn').textContent = 'TÒA THÁP ĐANG KHÓA'; }
+  else if (!liftDone()) {
+    $('startBtn').textContent = 'VÀO THANG MÁY ▸';
+    if (DAYS_START < LIFT_MIN) { $('startBtn').disabled = true; $('startBtn').textContent = `CẦN ÍT NHẤT ${LIFT_MIN} NGÀY`; }
+  } else $('startBtn').textContent = 'MỞ CÁNH CỬA ▸';
   $('homeBtn').onclick = () => location.href = RUN.url(HOME);
 
   /* ---------- lock state ---------- */
@@ -406,11 +417,15 @@ const RUN = (() => {
   }
   $('failBtn').onclick = () => location.href = RUN.url(HOME);
   $('extBtn').onclick = extend;
-  $('startBtn').onclick = () => { beep(160, .6, 'sawtooth', .06, 200); startLock(); };
+  $('startBtn').onclick = () => {
+    beep(160, .6, 'sawtooth', .06, 200);
+    if (!liftDone()) return setTimeout(() => location.href = RUN.url(LIFT), 300);
+    startLock();
+  };
 
   /* ---------- câu chuyện ---------- */
   const STORY = [
-    'Ổ khóa bật mở. Sau cánh cửa là một cầu thang xoắn ốc dẫn thẳng lên đỉnh tháp. Không có ai canh gác. Chỉ có tiếng bước chân của chính bạn.',
+    'Ổ khóa bật mở. Sau cánh cửa ở tầng 21 là một cầu thang xoắn ốc dẫn thẳng lên đỉnh tháp. Không có ai canh gác. Chỉ có tiếng bước chân của chính bạn.',
     'Trên đỉnh là một căn phòng tròn. Hàng trăm màn hình phủ kín bức tường, mỗi màn hình phát lại một trò chơi: căn phòng có chiếc cân, hành lang đèn, căn phòng ngập nước, chiếc thang máy không bao giờ dừng, bốn cánh cửa, chiếc bàn của những mặt nạ.',
     'Bạn bước lại gần. Trong mọi màn hình, người chơi đều là <b>bạn</b>. Có màn hình bạn thắng, có màn hình bạn thua. Có những trò chơi bạn không hề nhớ mình đã chơi.',
     'Giữa phòng có một chiếc ghế trống. Trên lưng ghế khắc dòng chữ: <b>NGƯỜI DẪN TRÒ</b>. Trên bàn là một tờ giấy gấp đôi, và nét chữ trên đó chính là của bạn:',
@@ -453,7 +468,7 @@ const RUN = (() => {
     else beep(80, 1.6, 'sawtooth', .07, 20);
     $('endTag').textContent = e.tag; $('endTitle').textContent = e.title;
     $('endText').innerHTML = '';
-    $('stats').innerHTML = `TÒA NHÀ ĐÃ VƯỢT QUA: 6/6<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}`;
+    $('stats').innerHTML = `TÒA NHÀ ĐÃ VƯỢT QUA: 5/5<br>THANG MÁY 21: ĐÃ LÊN TỚI ĐỈNH<br>NGÀY SỐNG CÒN LẠI: ${run.days}<br>LẦN THỬ MỞ KHÓA: ${S ? S.history.length : '–'}/${MAX_TRIES}`;
     show('ending');
     await wait(600);
     await typeInto($('endText'), e.text(run.days), 24);

@@ -133,7 +133,7 @@ header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;
 
   <div class="announce mono" id="announce"></div>
   <div class="progress mono">
-    <span>ĐÃ VƯỢT QUA: <b id="cleared">0/6</b></span>
+    <span>ĐÃ VƯỢT QUA: <b id="cleared">0/5</b></span>
     <span>PHÍ VÀO MỖI TÒA NHÀ: 1 NGÀY</span>
     <button class="adbtn" id="adPlus" style="display:none"></button>
   </div>
@@ -191,7 +191,7 @@ const RUN = (() => {
 })();
 
 (() => {
-  const FEE = 1;
+  const FEE = 1, LIFT_MIN = 2;   // thang máy trong tháp: cần ít nhất 2 ngày (đi thang bộ tốn ngày)
   const BUILDINGS = [
     { id: 'can',  sym: '◆', type: 'TRÍ TUỆ', name: 'PHÒNG CÂN',         stars: 2, reward: 3, file: 'phong-can.html',       c: 'var(--cyan)',  h: 150,
       desc: '9 quả cầu, một quả nặng hơn. 2 lần cân, 1 lần đoán.' },
@@ -199,14 +199,12 @@ const RUN = (() => {
       desc: 'Ghi nhớ thứ tự đèn sáng trên 9 cánh cửa. Từ vòng 5, mọi thứ đảo ngược.' },
     { id: 'nuoc', sym: '▲', type: 'ÁP LỰC',  name: 'PHÒNG NGẬP NƯỚC',   stars: 3, reward: 5, file: 'phong-ngap-nuoc.html', c: 'var(--red)',   h: 170,
       desc: 'Xoay ống nối van với cống trước khi nước ngập tới trần. 3 căn phòng.' },
-    { id: 'lift', sym: '◆', type: 'TRÍ TUỆ', name: 'THANG MÁY 21',      stars: 4, reward: 7, file: 'thang-may.html', c: 'var(--cyan)', h: 250, minDays: 3,
-      desc: 'Thang máy chạy theo một quy luật bí ẩn. Phải ở trong thang khi nó lên tầng 21, nhưng đừng để nó kéo bạn xuống tầng âm. Cần ít nhất 3 ngày.' },
     { id: 'cua',  sym: '◆', type: 'TRÍ TUỆ', name: 'BỐN CÁNH CỬA',      stars: 4, reward: 7, file: 'bon-canh-cua.html', c: 'var(--cyan)', h: 210,
       desc: 'Bốn người gác, một vài kẻ nói dối. Chỉ một cửa an toàn.' },
     { id: 'tin',  sym: '■', type: 'LÒNG TIN', name: 'VÁN BÀI LÒNG TIN', stars: 5, reward: 9, file: 'van-bai-long-tin.html', c: 'var(--green)', h: 230,
       desc: 'Hợp tác hay phản bội? Đọc tâm lý ba người chơi còn lại.' },
     { id: 'thap', sym: '✦', type: '???',     name: 'THÁP TRUNG TÂM',    stars: 0, reward: 0, file: 'thap-trung-tam.html', c: 'var(--violet)', h: 270, tower: true,
-      desc: 'Chỉ mở khi vượt qua cả 6 trò chơi.' },
+      desc: 'Chỉ mở khi vượt qua cả 5 trò chơi.' },
   ];
   const GAMES = BUILDINGS.filter(b => !b.tower);
   const $ = id => document.getElementById(id);
@@ -231,7 +229,8 @@ const RUN = (() => {
   }
 
   function statusOf(b, run) {
-    if (b.tower) return run.done.includes('thap') ? 'done' : GAMES.every(g => run.done.includes(g.id)) ? 'open' : 'lock';
+    if (b.tower) return run.done.includes('thap') ? 'done' : !GAMES.every(g => run.done.includes(g.id)) ? 'lock'
+      : !run.done.includes('lift') && run.days < LIFT_MIN ? 'broke' : 'open';
     if (run.done.includes(b.id)) return 'done';
     if (!b.file) return 'soon';
     if (run.days < (b.minDays || FEE + 1)) return 'broke';
@@ -281,11 +280,13 @@ const RUN = (() => {
     if (run.days <= 0) return showOver('GAME OVER', 'Thời gian của bạn đã hết. Thành phố đã nuốt chửng thêm một người chơi.');
     if (remaining.length && remaining.every(g => run.days < (g.minDays || FEE + 1)))
       return showOver('GAME OVER', `Bạn chỉ còn ${run.days} ngày, không đủ trả phí vào bất kỳ tòa nhà nào. Khi đồng hồ điểm, bạn sẽ biến mất cùng thành phố.`);
+    if (!remaining.length && !run.done.includes('thap') && !run.done.includes('lift') && run.days < LIFT_MIN)
+      return showOver('GAME OVER', `Bạn chỉ còn ${run.days} ngày. Thang máy trong tháp cần ít nhất ${LIFT_MIN} ngày, và bạn không còn đường nào để đi tiếp.`);
     typeAnnounce(remaining.length
       ? `> Thời gian còn lại của bạn: ${run.days} ngày. Các tòa nhà đang sáng đèn đang chờ bạn.`
       : run.done.includes('thap')
         ? `> Bạn đã đi tới tận cùng thành phố. Có lẽ đã đến lúc bắt đầu lại.`
-        : `> Sáu tòa nhà đã tắt đèn. Tháp Trung Tâm đang chờ bạn.`);
+        : `> Năm tòa nhà đã tắt đèn. Tháp Trung Tâm đang chờ bạn.`);
   }
 
   let typeTimer;
@@ -303,8 +304,11 @@ const RUN = (() => {
     $('eName').textContent = b.name;
     if (b.tower) {
       $('eTag').textContent = '✦ ???';
-      $('eDesc').textContent = 'Sáu tòa nhà đã tắt đèn. Câu trả lời cho câu hỏi "ai đã tạo ra thành phố này" nằm ở đỉnh tháp.';
-      $('eCalc').innerHTML = `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>không</b><br>Nếu thất bại: <b>−3</b> ngày`;
+      const up = RUN.get().done.includes('lift');
+      $('eDesc').textContent = up
+        ? 'Bạn đã lên tới tầng 21. Cánh cửa khóa cuối cùng vẫn đang chờ.'
+        : 'Năm tòa nhà đã tắt đèn. Bên trong tháp chỉ có một chiếc thang máy dẫn lên tầng 21, nơi có cánh cửa khóa cuối cùng.';
+      $('eCalc').innerHTML = `Ngày hiện có: <b>${d}</b><br>Phí vào cửa: <b>không</b>${up ? '' : `<br>Thang máy: cần ít nhất <b>${LIFT_MIN}</b> ngày, thua là <b>GAME OVER</b>`}<br>Thất bại ở cánh cửa: <b>−3</b> ngày`;
     } else {
       $('eTag').textContent = `${b.sym} ${b.type} · ${'★'.repeat(b.stars)}`;
       $('eDesc').textContent = b.desc;

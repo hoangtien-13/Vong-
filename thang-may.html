@@ -178,7 +178,7 @@ details .chip{display:inline-block;margin:2px}
 
 <!-- ============ INTRO ============ -->
 <section id="intro" class="screen on">
-  <div class="tag mono">TRÒ CHƠI · ◆ TRÍ TUỆ · ★★★★</div>
+  <div class="tag mono">✦ THÁP TRUNG TÂM · CHẶNG 1</div>
   <div class="title">THANG MÁY 21</div>
   <div class="announce mono" id="announce"></div>
   <ul class="rules">
@@ -186,18 +186,19 @@ details .chip{display:inline-block;margin:2px}
     <li>Thang máy tự chạy theo <b>một quy luật cố định</b>, mỗi lần chơi một quy luật khác.</li>
     <li>Khi thang dừng ở tầng của bạn, cửa mở rất nhanh: bạn có thể <b>bước vào</b> hoặc chờ lượt sau. Đang ở trong thang, mỗi lần cửa mở bạn có thể <b>bước ra</b>.</li>
     <li>Thang chạy xuống <b style="color:var(--red)">tầng 0 hoặc tầng âm</b> khi bạn đang ở trong: <b style="color:var(--red)">GAME OVER</b>.</li>
-    <li>Thang lên tới <b style="color:var(--green)">tầng 21</b> lần đầu tiên mà bạn <b>không ở trong</b>: cửa sân thượng khóa lại vĩnh viễn, <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li>Thang lên tới <b style="color:var(--green)">tầng 21</b> lần đầu tiên mà bạn <b>không ở trong</b>: <b style="color:var(--red)">GAME OVER</b>.</li>
+    <li>Hết giờ: <b style="color:var(--red)">GAME OVER</b>. Ở thang máy không có lần thử lại.</li>
     <li><b>Thang bộ</b>: đi lên hoặc xuống, cứ <b>3 tầng tốn 1 ngày sống</b> (làm tròn lên). Không thể đi bộ tới tầng 21.</li>
     <li>Bảng lịch sử ghi lại các tầng thang đã dừng kèm <b>số thứ tự lượt chạy</b>. Thời gian <b>100 giây</b>.</li>
   </ul>
   <div class="stakes mono">
     <span>Ngày còn lại <b id="stDays">3</b></span>
-    <span>Phí vào cửa <b>−1 ngày</b></span>
-    <span>Phần thưởng <b>+7 ngày</b></span>
-    <span>Cần ít nhất <b>3 ngày</b></span>
+    <span>Phí vào cửa <b>không</b></span>
+    <span>Cần ít nhất <b>2 ngày</b></span>
+    <span>Tầng 21 <b>cánh cửa khóa</b></span>
   </div>
   <div class="warn">Lưu ý: chiếc thang đang mở cửa chờ bạn ở tầng 1. Đừng vội tin nó, nhưng cũng đừng chờ quá lâu.</div>
-  <div class="introBtns"><button class="btn" id="homeBtn">◂ THÀNH PHỐ</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
+  <div class="introBtns"><button class="btn" id="homeBtn">◂ CHÂN THÁP</button><button class="btn red" id="startBtn">BƯỚC VÀO ▸</button></div>
 </section>
 
 <!-- ============ GAME ============ -->
@@ -263,6 +264,7 @@ details .chip{display:inline-block;margin:2px}
     <p><b>Thang máy là phương tiện miễn phí:</b> đi một đoạn rồi bước ra trước khi nó lao xuống, sau đó đi bộ vài tầng tới điểm an toàn.</p>
   </details>
   <button class="btn red" id="againBtn">VỀ THÀNH PHỐ ▸</button>
+  <button class="btn violet" id="doorBtn" style="display:none">TỚI CÁNH CỬA KHÓA ▸</button>
 </section>
 
 <script>
@@ -282,7 +284,7 @@ const RUN = (() => {
 <script>
 (() => {
   /* ---------- cấu hình ---------- */
-  const DAYS_START = RUN.get().days, FEE = 1, REWARD = 7, MIN_DAYS = 3;
+  const DAYS_START = RUN.get().days, FEE = 0, MIN_DAYS = 2;   // chặng 1 của Tháp Trung Tâm
   const STARS = 4;            // độ khó của trò chơi này
   const SOFT_MAX_STARS = 2;   // trò chơi từ mức này trở xuống: hết giờ bị phạt thay vì bị loại
   const TIMEOUT_PENALTY = 1;
@@ -575,12 +577,12 @@ const RUN = (() => {
   function timeout() {
     S.over = true; clearInterval(tick); render();
     const where = S.inside ? 'Đèn tắt khi bạn vẫn còn kẹt trong thang.' : `Đèn tắt khi bạn vẫn đứng ở sảnh tầng ${fl(S.me)}.`;
-    if (STARS <= SOFT_MAX_STARS) {
-      S.days = Math.max(0, S.days - TIMEOUT_PENALTY);
-      if (S.days > 0) return finish('penalty', `${where}<br>Bạn bị phạt <b>−${TIMEOUT_PENALTY} ngày</b>.`);
-    }
+    fail(`Hết giờ. ${where}`);
+  }
+  // thua ở thang máy: GAME OVER ngay
+  function fail(why) {
     S.days = 0;
-    finish('lose', `Hết giờ. ${where}<br><span style="color:var(--dim)">Trò chơi ★★★ không có phạt nhẹ khi hết giờ.</span>`);
+    finish('lose', why);
   }
 
   function win() {
@@ -591,19 +593,19 @@ const RUN = (() => {
   }
 
   function missed() {
-    S.over = true; S.days = 0;
+    S.over = true;
     setMsg('Thang đã lên tầng 21… mà không có bạn.', 'err');
     beep(140, 1.2, 'sawtooth', .09, -60);
     const where = S.walking ? 'vẫn đang trên thang bộ' : `vẫn đứng ở sảnh tầng ${fl(S.me)}`;
-    setTimeout(() => finish('lose', `Thang đã lên tới <b style="color:var(--green)">tầng 21</b> khi bạn ${where}. Cửa sân thượng khóa lại vĩnh viễn.`), 1100);
+    setTimeout(() => fail(`Thang đã lên tới <b style="color:var(--green)">tầng 21</b> khi bạn ${where}.`), 1100);
   }
 
   function crash(f) {
-    S.over = true; S.days = 0;
+    S.over = true;
     setMsg(`Thang lao xuống tầng ${fl(f)}…`, 'err');
     beep(160, 1, 'sawtooth', .1, -140);
     $('game').classList.add('fall');
-    setTimeout(() => finish('lose', `Thang lao xuống <b style="color:var(--red)">tầng ${fl(f)}</b> khi bạn vẫn ở bên trong. Cửa không bao giờ mở lại.`), 1100);
+    setTimeout(() => fail(`Thang lao xuống <b style="color:var(--red)">tầng ${fl(f)}</b> khi bạn vẫn ở bên trong.`), 1100);
   }
 
   /* ---------- end ---------- */
@@ -623,21 +625,22 @@ const RUN = (() => {
   }
 
   function finish(kind, why = '') {
-    RUN.save({ days: kind === 'win' ? S.days + REWARD : kind === 'lose' ? 0 : S.days,
+    RUN.save({ days: kind === 'lose' ? 0 : S.days,
                done: kind === 'win' ? [...new Set([...RUN.get().done, GAME_ID])] : RUN.get().done });
+    $('doorBtn').style.display = kind === 'win' ? '' : 'none';
+    $('againBtn').style.display = kind === 'win' ? 'none' : '';
     S.over = true; clearInterval(tick); runId++;
     const end = $('end');
     ['win', 'lose', 'penalty'].forEach(k => end.classList.toggle(k, k === kind));
     $('ruleBox').innerHTML = ruleHTML();
     if (kind === 'win') {
-      $('endTitle').textContent = 'SỐNG SÓT';
-      $('endReason').innerHTML = `Bạn đã lên tới tầng 21 sau ${S.moves} lượt chạy.`
+      $('endTitle').textContent = 'TẦNG 21';
+      $('endReason').innerHTML = `Bạn đã lên tới tầng 21 sau ${S.moves} lượt chạy. Cửa thang mở ra một hành lang tối, cuối hành lang là cánh cửa khóa.`
         + `<br><span style="color:var(--dim)">Đi bộ ${S.walked} tầng (−${S.spent} ngày).</span>`;
-      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days} + ${REWARD} = ${S.days + REWARD}`;
-      S.days += REWARD;
+      $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
       show('end');
     } else if (kind === 'penalty') {
-      $('endTitle').textContent = 'THẤT BẠI';
+      $('endTitle').textContent = 'BỊ ĐẨY RA NGOÀI';
       $('endReason').innerHTML = why;
       $('endDays').textContent = `NGÀY CÒN LẠI: ${S.days}`;
       beep(220, .5, 'sawtooth', .07, -100);
@@ -662,9 +665,12 @@ const RUN = (() => {
   };
 
   /* ---------- nối với Vong Giới ---------- */
-  const HOME = 'thanh-pho-lang.html';
+  const HOME = 'thanh-pho-lang.html', TOWER = 'thap-trung-tam.html';
+  // chỉ vào được từ trong tháp: chưa mở tháp hoặc đã qua thang máy thì quay về chân tháp
+  if (!['can', 'den', 'nuoc', 'cua', 'tin'].every(g => RUN.get().done.includes(g)) || RUN.get().done.includes(GAME_ID)) location.replace(RUN.url(TOWER));
   $('stDays').textContent = DAYS_START;
-  $('homeBtn').onclick = () => location.href = RUN.url(HOME);
+  $('homeBtn').onclick = () => location.href = RUN.url(TOWER);
+  $('doorBtn').onclick = () => location.href = RUN.url(TOWER);
   $('againBtn').onclick = () => location.href = RUN.url(HOME);
   // trả phí vào cửa ngay khi bước vào (thoát giữa chừng không được hoàn lại)
   $('startBtn').addEventListener('click', () => RUN.save({ days: DAYS_START - FEE, done: RUN.get().done }));

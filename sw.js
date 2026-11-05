@@ -1,6 +1,6 @@
 /* Service worker của Vong Giới: lưu sẵn toàn bộ game để chơi khi không có mạng.
    Mỗi lần sửa game, hãy tăng số phiên bản bên dưới để điện thoại tải bản mới. */
-const VERSION = 'tpl-v12';
+const VERSION = 'tpl-v14';
 const FONT_CACHE = 'tpl-fonts';
 const FILES = [
   './', './index.html', './thanh-pho-lang.html',
